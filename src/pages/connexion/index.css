@@ -1,0 +1,43 @@
+/* Container pour la page de connexion */
+.connexion-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Occupe toute la hauteur de l'écran */
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  .connexion-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Style du bouton "Me connecter" */
+  .connexion-button {
+    background-color: #2b2f34;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .connexion-button:hover {
+    background-color: #6d6d6d; /* Changement de couleur au survol */
+  }
+  
+  .connexion-button:active {
+    background-color: #040404; /* Couleur lors du clic */
+  }
+  
+  .connexion-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+  }
+  

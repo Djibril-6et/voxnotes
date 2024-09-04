@@ -1,0 +1,52 @@
+.presentation-section {
+    display: flex;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f4f4f4;
+  }
+  
+  .presentation-text {
+    flex: 3;
+    margin-right: 20px;
+  }
+  
+  .presentation-text h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .presentation-text p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+  }
+  
+  .presentation-image {
+    flex: 1;
+  }
+  
+  .presentation-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Style pour la section À propos de nous */
+  .about-section {
+    padding: 40px 20px;
+    background-color: #fff;
+  }
+  
+  .about-section h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .about-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+  }
+  

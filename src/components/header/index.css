@@ -1,0 +1,46 @@
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333; /* Change la couleur de fond selon ton design */
+    color: white;
+  }
+  
+  .logo img {
+    height: 50px; /* Ajuste la taille du logo */
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 20px; /* Espacement entre les liens */
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline; /* Effet de survol */
+  }
+  
+  .language-selector {
+    background-color: #444; /* Couleur de fond assortie à la bannière */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .language-selector:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  
+  .language-selector:hover {
+    background-color: #555; /* Changement de couleur au survol */
+  }
