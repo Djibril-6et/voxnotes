@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './index.css';  // Importer le fichier CSS
+import './index.css';
+import usersServices from '../../services/users.services';
 
 function Connexion({ setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -18,9 +19,34 @@ function Connexion({ setIsAuthenticated }) {
     });
   };
 
-  const handleLogin = () => {
-    console.log(user);
-  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+  
+    // Check if empty
+    const { email, password } = user;
+    if (!email || !password) {
+      alert('Veuillez remplir tous les champs');
+      return;
+    }
+  
+    // Check email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Veuillez entrer une adresse email valide');
+      return;
+    }
+  
+    usersServices.loginUser(user)
+    .then(userData => {
+      console.log("LOGGED IN", userData);
+      localStorage.setItem('userConnected', JSON.stringify(userData));
+      navigate('/profile');
+    })
+    .catch(err => {
+      console.error('Error:', err);
+      alert(err.message);
+    });
+};
 
   return (
     <div className="connexion-container">
