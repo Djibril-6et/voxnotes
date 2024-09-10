@@ -1,5 +1,6 @@
-import React from 'react';
-import './index.css'; 
+import React from "react";
+import PropTypes from "prop-types";
+import "./index.css";
 
 function TranscriptionCard({ title, date, content }) {
   return (
@@ -14,5 +15,12 @@ function TranscriptionCard({ title, date, content }) {
     </div>
   );
 }
+
+// Validation des props avec PropTypes
+TranscriptionCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+};
 
 export default TranscriptionCard;
