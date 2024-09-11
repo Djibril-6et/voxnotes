@@ -1,15 +1,7 @@
 import React from 'react';
 import './index.css'; 
-import { useNavigate } from 'react-router-dom';
 
-function SouscriptionCard({ title, price, content }) {
-  // Appel du hook useNavigate dans le corps du composant
-  const navigate = useNavigate();
-
-  // Fonction pour gérer la redirection
-  const handlePaymentClick = () => {
-    navigate('/paiement'); // Redirection vers la page /paiement
-  };
+function SouscriptionCard({ title, price, content, onClickFunction }) {
 
   return (
     <div className="card">
@@ -19,7 +11,7 @@ function SouscriptionCard({ title, price, content }) {
       </div>
       <div className="card-bottom">
         <p className="card-summary">{title}</p>
-        <button className="payment-button" onClick={handlePaymentClick}>
+        <button className="payment-button" onClick={onClickFunction}>
           Allez au paiement
         </button>
       </div>
