@@ -1,6 +1,9 @@
 .landing-banner {
     height: 400px;
-    background-color: darkgrey;
+    background-image: url('../../assets/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
