@@ -1,11 +1,12 @@
 .banner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333; /* Change la couleur de fond selon ton design */
-    color: white;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(51, 51, 51, 0.8); /* Fond gris foncé avec transparence */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Ombre en bas de la bannière */
+}
   
   .logo img {
     height: 50px; /* Ajuste la taille du logo */
