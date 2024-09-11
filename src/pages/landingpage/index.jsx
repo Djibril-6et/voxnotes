@@ -1,9 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import LandingBanner from '../../components/landingBanner';
 import './index.css';
 import voicetotextLogo from '../../assets/voicetotext.png';
 
 function Home() {
+  const navigate = useNavigate();
+
+  // Fonction pour gérer la redirection vers la page /souscription
+  const handleButtonClick = () => {
+    navigate('/souscription');
+  };
+
   return (
     <div>
       <LandingBanner />
@@ -21,7 +29,15 @@ function Home() {
         <div className="presentation-image">
           <img src={voicetotextLogo} alt="Présentation de VoxNotes" />
         </div>
+
+        {/* Le bouton est placé ici sous le texte et l'image */}
+        <div className="cta-button-container">
+          <button className="cta-button" onClick={handleButtonClick}>
+            Je veux essayer !
+          </button>
+        </div>
       </section>
+
       <section className="about-section">
         <h2>À propos de nous</h2>
         <p>

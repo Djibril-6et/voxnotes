@@ -7,6 +7,8 @@ import LandingPage from "./pages/landingpage";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import NewTranscritpion from "./pages/newTranscritpion";
+import Souscriptions from "./pages/subscritpions";
+import Paiement from "./pages/paiement";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,6 +30,8 @@ function App() {
             />
             <Route path="/about" element={<About />} />
             <Route path="/newtranscription" element={<NewTranscritpion />} />
+            <Route path="/souscription" element={<Souscriptions />} />
+            <Route path="/paiement" element={<Paiement />} />
           </Routes>
         </div>
       </main>
