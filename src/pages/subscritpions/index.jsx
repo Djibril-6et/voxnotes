@@ -6,15 +6,21 @@ function Souscriptions() {
 
   const goToPaiement = (e, subject, type, price) => {
     e.preventDefault();
-
+  
+    const userConnected = JSON.parse(localStorage.getItem('userConnected'));
+    const userId = userConnected?.user?._id;
+  
     const requestBody = {
-      price: price * 100, // Convertir en centimes pour Stripe (ex: 15€ => 1500)
+      price: price * 100, // Convertir en centimes
+      userId: userId,     // Inclure userId
     };
-
+  
+    console.log("Request body:", requestBody); // Ajoutez le console.log ici
+  
     let endpoint = "";
-    if(type === "PAI") endpoint = `/create-checkout-session/${subject}`;
-    else if(type === "SUB") endpoint = `/create-subscription/${subject}`;
-
+    if (type === "PAI") endpoint = `/create-checkout-session/${subject}`;
+    else if (type === "SUB") endpoint = `/create-subscription/${subject}`;
+  
     fetch(`http://localhost:8080${endpoint}`, {
       method: "POST",
       headers: {

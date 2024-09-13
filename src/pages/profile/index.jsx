@@ -8,14 +8,13 @@ function Profil() {
     email: '',
   });
 
-  const [paymentDetails, setPaymentDetails] = useState(null); // Pour stocker les détails du paiement
-  const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Pour stocker les détails de l'abonnement
+  const [paymentDetails, setPaymentDetails] = useState(null); // Détails du paiement
+  const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Détails de l'abonnement
   const navigate = useNavigate();
 
   // Fonction pour récupérer les détails du paiement ou de l'abonnement en fonction du session_id
   const fetchSessionDetails = async (sessionId) => {
     try {
-      // 1. Récupérer la session Stripe pour vérifier si c'est un paiement ou un abonnement
       const sessionResponse = await fetch('http://localhost:8080/get-session-details', {
         method: 'POST',
         headers: {
@@ -28,7 +27,6 @@ function Profil() {
       if (sessionResponse.ok && sessionData.session) {
         const session = sessionData.session;
 
-        // 2. Si c'est un paiement unique, récupérer les détails du paiement
         if (session.mode === 'payment') {
           const paymentResponse = await fetch('http://localhost:8080/get-payment-details', {
             method: 'POST',
@@ -43,7 +41,6 @@ function Profil() {
           }
         }
 
-        // 3. Si c'est un abonnement, récupérer les détails de l'abonnement
         if (session.mode === 'subscription') {
           const subscriptionResponse = await fetch('http://localhost:8080/get-subscription-details', {
             method: 'POST',
@@ -66,10 +63,11 @@ function Profil() {
   };
 
   useEffect(() => {
-    // Récupération des informations de l'utilisateur depuis localStorage
     const storedUser = localStorage.getItem('userConnected');
+    let parsedUser = null;
+
     if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
+      parsedUser = JSON.parse(storedUser);
       setUser({
         username: parsedUser.user.username,
         email: parsedUser.user.email,
@@ -78,16 +76,16 @@ function Profil() {
       navigate('/connexion'); // Redirection si aucun utilisateur n'est connecté
     }
 
-    // Vérification de la présence du session_id dans l'URL
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get('session_id');
 
-    // Si un session_id est trouvé, récupérer les détails du paiement ou de l'abonnement
     if (sessionId) {
       const fetchDetails = async () => {
         const { paymentDetails, subscriptionDetails } = await fetchSessionDetails(sessionId);
         setPaymentDetails(paymentDetails);
         setSubscriptionDetails(subscriptionDetails);
+
+        // La création de la souscription dans la base de données est maintenant gérée côté serveur
       };
       fetchDetails();
     }
@@ -97,11 +95,9 @@ function Profil() {
     <div className="profil-container">
       <h2 className="profil-title">Profil</h2>
 
-      {/* Afficher les informations de l'utilisateur */}
       <p className="profil-info"><strong>Username:</strong> {user.username}</p>
       <p className="profil-info"><strong>Email:</strong> {user.email}</p>
 
-      {/* Afficher les détails du paiement si présents */}
       {paymentDetails ? (
         <div className="payment-details">
           <h3>Détails du paiement</h3>
