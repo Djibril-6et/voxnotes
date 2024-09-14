@@ -1,6 +1,6 @@
-import React from 'react';
-import './index.css'; 
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import "./index.css";
+import { useNavigate } from "react-router-dom";
 
 function SouscriptionCard({ title, price, content }) {
   // Appel du hook useNavigate dans le corps du composant
@@ -8,7 +8,7 @@ function SouscriptionCard({ title, price, content }) {
 
   // Fonction pour gérer la redirection
   const handlePaymentClick = () => {
-    navigate('/paiement'); // Redirection vers la page /paiement
+    navigate("/paiement"); // Redirection vers la page /paiement
   };
 
   return (
