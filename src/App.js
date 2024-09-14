@@ -31,7 +31,7 @@ function App() {
             />
             <Route path="/about" element={<About />} />
             <Route path="/newtranscription" element={<NewTranscritpion />} />
-            <Route path="/profile" element={<Profil/>}/>
+            <Route path="/profile" element={<Profil />} />
             <Route path="/souscription" element={<Souscriptions />} />
             <Route path="/paiement" element={<Paiement />} />
           </Routes>

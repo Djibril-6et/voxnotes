@@ -1,8 +1,7 @@
-import React from 'react';
-import './index.css'; 
+import React from "react";
+import "./index.css";
 
 function SouscriptionCard({ title, price, content, onClickFunction }) {
-
   return (
     <div className="card">
       <div className="card-top">
