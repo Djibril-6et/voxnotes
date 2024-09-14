@@ -26,17 +26,14 @@ function App() {
               path="/connexion"
               element={<Connexion setIsAuthenticated={setIsAuthenticated} />}
             />
-            <Route
-              path="/inscription"
-              element={<Inscription />}
-            />
+            <Route path="/inscription" element={<Inscription />} />
             <Route
               path="/transcription"
               element={isAuthenticated ? <Transcription /> : <LandingPage />}
             />
             <Route path="/about" element={<About />} />
             <Route path="/newtranscription" element={<NewTranscritpion />} />
-            <Route path="/profile" element={<Profil/>}/>
+            <Route path="/profile" element={<Profil />} />
             <Route path="/souscription" element={<Souscriptions />} />
             <Route path="/paiement" element={<Paiement />} />
           </Routes>

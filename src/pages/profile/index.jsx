@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import './index.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./index.css";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Profil() {
   const [user, setUser] = useState({
-    username: '',
-    email: '',
+    username: "",
+    email: "",
   });
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
-  const username = queryParams.get('username');
-  const email = queryParams.get('email');
+  const username = queryParams.get("username");
+  const email = queryParams.get("email");
   //const provider = queryParams.get('provider');
 
   useEffect(() => {
     if (username && email) {
       const userData = { username, email };
-      localStorage.setItem('userConnected', JSON.stringify({ user: userData }));
+      localStorage.setItem("userConnected", JSON.stringify({ user: userData }));
       setUser(userData);
-    }
-    else{
-        const storedUser = localStorage.getItem('userConnected');
+    } else {
+      const storedUser = localStorage.getItem("userConnected");
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         setUser({
@@ -31,7 +30,7 @@ function Profil() {
           email: parsedUser.user.email,
         });
       } else {
-        navigate('/connexion');
+        navigate("/connexion");
       }
     }
   }, [location, navigate]);
@@ -45,12 +44,12 @@ function Profil() {
       }); */
 
       // Remove user data from localStorage
-      localStorage.removeItem('userConnected');
-      
+      localStorage.removeItem("userConnected");
+
       // Redirect to login page
-      navigate('/connexion');
+      navigate("/connexion");
     } catch (error) {
-      console.error('Error signing out:', error);
+      console.error("Error signing out:", error);
     }
   };
 
@@ -59,8 +58,12 @@ function Profil() {
       <h2 className="profil-title">Profil</h2>
 
       {/* Afficher les informations de l'utilisateur */}
-      <p className="profil-info"><strong>Username:</strong> {user.username}</p>
-      <p className="profil-info"><strong>Email:</strong> {user.email}</p>
+      <p className="profil-info">
+        <strong>Username:</strong> {user.username}
+      </p>
+      <p className="profil-info">
+        <strong>Email:</strong> {user.email}
+      </p>
 
       {/* Sign Out button */}
       <button className="signout-button" onClick={handleSignOut}>

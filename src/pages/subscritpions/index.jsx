@@ -1,12 +1,12 @@
-import React from 'react';
-import './index.css';
-import SouscriptionCard from '../../components/souscriptionCard';
+import React from "react";
+import "./index.css";
+import SouscriptionCard from "../../components/souscriptionCard";
 
 function Souscriptions() {
   return (
     <div className="subscription-page">
       <h1>Abonnements :</h1>
-      
+
       <div className="subscription-section">
         <h2>Personnel</h2>
         <div className="subscription-cards">

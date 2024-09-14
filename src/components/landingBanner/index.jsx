@@ -1,6 +1,6 @@
-import React from 'react';
-import './index.css';
-import VoxNotesLogo from "../../assets/voxNotes.png"
+import React from "react";
+import "./index.css";
+import VoxNotesLogo from "../../assets/voxNotes.png";
 
 function LandingBanner() {
   return (
@@ -10,9 +10,7 @@ function LandingBanner() {
         <h1 className="banner-sub-title">
           Bienvenue <br /> sur
         </h1>
-        <h1 className="banner-title">
-          VoxNotes !
-        </h1>
+        <h1 className="banner-title">VoxNotes !</h1>
       </div>
     </div>
   );

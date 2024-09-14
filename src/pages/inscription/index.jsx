@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import usersServices from '../../services/users.services'; // Adjust the import path if necessary
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import usersServices from "../../services/users.services"; // Adjust the import path if necessary
 
 function Inscription() {
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -23,22 +23,22 @@ function Inscription() {
 
     const { username, email, password } = user;
     if (!username || !email || !password) {
-      alert('Please fill in all fields');
+      alert("Please fill in all fields");
       return;
     }
 
     try {
       await usersServices.registerUser(user);
-      alert('User registered successfully');
-      navigate('/connexion'); // Redirect to login page after successful registration
+      alert("User registered successfully");
+      navigate("/connexion"); // Redirect to login page after successful registration
     } catch (err) {
-      console.error('Error:', err);
+      console.error("Error:", err);
       alert(err.message);
     }
   };
 
   const oauthUrl = process.env.REACT_APP_OAUTH_SERVICE_URL;
-  
+
   const handleGoogleAuth = () => {
     window.location.href = `${oauthUrl}/auth/google`;
   };
@@ -52,7 +52,7 @@ function Inscription() {
   return (
     <div className="connexion-container">
       <h2 className="connexion-title">Inscription</h2>
-      
+
       <form onSubmit={handleRegister} className="connexion-form">
         <input
           type="text"
@@ -84,13 +84,22 @@ function Inscription() {
       </form>
 
       {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
-      <button className="connexion-button google-auth" onClick={handleGoogleAuth}>
+      <button
+        className="connexion-button google-auth"
+        onClick={handleGoogleAuth}
+      >
         S'inscrire avec Google
       </button>
-      <button className="connexion-button github-auth" onClick={handleGithubAuth}>
+      <button
+        className="connexion-button github-auth"
+        onClick={handleGithubAuth}
+      >
         S'inscrire avec GitHub
       </button>
-      <button className="connexion-button discord-auth" onClick={handleDiscordAuth}>
+      <button
+        className="connexion-button discord-auth"
+        onClick={handleDiscordAuth}
+      >
         S'inscrire avec Discord
       </button>
     </div>
