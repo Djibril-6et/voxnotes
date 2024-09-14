@@ -80,7 +80,6 @@ function Profil() {
   useEffect(() => {
     const storedUser = localStorage.getItem("userConnected");
     let parsedUser = null;
-
     if (storedUser) {
       parsedUser = JSON.parse(storedUser);
       setUser({
@@ -110,14 +109,12 @@ function Profil() {
   return (
     <div className="profil-container">
       <h2 className="profil-title">Profil</h2>
-
       <p className="profil-info">
         <strong>Username:</strong> {user.username}
       </p>
       <p className="profil-info">
         <strong>Email:</strong> {user.email}
       </p>
-
       {paymentDetails ? (
         <div className="payment-details">
           <h3>Détails du paiement</h3>

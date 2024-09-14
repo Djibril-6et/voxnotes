@@ -1,32 +1,89 @@
+/* Hero Banner Styling */
 .landing-banner {
-    height: 400px;
-    background-image: url('../../assets/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-  }
-  
-  .banner-content {
-    text-align: center;
-  }
-  
-  .banner-logo {
-    height: 100px;
-    margin-bottom: 10px;
-  }
-  
-  .banner-sub-title {
-    font-size: 24px;
-    line-height: 1.5;
-    margin-bottom: -45px;
-  }
+  height: 100vh; /* Prend toute la hauteur de l'écran */
+  background: linear-gradient(177deg, #0a9393, #000000, #000000); /* Dégradé comme sur l'exemple */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 0 20px;
+  text-align: center;
+  border-bottom-left-radius: ;
+}
 
-  .banner-title {
-    font-size: 44px;
-    line-height: 2.5;
-  }
-  
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -100px;
+  gap: -30px;
+}
+
+.banner-logo {
+  height: 100px;
+  margin-bottom: 0px;
+}
+
+.banner-sub-title {
+  margin-bottom: -30px;
+  font-size: 32px;
+  line-height: 1.5;
+}
+
+.banner-title {
+  font-size: 60px;
+  line-height: 1.2;
+  margin-bottom: 80px;
+}
+
+/* Texte "Découvrez VoxNotes" */
+.banner-description {
+  margin-top: 10px;
+  max-width: 800px;
+}
+
+.banner-description h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.banner-description p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: darkgray; /* Légèrement plus clair pour le texte */
+}
+
+/* Button styling */
+.banner-buttons {
+  margin-top: 50px;
+  display: flex;
+  gap: 20px;
+}
+
+.banner-btn {
+  padding: 12px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.learn-more {
+  background-color: #0a9393;
+  color: white;
+}
+
+.learn-more:hover {
+  background-color: #26d1d1;
+}
+
+.register-now {
+  background-color: #4b5157;
+  color: white;
+}
+
+.register-now:hover {
+  background-color: #84878a;
+}
