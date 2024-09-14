@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import './index.css';
-import voxNotesLogo from "../../assets/voxNotes.png"
+import React from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import "./index.css";
+import voxNotesLogo from "../../assets/voxNotes.png";
 
 function Header({ isAuthenticated }) {
   const { t, i18n } = useTranslation();
@@ -16,7 +16,6 @@ function Header({ isAuthenticated }) {
       <div className="logo">
         <img src={voxNotesLogo} alt="Logo" />
       </div>
-      
       <div className="nav-links-container">
         <nav className="nav-links">
           <Link to="/">{t('banner.home')}</Link>
