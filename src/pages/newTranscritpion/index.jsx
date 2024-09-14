@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { jsPDF } from "jspdf"; // Importer jsPDF
 import "./index.css"; // Assurez-vous que le fichier de style est bien lié
-import SaveModal from "../../components/saveModal";// Importer la modal
+import SaveModal from "../../components/saveModal"; // Importer la modal
 
 function NewTranscription() {
   const [transcription, setTranscription] = useState(""); // Transcription complète
@@ -16,7 +16,9 @@ function NewTranscription() {
   const handleStartRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm; codecs=opus" });
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: "audio/webm; codecs=opus",
+      });
       mediaRecorderRef.current = mediaRecorder;
       setIsRecording(true);
 
@@ -47,7 +49,9 @@ function NewTranscription() {
 
   // Fonction pour envoyer l'audio à l'API backend
   const sendAudioToAPI = async (audioBlob) => {
-    const audioFile = new File([audioBlob], "audio.webm", { type: "audio/webm" });
+    const audioFile = new File([audioBlob], "audio.webm", {
+      type: "audio/webm",
+    });
 
     const formData = new FormData();
     formData.append("file", audioFile);
@@ -61,7 +65,9 @@ function NewTranscription() {
 
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(`Erreur lors de la transcription : ${response.status} - ${errorMessage}`);
+        throw new Error(
+          `Erreur lors de la transcription : ${response.status} - ${errorMessage}`
+        );
       }
 
       const data = await response.json();
@@ -131,10 +137,18 @@ function NewTranscription() {
 
       {/* Section des boutons pour démarrer et arrêter */}
       <div className="recording-controls">
-        <button onClick={handleStartRecording} disabled={isRecording} className="record-btn">
+        <button
+          onClick={handleStartRecording}
+          disabled={isRecording}
+          className="record-btn"
+        >
           Démarrer l'enregistrement
         </button>
-        <button onClick={handleStopRecording} disabled={!isRecording} className="stop-btn">
+        <button
+          onClick={handleStopRecording}
+          disabled={!isRecording}
+          className="stop-btn"
+        >
           Arrêter l'enregistrement
         </button>
       </div>
@@ -149,7 +163,11 @@ function NewTranscription() {
       <div className="transcription-section">
         <div className="transcription-text">
           <h3>Transcription complète :</h3>
-          <textarea value={transcription} readOnly placeholder="Votre transcription apparaîtra ici..." />
+          <textarea
+            value={transcription}
+            readOnly
+            placeholder="Votre transcription apparaîtra ici..."
+          />
         </div>
 
         {/* Lecteur audio */}

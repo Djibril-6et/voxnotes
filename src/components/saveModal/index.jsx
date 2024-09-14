@@ -24,8 +24,12 @@ function SaveModal({ onSave, onClose }) {
             required
           />
           <div className="modal-actions">
-            <button type="submit" className="save-btn">Enregistrer</button>
-            <button type="button" className="close-btn" onClick={onClose}>Annuler</button>
+            <button type="submit" className="save-btn">
+              Enregistrer
+            </button>
+            <button type="button" className="close-btn" onClick={onClose}>
+              Annuler
+            </button>
           </div>
         </form>
       </div>
