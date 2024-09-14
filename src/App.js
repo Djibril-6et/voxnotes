@@ -10,6 +10,7 @@ import NewTranscritpion from "./pages/newTranscritpion";
 import Profil from "./pages/profile";
 import Souscriptions from "./pages/subscritpions";
 import Paiement from "./pages/paiement";
+import Inscription from "./pages/inscription";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,6 +26,7 @@ function App() {
               path="/connexion"
               element={<Connexion setIsAuthenticated={setIsAuthenticated} />}
             />
+            <Route path="/inscription" element={<Inscription />} />
             <Route
               path="/transcription"
               element={isAuthenticated ? <Transcription /> : <LandingPage />}

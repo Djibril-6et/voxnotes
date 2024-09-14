@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Profil() {
   const [user, setUser] = useState({
@@ -11,6 +11,12 @@ function Profil() {
   const [paymentDetails, setPaymentDetails] = useState(null); // Détails du paiement
   const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Détails de l'abonnement
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const username = queryParams.get("username");
+  const email = queryParams.get("email");
+  const sessionId = queryParams.get("session_id");
 
   // Fonction pour récupérer les détails du paiement ou de l'abonnement en fonction du session_id
   const fetchSessionDetails = async (sessionId) => {
@@ -78,21 +84,24 @@ function Profil() {
   };
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("userConnected");
-    let parsedUser = null;
-    if (storedUser) {
-      parsedUser = JSON.parse(storedUser);
-      setUser({
-        username: parsedUser.user.username,
-        email: parsedUser.user.email,
-      });
+    if (username && email) {
+      const userData = { username, email };
+      localStorage.setItem("userConnected", JSON.stringify({ user: userData }));
+      setUser(userData);
     } else {
-      navigate("/connexion"); // Redirection si aucun utilisateur n'est connecté
+      const storedUser = localStorage.getItem("userConnected");
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        setUser({
+          username: parsedUser.user.username,
+          email: parsedUser.user.email,
+        });
+      } else {
+        navigate("/connexion");
+      }
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get("session_id");
-
+    // Récupération des détails de la session si sessionId est présent
     if (sessionId) {
       const fetchDetails = async () => {
         const { paymentDetails, subscriptionDetails } =
@@ -104,7 +113,19 @@ function Profil() {
       };
       fetchDetails();
     }
-  }, [navigate]);
+  }, [location, navigate, username, email, sessionId]);
+
+  const handleSignOut = async () => {
+    try {
+      // Remove user data from localStorage
+      localStorage.removeItem("userConnected");
+
+      // Redirect to login page
+      navigate("/connexion");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   return (
     <div className="profil-container">
@@ -115,6 +136,7 @@ function Profil() {
       <p className="profil-info">
         <strong>Email:</strong> {user.email}
       </p>
+    
       {paymentDetails ? (
         <div className="payment-details">
           <h3>Détails du paiement</h3>
@@ -149,6 +171,10 @@ function Profil() {
           Aucun paiement ou abonnement récent trouvé.
         </p>
       )}
+
+      <button className="signout-button" onClick={handleSignOut}>
+        Sign Out
+      </button>
     </div>
   );
 }

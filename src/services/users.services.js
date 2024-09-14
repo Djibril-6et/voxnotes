@@ -25,4 +25,29 @@ export default {
         throw err;
       });
   },
+
+  registerUser(payload) {
+    return fetch(`${API_URL_BASE}/api/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then((data) => {
+            throw new Error(
+              data.message || "Une erreur est survenue lors de l'inscription."
+            );
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        throw err;
+      });
+  },
 };

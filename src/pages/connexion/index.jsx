@@ -49,6 +49,18 @@ function Connexion({ setIsAuthenticated }) {
       });
   };
 
+  const oauthUrl = process.env.REACT_APP_OAUTH_SERVICE_URL;
+
+  const handleGoogleAuth = () => {
+    window.location.href = `${oauthUrl}/auth/google`;
+  };
+  const handleGithubAuth = () => {
+    window.location.href = `${oauthUrl}/auth/github`;
+  };
+  const handleDiscordAuth = () => {
+    window.location.href = `${oauthUrl}/auth/discord`;
+  };
+
   return (
     <div className="connexion-container">
       <h2 className="connexion-title">Connexion</h2>
@@ -76,6 +88,26 @@ function Connexion({ setIsAuthenticated }) {
       {/* Bouton pour soumettre le formulaire de connexion */}
       <button className="connexion-button" onClick={handleLogin}>
         Me connecter
+      </button>
+
+      {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
+      <button
+        className="connexion-button google-auth"
+        onClick={handleGoogleAuth}
+      >
+        Connexion avec Google
+      </button>
+      <button
+        className="connexion-button github-auth"
+        onClick={handleGithubAuth}
+      >
+        Connexion avec GitHub
+      </button>
+      <button
+        className="connexion-button discord-auth"
+        onClick={handleDiscordAuth}
+      >
+        Connexion avec Discord
       </button>
     </div>
   );
