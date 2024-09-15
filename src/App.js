@@ -7,6 +7,10 @@ import LandingPage from "./pages/landingpage";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import NewTranscritpion from "./pages/newTranscritpion";
+import Profil from "./pages/profile";
+import Souscriptions from "./pages/subscritpions";
+import Paiement from "./pages/paiement";
+import Inscription from "./pages/inscription";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -22,12 +26,16 @@ function App() {
               path="/connexion"
               element={<Connexion setIsAuthenticated={setIsAuthenticated} />}
             />
+            <Route path="/inscription" element={<Inscription />} />
             <Route
               path="/transcription"
               element={isAuthenticated ? <Transcription /> : <LandingPage />}
             />
             <Route path="/about" element={<About />} />
             <Route path="/newtranscription" element={<NewTranscritpion />} />
+            <Route path="/profile" element={<Profil />} />
+            <Route path="/souscription" element={<Souscriptions />} />
+            <Route path="/paiement" element={<Paiement />} />
           </Routes>
         </div>
       </main>

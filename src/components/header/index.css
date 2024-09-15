@@ -1,46 +1,65 @@
-.banner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333; /* Change la couleur de fond selon ton design */
-    color: white;
-  }
-  
-  .logo img {
-    height: 50px; /* Ajuste la taille du logo */
-  }
-  
-  .nav-links {
-    display: flex;
-    gap: 20px; /* Espacement entre les liens */
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .nav-links a:hover {
-    text-decoration: underline; /* Effet de survol */
-  }
-  
-  .language-selector {
-    background-color: #444; /* Couleur de fond assortie à la bannière */
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .language-selector:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-  }
-  
-  .language-selector:hover {
-    background-color: #555; /* Changement de couleur au survol */
-  }
+/* Header Styling */
+.floating-header {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; /* Ajuste la largeur du header */
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Ombre sous le header */
+  border-radius: 20px; /* Bordures arrondies */
+  padding: 20px 0;
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: space-between; /* Espace entre logo, liens et sélection de langue */
+}
+
+.logo {
+  margin-left: 20px; /* Logo collé à gauche */
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-links-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Centre les liens horizontalement */
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.language-selector {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 20px; /* Sélecteur de langue collé à droite */
+}
+
+.language-selector:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.language-selector:hover {
+  background-color: #555;
+}
