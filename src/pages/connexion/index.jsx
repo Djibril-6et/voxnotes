@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"; // Importation de PropTypes pour valider les props
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
@@ -112,5 +113,10 @@ function Connexion({ setIsAuthenticated }) {
     </div>
   );
 }
+
+// Validation des props avec PropTypes
+Connexion.propTypes = {
+  setIsAuthenticated: PropTypes.func.isRequired, // Validation de setIsAuthenticated comme fonction requise
+};
 
 export default Connexion;

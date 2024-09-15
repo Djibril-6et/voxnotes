@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types"; // Importation de PropTypes pour la validation des props
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./index.css";
@@ -34,5 +35,10 @@ function Header({ isAuthenticated }) {
     </header>
   );
 }
+
+// Validation des props avec PropTypes
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired, // Validation que isAuthenticated est un booléen obligatoire
+};
 
 export default Header;
