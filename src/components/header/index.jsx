@@ -19,14 +19,27 @@ function Header({ isAuthenticated }) {
       </div>
       <div className="nav-links-container">
         <nav className="nav-links">
-          <Link to="/">{t('banner.home')}</Link>
-          {!isAuthenticated && <Link to="/connexion">{t('banner.connexion')}</Link>}
-          {isAuthenticated && <Link to="/transcription">{t('banner.transcription')}</Link>}
-          <Link to="/about">{t('banner.about')}</Link>
+          <Link to="/">{t("banner.home")}</Link>
+          {!isAuthenticated && (
+            <Link to="/connexion">
+              {t("banner.connexion")}
+            </Link>
+          )}
+          {isAuthenticated && (
+            <Link to="/transcription">
+              {t("banner.transcription")}
+            </Link>
+          )}
+          <Link to="/about">
+            {t("banner.about")}
+          </Link>
         </nav>
       </div>
 
-      <select className="language-selector" onChange={(e) => changeLanguage(e.target.value)}>
+      <select
+        className="language-selector"
+        onChange={(e) => changeLanguage(e.target.value)}
+      >
         <option value="en">En</option>
         <option value="fr">Fr</option>
         <option value="pt">Pt</option>
