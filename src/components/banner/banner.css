@@ -8,21 +8,14 @@
   color: white;
   padding: 0 20px;
   text-align: center;
-  border-bottom-left-radius: ;
 }
 
 .banner-content {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: -100px;
-  gap: -30px;
-}
-
-.banner-logo {
-  height: 100px;
-  margin-bottom: 0px;
 }
 
 .banner-sub-title {
@@ -34,12 +27,9 @@
 .banner-title {
   font-size: 60px;
   line-height: 1.2;
-  margin-bottom: 80px;
 }
 
-/* Texte "Découvrez VoxNotes" */
 .banner-description {
-  margin-top: 10px;
   max-width: 800px;
 }
 
@@ -56,7 +46,7 @@
 
 /* Button styling */
 .banner-buttons {
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   gap: 20px;
 }

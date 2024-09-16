@@ -1,10 +1,9 @@
-import PropTypes from "prop-types"; // Importation de PropTypes pour valider les props
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./index.css";
+import "./connexion.css"; // Assurez-vous que les styles sont bien appliqués
 import usersServices from "../../services/users.services";
 
-function Connexion({ setIsAuthenticated }) {
+function Connexion() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -23,14 +22,12 @@ function Connexion({ setIsAuthenticated }) {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Check if empty
     const { email, password } = user;
     if (!email || !password) {
       alert("Veuillez remplir tous les champs");
       return;
     }
 
-    // Check email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Veuillez entrer une adresse email valide");
@@ -42,7 +39,8 @@ function Connexion({ setIsAuthenticated }) {
       .then((userData) => {
         console.log("LOGGED IN", userData);
         localStorage.setItem("userConnected", JSON.stringify(userData));
-        navigate("/profile");
+        window.location.reload();
+        navigate("/transcription");
       })
       .catch((err) => {
         console.error("Error:", err);
@@ -55,9 +53,11 @@ function Connexion({ setIsAuthenticated }) {
   const handleGoogleAuth = () => {
     window.location.href = `${oauthUrl}/auth/google`;
   };
+
   const handleGithubAuth = () => {
     window.location.href = `${oauthUrl}/auth/github`;
   };
+
   const handleDiscordAuth = () => {
     window.location.href = `${oauthUrl}/auth/discord`;
   };
@@ -116,10 +116,5 @@ function Connexion({ setIsAuthenticated }) {
     </div>
   );
 }
-
-// Validation des props avec PropTypes
-Connexion.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired, // Validation de setIsAuthenticated comme fonction requise
-};
 
 export default Connexion;

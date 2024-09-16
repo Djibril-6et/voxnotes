@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./index.css";
+import "./souscriptionCard.css";
 
 function SouscriptionCard({ title, price, content, onClickFunction }) {
   return (

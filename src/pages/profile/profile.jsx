@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
+import "./profile.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Profil() {

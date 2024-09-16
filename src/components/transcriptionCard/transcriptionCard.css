@@ -35,7 +35,7 @@
   }
   
   .card-bottom {
-    background-color: #ddd; /* Couleur grise pour la partie inférieure */
+    background-color: #0a9393; /* Couleur grise pour la partie inférieure */
     flex: 1; /* Partie inférieure plus petite */
     display: flex;
     justify-content: center;

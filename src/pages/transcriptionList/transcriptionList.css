@@ -1,0 +1,106 @@
+/* Container de la page transcription */
+.transcription-page {
+  padding: 20px;
+  height: 100vh;
+  background: linear-gradient(177deg, #0a9393, #000000, #000000); /* Dégradé comme sur la landing page */
+  color: white;
+}
+
+/* Section pour la nouvelle transcription */
+.new-transcription-section {
+  margin-top: 150px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.new-transcription-link {
+  background-color: #30353a;
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.new-transcription-link:hover {
+  background-color: #484f56; /* Changement de couleur au survol */
+}
+
+.new-transcription-link:active {
+  background-color: #000000; /* Couleur lors du clic */
+}
+
+.new-transcription-link:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(57, 60, 63, 0.7);
+}
+
+/* Centrer le contenu */
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Section pour les cartes de transcription */
+.card-section {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux cartes de s'adapter à la taille de l'écran */
+  justify-content: space-evenly; /* Espacement entre les cartes */
+  gap: 20px; /* Espacement entre les cartes */
+}
+
+/* Style des cartes de transcription */
+.card {
+  width: 200px;
+  height: 250px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px;
+  background-color: #0a9393;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-top {
+  padding: 10px;
+  background-color: transparent;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #0a9393;
+}
+
+.card-bottom {
+  background-color: #0a9393;
+  padding: 10px;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.card-content {
+  font-size: 14px;
+  color: #ccc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-date {
+  font-size: 12px;
+  color: lightgray;
+  margin-top: 10px;
+}

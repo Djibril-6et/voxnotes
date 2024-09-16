@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./footer.css";
 import VoxNotesLogo from "../../assets/voxNotes.png";
 
 function Footer() {

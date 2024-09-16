@@ -1,41 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Connexion from "./pages/connexion";
-import Transcription from "./pages/transcriptionList";
-import About from "./pages/aboutUs";
-import LandingPage from "./pages/landingpage";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import NewTranscritpion from "./pages/newTranscritpion";
-import Profil from "./pages/profile";
-import Souscriptions from "./pages/subscritpions";
-import Paiement from "./pages/paiement";
-import Inscription from "./pages/inscription";
+import Connexion from "./pages/connexion/connexion";
+import Transcription from "./pages/transcriptionList/transcriptionList";
+import About from "./pages/aboutUs/aboutUs";
+import LandingPage from "./pages/landingpage/landingPage";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
+import NewTranscritpion from "./pages/newTranscritpion/newTranscription";
+import Profil from "./pages/profile/profile";
+import Souscriptions from "./pages/subscritpions/subscriptions";
+import Inscription from "./pages/inscription/inscription";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   return (
     <div>
-      <Header isAuthenticated={isAuthenticated} />
+      <Header />
       <main>
         <div className="content">
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route
-              path="/connexion"
-              element={<Connexion setIsAuthenticated={setIsAuthenticated} />}
-            />
+            <Route path="/connexion" element={<Connexion />} />
             <Route path="/inscription" element={<Inscription />} />
-            <Route
-              path="/transcription"
-              element={isAuthenticated ? <Transcription /> : <LandingPage />}
-            />
+            <Route path="/transcription" element={<Transcription />} />
             <Route path="/about" element={<About />} />
             <Route path="/newtranscription" element={<NewTranscritpion />} />
             <Route path="/profile" element={<Profil />} />
             <Route path="/souscription" element={<Souscriptions />} />
-            <Route path="/paiement" element={<Paiement />} />
           </Routes>
         </div>
       </main>

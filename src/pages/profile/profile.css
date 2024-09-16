@@ -1,0 +1,67 @@
+/* Container pour la page de profil avec le même fond et couleurs que la landing page */
+.profil-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(177deg, #0a9393, #000000, #000000); /* Fond dégradé */
+  color: white;
+  padding: 20px;
+}
+
+.profil-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.profil-info {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: lightgray; /* Texte plus clair */
+}
+
+.payment-details,
+.subscription-details {
+  background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent */
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-details h3,
+.subscription-details h3 {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.payment-details p,
+.subscription-details p {
+  font-size: 18px;
+  color: lightgray;
+}
+
+.no-payment-details {
+  font-size: 18px;
+  color: lightgray;
+}
+
+.signout-button {
+  padding: 12px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #0a9393;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.signout-button:hover {
+  background-color: #26d1d1;
+}

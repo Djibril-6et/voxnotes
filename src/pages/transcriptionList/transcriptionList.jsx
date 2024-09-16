@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./index.css";
-import TranscriptionCard from "../../components/transcriptionCard";
+import "./transcriptionList.css";
+import TranscriptionCard from "../../components/transcriptionCard/transcriptionCard";
 
 function Transcription() {
   const fakeData = [

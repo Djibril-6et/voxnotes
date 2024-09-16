@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { jsPDF } from "jspdf";
-import "./index.css";
-import SaveModal from "../../components/saveModal";
+import "./newTranscription.css";
+import SaveModal from "../../components/saveModal/saveModal";
 
 function NewTranscription() {
   const [transcription, setTranscription] = useState("");

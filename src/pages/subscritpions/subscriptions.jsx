@@ -1,6 +1,6 @@
 import React from "react";
-import "./index.css";
-import SouscriptionCard from "../../components/souscriptionCard";
+import "./subscriptions.css";
+import SouscriptionCard from "../../components/souscriptionCard/souscriptionCard";
 
 function Souscriptions() {
   const goToPaiement = (e, subject, type, price) => {

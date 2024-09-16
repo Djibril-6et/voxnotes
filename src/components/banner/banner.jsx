@@ -1,8 +1,23 @@
 import React from "react";
-import "./index.css";
-import VoxNotesLogo from "../../assets/voxNotes.png";
+import { useNavigate } from "react-router-dom"; // Importez useNavigate pour la redirection
+import "./banner.css";
 
-function LandingBanner() {
+function Banner() {
+  const navigate = useNavigate();
+
+  // Fonction qui gère le clic sur le bouton
+  const handleTryClick = () => {
+    const userSession = localStorage.getItem("userConnected");
+
+    if (userSession) {
+      // Si l'utilisateur est connecté, redirigez-le vers la page de transcription
+      navigate("/transcription");
+    } else {
+      // Sinon, redirigez-le vers la page de connexion
+      navigate("/connexion");
+    }
+  };
+
   return (
     <div className="landing-banner">
       <div className="banner-content">
@@ -11,7 +26,6 @@ function LandingBanner() {
         </h1>
         <h1 className="banner-title">VoxNotes !</h1>
 
-        {/* Ajout du texte "Découvrez VoxNotes" ici */}
         <div className="banner-description">
           <h2>Découvrez VoxNotes</h2>
           <p>
@@ -26,11 +40,12 @@ function LandingBanner() {
         </div>
 
         <div className="banner-buttons">
-          <button type="button" className="banner-btn learn-more">
-            En savoir plus
-          </button>
-          <button type="button" className="banner-btn register-now">
-            S&apos;inscrire
+          <button
+            type="button"
+            className="banner-btn learn-more"
+            onClick={handleTryClick}
+          >
+            Je veux Essayer !
           </button>
         </div>
       </div>
@@ -38,4 +53,4 @@ function LandingBanner() {
   );
 }
 
-export default LandingBanner;
+export default Banner;

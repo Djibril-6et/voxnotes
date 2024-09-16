@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "./index.css"; // Créer un fichier CSS pour styliser la modal
+import "./saveModal.css"; // Créer un fichier CSS pour styliser la modal
 
 function SaveModal({ onSave, onClose }) {
   const [transcriptionName, setTranscriptionName] = useState("");

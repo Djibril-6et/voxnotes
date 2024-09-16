@@ -1,11 +1,11 @@
 import React from "react";
-import LandingBanner from "../../components/landingBanner";
-import "./index.css";
+import "./landingPage.css";
+import Banner from "../../components/banner/banner";
 
 function Home() {
   return (
     <div>
-      <LandingBanner />
+      <Banner />
     </div>
   );
 }

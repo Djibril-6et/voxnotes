@@ -5,7 +5,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 80%; /* Ajuste la largeur du header */
-  z-index: 1000;
+  height: 20px;
   background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Ombre sous le header */
   border-radius: 20px; /* Bordures arrondies */

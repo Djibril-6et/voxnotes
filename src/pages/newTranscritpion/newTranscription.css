@@ -1,0 +1,131 @@
+/* Container pour la page de transcription */
+.transcription-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(177deg, #0a9393, #000000, #000000); /* Fond dégradé similaire à la landing page */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+h2 {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: white; /* Couleur du texte blanc pour une meilleure lisibilité */
+}
+
+/* Contrôles pour l'enregistrement */
+.recording-controls {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.record-btn, .stop-btn {
+  padding: 15px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.record-btn {
+  background-color: #0a9393;
+  color: white;
+}
+
+.record-btn:disabled {
+  background-color: #aaa;
+}
+
+.stop-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.stop-btn:disabled {
+  background-color: #aaa;
+}
+
+.status-message {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #fff; /* Couleur blanche pour le texte d'état */
+}
+
+/* Section de transcription */
+.transcription-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 30px;
+}
+
+.transcription-text {
+  width: 60%;
+}
+
+.transcription-text h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: white; /* Couleur blanche pour le titre */
+}
+
+.transcription-text textarea {
+  width: 100%;
+  height: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #566363;
+  border-radius: 5px;
+  resize: none;
+  background-color: #aaa; /* Fond clair pour une meilleure lisibilité */
+  color: white; /* Couleur du texte */
+}
+
+/* Section du lecteur audio */
+.audio-player {
+  width: 35%;
+  text-align: center;
+}
+
+.audio-player h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: white; /* Couleur blanche pour le titre */
+}
+
+.audio-player audio {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Léger effet d'ombre pour le lecteur audio */
+}
+
+/* Boutons d'action */
+.action-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.action-buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0a9393;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-buttons button:hover {
+  background-color: #62cece; /* Changement de couleur au survol */
+}
