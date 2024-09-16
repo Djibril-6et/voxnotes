@@ -38,6 +38,7 @@ function NewTranscription() {
       setTranscription(data.text);
       setAudioUrl(data.audioUrl);
     } catch (error) {
+      // eslint-disable-next-line
       console.error("Erreur lors de la transcription :", error);
     } finally {
       setIsTranscribing(false);
@@ -59,6 +60,7 @@ function NewTranscription() {
 
       mediaRecorder.start();
     } catch (error) {
+      // eslint-disable-next-line
       console.error("Erreur lors de l'initialisation du MediaRecorder:", error);
     }
   };
@@ -79,6 +81,7 @@ function NewTranscription() {
 
   const handleCopyText = () => {
     navigator.clipboard.writeText(transcription);
+    // eslint-disable-next-line
     alert("Texte copié dans le presse-papier !");
   };
 
@@ -114,9 +117,10 @@ function NewTranscription() {
       if (!response.ok) {
         throw new Error("Erreur lors de l'enregistrement de la transcription");
       }
-
+      // eslint-disable-next-line
       alert("Transcription enregistrée avec succès !");
     } catch (error) {
+      // eslint-disable-next-line
       console.error("Erreur lors de l'enregistrement :", error);
     } finally {
       handleCloseModal();

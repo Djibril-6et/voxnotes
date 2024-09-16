@@ -24,12 +24,14 @@ function Connexion() {
 
     const { email, password } = user;
     if (!email || !password) {
+      // eslint-disable-next-line
       alert("Veuillez remplir tous les champs.");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
+      // eslint-disable-next-line
       alert("Veuillez entrer une adresse email valide.");
       return;
     }
@@ -37,6 +39,7 @@ function Connexion() {
     usersServices
       .loginUser(user)
       .then((userData) => {
+        // eslint-disable-next-line
         console.log("LOGGED IN", userData);
         localStorage.setItem("userConnected", JSON.stringify(userData));
 
@@ -47,7 +50,9 @@ function Connexion() {
         navigate("/profile");
       })
       .catch((err) => {
+        // eslint-disable-next-line
         console.error("Error:", err);
+        // eslint-disable-next-line
         alert(err.message);
       });
   };

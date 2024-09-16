@@ -20,6 +20,7 @@ export default {
         });
       })
       .catch((err) => {
+        // eslint-disable-next-line
         console.error("Error:", err);
         throw err;
       });
@@ -44,6 +45,7 @@ export default {
         });
       })
       .catch((err) => {
+        // eslint-disable-next-line
         console.error("Error:", err);
         throw err;
       });

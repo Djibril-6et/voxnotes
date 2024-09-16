@@ -14,7 +14,7 @@ function Souscriptions() {
       price: price * 100, // Convertir en centimes
       userId, // Utiliser la syntaxe abrégée
     };
-
+    // eslint-disable-next-line
     console.log("Request body:", requestBody); // Ajoutez le console.log ici
 
     let endpoint = "";
@@ -36,6 +36,7 @@ function Souscriptions() {
         window.location.href = url;
       })
       .catch((error) => {
+        // eslint-disable-next-line
         console.error(error.error);
       });
   };

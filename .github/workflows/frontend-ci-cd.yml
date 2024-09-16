@@ -33,9 +33,9 @@ jobs:
       # - name: Run tests
       #   run: npm test -- --watchAll=false
 
-      # # Étape 5 : Vérifier le code avec ESLint
-      # - name: Lint code
-      #   run: npm run lint
+      # Étape 5 : Vérifier le code avec ESLint
+      - name: Lint code
+        run: npm run lint
 
   build-frontend:
     name: Build Frontend

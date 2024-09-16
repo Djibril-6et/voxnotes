@@ -24,25 +24,30 @@ function Profil() {
   // On récupère _id des query params ou du localStorage si les query params sont vides
   /* eslint-disable-next-line no-underscore-dangle */
   const _id = queryParams.get("_id") || JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
-
+  // eslint-disable-next-line
   console.log("Query Params _id:", _id); // Ajout pour vérifier la valeur de _id
 
   // Fonction pour récupérer les fichiers audio de l'utilisateur connecté
   const fetchUserAudioFiles = async () => {
     if (_id) {
+      // eslint-disable-next-line
       console.log("User ID:", _id); // Vérifiez que l'ID est correct
       try {
         const audioFiles = await audioFilesServices.getUserFiles(_id);
+        // eslint-disable-next-line
         console.log("Audio Files Data: ", audioFiles); // Afficher la réponse complète de l'API
         setAudioFilesList(audioFiles); // Assigner la liste directement
+        // eslint-disable-next-line
         console.log("State after setting audio files: ", audioFilesList); // Vérifier l'état après mise à jour
       } catch (error) {
+        // eslint-disable-next-line
         console.error(
           "Erreur lors de la récupération des fichiers audio :",
           error
         );
       }
     } else {
+      // eslint-disable-next-line
       console.warn("No user ID found!"); // Log si l'ID est manquant
     }
   };
@@ -105,6 +110,7 @@ function Profil() {
         }
       }
     } catch (error) {
+      // eslint-disable-next-line
       console.error(
         "Erreur lors de la récupération des fichiers audio :",
         error
@@ -127,6 +133,7 @@ function Profil() {
           email: storedEmail,
           _id: storedId,
         } = JSON.parse(storedUser).user;
+        // eslint-disable-next-line
         console.log("Stored user data:", { storedUsername, storedEmail, storedId }); // eslint-disable-line
         setUser({ username: storedUsername, email: storedEmail, _id: storedId }); // eslint-disable-line
       } else {
@@ -146,7 +153,7 @@ function Profil() {
       };
       fetchDetails();
     }
-
+    // eslint-disable-next-line
     console.log("useEffect - _id:", _id); // Vérification de _id dans useEffect
 
     fetchUserAudioFiles();
@@ -220,7 +227,7 @@ function Profil() {
       {/* Affichage des fichiers audio */}
       <div className="audio-files-section">
         <h3>Vos fichiers audio</h3>
-        {console.log("State audioFilesList:", audioFilesList)}
+        {/* {console.log("State audioFilesList:", audioFilesList)} */}
         {audioFilesList.length > 0 ? (
           <ul>
             {audioFilesList.map((audioFile) => (

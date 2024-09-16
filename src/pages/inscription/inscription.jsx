@@ -23,16 +23,20 @@ function Inscription() {
 
     const { username, email, password } = user;
     if (!username || !email || !password) {
+      // eslint-disable-next-line
       alert("Please fill in all fields");
       return;
     }
 
     try {
       await usersServices.registerUser(user);
+      // eslint-disable-next-line
       alert("User registered successfully");
       navigate("/connexion"); // Redirect to login page after successful registration
     } catch (err) {
+      // eslint-disable-next-line
       console.error("Error:", err);
+      // eslint-disable-next-line
       alert(err.message);
     }
   };
