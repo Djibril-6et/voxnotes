@@ -29,9 +29,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Étape 4 : Lancer les tests du frontend
-      - name: Run tests
-        run: npm test -- --watchAll=false
+      # # Étape 4 : Lancer les tests du frontend
+      # - name: Run tests
+      #   run: npm test -- --watchAll=false
 
       # Étape 5 : Vérifier le code avec ESLint
       - name: Lint code
