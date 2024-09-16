@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./profile.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import audioFilesServices from "../../services/audioFiles.services";
 
 function Profil() {
   const [user, setUser] = useState({
     username: "",
     email: "",
+    _id: "", // Suppression de l'espace en trop ici
   });
 
   const [paymentDetails, setPaymentDetails] = useState(null); // Détails du paiement
   const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Détails de l'abonnement
+  const [audioFilesList, setAudioFilesList] = useState([]); // Liste des fichiers audio
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,7 +21,32 @@ function Profil() {
   const email = queryParams.get("email");
   const sessionId = queryParams.get("session_id");
 
-  // Fonction pour récupérer les détails du paiement ou de l'abonnement en fonction du session_id
+  // On récupère _id des query params ou du localStorage si les query params sont vides
+  /* eslint-disable-next-line no-underscore-dangle */
+  const _id = queryParams.get("_id") || JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
+
+  console.log("Query Params _id:", _id); // Ajout pour vérifier la valeur de _id
+
+  // Fonction pour récupérer les fichiers audio de l'utilisateur connecté
+  const fetchUserAudioFiles = async () => {
+    if (_id) {
+      console.log("User ID:", _id); // Vérifiez que l'ID est correct
+      try {
+        const audioFiles = await audioFilesServices.getUserFiles(_id);
+        console.log("Audio Files Data: ", audioFiles); // Afficher la réponse complète de l'API
+        setAudioFilesList(audioFiles); // Assigner la liste directement
+        console.log("State after setting audio files: ", audioFilesList); // Vérifier l'état après mise à jour
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des fichiers audio :",
+          error
+        );
+      }
+    } else {
+      console.warn("No user ID found!"); // Log si l'ID est manquant
+    }
+  };
+
   const fetchSessionDetails = async (sessionId) => { // eslint-disable-line
     try {
       const sessionResponse = await fetch(
@@ -77,24 +105,30 @@ function Profil() {
         }
       }
     } catch (error) {
-      console.error("Erreur lors de la requête :", error);
+      console.error(
+        "Erreur lors de la récupération des fichiers audio :",
+        error
+      ); // eslint-disable-line no-console
     }
 
     return { paymentDetails: null, subscriptionDetails: null };
   };
 
   useEffect(() => {
-    if (username && email) {
-      const userData = { username, email };
+    if (username && email && _id) {
+      const userData = { username, email, _id };
       localStorage.setItem("userConnected", JSON.stringify({ user: userData }));
       setUser(userData);
     } else {
       const storedUser = localStorage.getItem("userConnected");
       if (storedUser) {
         const {
-          user: { username, email }, // eslint-disable-line
-        } = JSON.parse(storedUser);
-        setUser({ username, email });
+          username: storedUsername,
+          email: storedEmail,
+          _id: storedId,
+        } = JSON.parse(storedUser).user;
+        console.log("Stored user data:", { storedUsername, storedEmail, storedId }); // eslint-disable-line
+        setUser({ username: storedUsername, email: storedEmail, _id: storedId }); // eslint-disable-line
       } else {
         navigate("/connexion");
       }
@@ -112,7 +146,11 @@ function Profil() {
       };
       fetchDetails();
     }
-  }, [location, navigate, username, email, sessionId]);
+
+    console.log("useEffect - _id:", _id); // Vérification de _id dans useEffect
+
+    fetchUserAudioFiles();
+  }, [location, navigate, username, email, sessionId, _id]);
 
   const handleSignOut = async () => {
     try {
@@ -126,7 +164,7 @@ function Profil() {
       // Redirect to login page
       navigate("/connexion");
     } catch (error) {
-      console.error("Error signing out:", error);
+      console.error("Error signing out:", error); // eslint-disable-line no-console
     }
   };
 
@@ -154,6 +192,7 @@ function Profil() {
           </p>
         </div>
       )}
+
       {!paymentDetails && subscriptionDetails && (
         <div className="subscription-details">
           <h3>Détails de l&apos;abonnement</h3>
@@ -171,11 +210,35 @@ function Profil() {
           </p>
         </div>
       )}
+
       {!paymentDetails && !subscriptionDetails && (
         <p className="no-payment-details">
           Aucun paiement ou abonnement récent trouvé.
         </p>
       )}
+
+      {/* Affichage des fichiers audio */}
+      <div className="audio-files-section">
+        <h3>Vos fichiers audio</h3>
+        {console.log("State audioFilesList:", audioFilesList)}
+        {audioFilesList.length > 0 ? (
+          <ul>
+            {audioFilesList.map((audioFile) => (
+              <li key={audioFile.fileName}>
+                <strong>Nom du fichier :</strong> {audioFile.fileName} <br />
+                <strong>Type :</strong> {audioFile.fileType} <br />
+                <strong>Taille :</strong>{" "}
+                {(audioFile.fileSize / 1000000).toFixed(2)} MB <br />
+                <strong>Statut :</strong> {audioFile.status} <br />
+                <strong>Date d&apos;upload :</strong>{" "}
+                {new Date(audioFile.uploadDate).toLocaleDateString()}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Aucun fichier audio disponible.</p>
+        )}
+      </div>
 
       <button type="button" className="signout-button" onClick={handleSignOut}>
         Sign Out
