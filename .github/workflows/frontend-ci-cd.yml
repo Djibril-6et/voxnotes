@@ -1,0 +1,62 @@
+name: Frontend CI/CD Pipeline
+
+# Déclenche la pipeline sur chaque push ou pull request vers la branche 'main'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  install-and-test:
+    name: Install dependencies and run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Cloner le dépôt
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Étape 2 : Configurer Node.js (utilise la version spécifiée dans le fichier package.json)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      # Étape 3 : Installer les dépendances du projet
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 4 : Lancer les tests du frontend
+      - name: Run tests
+        run: npm test -- --watchAll=false
+
+      # Étape 5 : Vérifier le code avec ESLint
+      - name: Lint code
+        run: npm run lint
+
+  build-frontend:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    needs: install-and-test
+
+    steps:
+      # Étape 1 : Cloner le dépôt
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Étape 2 : Configurer Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 4 : Lancer le build pour la production
+      - name: Build frontend
+        run: npm run build
