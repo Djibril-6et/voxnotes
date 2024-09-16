@@ -39,8 +39,12 @@ function Connexion() {
       .then((userData) => {
         console.log("LOGGED IN", userData);
         localStorage.setItem("userConnected", JSON.stringify(userData));
-        window.location.reload();
-        navigate("/transcription");
+
+        // Déclencher un événement personnalisé "userConnected"
+        const event = new Event("userConnected");
+        window.dispatchEvent(event);
+
+        navigate("/profile");
       })
       .catch((err) => {
         console.error("Error:", err);

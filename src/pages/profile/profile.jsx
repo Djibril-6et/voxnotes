@@ -109,8 +109,6 @@ function Profil() {
         } = await fetchSessionDetails(sessionId);
         setPaymentDetails(fetchedPaymentDetails);
         setSubscriptionDetails(fetchedSubscriptionDetails);
-
-        // La création de la souscription dans la base de données est maintenant gérée côté serveur
       };
       fetchDetails();
     }
@@ -120,6 +118,10 @@ function Profil() {
     try {
       // Remove user data from localStorage
       localStorage.removeItem("userConnected");
+
+      // Émettre un événement pour mettre à jour le header
+      const event = new Event("userDisconnected");
+      window.dispatchEvent(event);
 
       // Redirect to login page
       navigate("/connexion");
