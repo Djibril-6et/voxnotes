@@ -24,13 +24,13 @@ function Connexion() {
 
     const { email, password } = user;
     if (!email || !password) {
-      alert("Veuillez remplir tous les champs");
+      alert("Veuillez remplir tous les champs.");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      alert("Veuillez entrer une adresse email valide");
+      alert("Veuillez entrer une adresse email valide.");
       return;
     }
 
