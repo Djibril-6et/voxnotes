@@ -85,22 +85,25 @@ function Inscription() {
 
       {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
       <button
+        type="button"
         className="connexion-button google-auth"
         onClick={handleGoogleAuth}
       >
-        S'inscrire avec Google
+        S&apos;inscrire avec Google
       </button>
       <button
+        type="button"
         className="connexion-button github-auth"
         onClick={handleGithubAuth}
       >
-        S'inscrire avec GitHub
+        S&apos;inscrire avec GitHub
       </button>
       <button
+        type="button"
         className="connexion-button discord-auth"
         onClick={handleDiscordAuth}
       >
-        S'inscrire avec Discord
+        S&apos;inscrire avec Discord
       </button>
     </div>
   );

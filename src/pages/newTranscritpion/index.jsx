@@ -1,53 +1,17 @@
 import React, { useState, useRef } from "react";
-import { jsPDF } from "jspdf"; // Importer jsPDF
-import "./index.css"; // Assurez-vous que le fichier de style est bien lié
-import SaveModal from "../../components/saveModal"; // Importer la modal
+import { jsPDF } from "jspdf";
+import "./index.css";
+import SaveModal from "../../components/saveModal";
 
 function NewTranscription() {
-  const [transcription, setTranscription] = useState(""); // Transcription complète
-  const [isRecording, setIsRecording] = useState(false); // État de l'enregistrement
-  const [isTranscribing, setIsTranscribing] = useState(false); // État de la transcription
-  const [isModalOpen, setIsModalOpen] = useState(false); // État de la modal
-  const mediaRecorderRef = useRef(null); // Utilisation de useRef pour stocker mediaRecorder
-  const audioBlobRef = useRef(null); // Stockage de l'audio complet après l'enregistrement
-  const [audioUrl, setAudioUrl] = useState(""); // URL pour le lecteur audio
+  const [transcription, setTranscription] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const mediaRecorderRef = useRef(null);
+  const audioBlobRef = useRef(null);
+  const [audioUrl, setAudioUrl] = useState("");
 
-  // Démarrer l'enregistrement
-  const handleStartRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: "audio/webm; codecs=opus",
-      });
-      mediaRecorderRef.current = mediaRecorder;
-      setIsRecording(true);
-
-      mediaRecorder.ondataavailable = (event) => {
-        audioBlobRef.current = event.data; // Stocker l'audio
-      };
-
-      mediaRecorder.start(); // Démarrer l'enregistrement
-    } catch (error) {
-      console.error("Erreur lors de l'initialisation du MediaRecorder:", error);
-    }
-  };
-
-  // Arrêter l'enregistrement et envoyer à OpenAI
-  const handleStopRecording = async () => {
-    if (mediaRecorderRef.current) {
-      mediaRecorderRef.current.stop(); // Arrêter l'enregistrement
-      setIsRecording(false);
-
-      mediaRecorderRef.current.onstop = async () => {
-        const audioBlob = audioBlobRef.current;
-        if (audioBlob) {
-          await sendAudioToAPI(audioBlob); // Envoyer à OpenAI
-        }
-      };
-    }
-  };
-
-  // Fonction pour envoyer l'audio à l'API backend
   const sendAudioToAPI = async (audioBlob) => {
     const audioFile = new File([audioBlob], "audio.webm", {
       type: "audio/webm",
@@ -71,8 +35,8 @@ function NewTranscription() {
       }
 
       const data = await response.json();
-      setTranscription(data.text); // Afficher la transcription reçue
-      setAudioUrl(data.audioUrl); // Stocker l'URL de l'audio
+      setTranscription(data.text);
+      setAudioUrl(data.audioUrl);
     } catch (error) {
       console.error("Erreur lors de la transcription :", error);
     } finally {
@@ -80,33 +44,61 @@ function NewTranscription() {
     }
   };
 
-  // Fonction pour copier le texte
+  const handleStartRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: "audio/webm; codecs=opus",
+      });
+      mediaRecorderRef.current = mediaRecorder;
+      setIsRecording(true);
+
+      mediaRecorder.ondataavailable = (event) => {
+        audioBlobRef.current = event.data;
+      };
+
+      mediaRecorder.start();
+    } catch (error) {
+      console.error("Erreur lors de l'initialisation du MediaRecorder:", error);
+    }
+  };
+
+  const handleStopRecording = async () => {
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+
+      mediaRecorderRef.current.onstop = async () => {
+        const audioBlob = audioBlobRef.current;
+        if (audioBlob) {
+          await sendAudioToAPI(audioBlob);
+        }
+      };
+    }
+  };
+
   const handleCopyText = () => {
     navigator.clipboard.writeText(transcription);
     alert("Texte copié dans le presse-papier !");
   };
 
-  // Fonction pour télécharger le texte sous forme de PDF avec jsPDF
   const handleDownloadPDF = () => {
-    const doc = new jsPDF(); // Créer un nouveau document PDF
-    doc.text(transcription, 10, 10); // Ajouter le texte de la transcription au PDF
-    doc.save("transcription.pdf"); // Télécharger le PDF avec le nom 'transcription.pdf'
+    // eslint-disable-next-line new-cap
+    const doc = new jsPDF();
+    doc.text(transcription, 10, 10);
+    doc.save("transcription.pdf");
   };
 
-  // Ouvrir la modal d'enregistrement
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
-  // Fermer la modal d'enregistrement
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-  // Soumettre le nom de la transcription depuis la modal
   const handleSaveTranscription = async (transcriptionName) => {
     try {
-      // Envoyer la transcription et le nom au backend ou à une base de données
       const response = await fetch("http://localhost:5015/save-transcription", {
         method: "POST",
         headers: {
@@ -114,8 +106,8 @@ function NewTranscription() {
         },
         body: JSON.stringify({
           name: transcriptionName,
-          transcription: transcription,
-          audioUrl: audioUrl,
+          transcription,
+          audioUrl,
         }),
       });
 
@@ -135,31 +127,30 @@ function NewTranscription() {
     <div className="transcription-container">
       <h2>Créer une nouvelle transcription</h2>
 
-      {/* Section des boutons pour démarrer et arrêter */}
       <div className="recording-controls">
         <button
+          type="button"
           onClick={handleStartRecording}
           disabled={isRecording}
           className="record-btn"
         >
-          Démarrer l'enregistrement
+          D&eacute;marrer l&apos;enregistrement
         </button>
         <button
+          type="button"
           onClick={handleStopRecording}
           disabled={!isRecording}
           className="stop-btn"
         >
-          Arrêter l'enregistrement
+          Stoppez enregistrement
         </button>
       </div>
 
-      {/* Message indiquant que l'enregistrement ou la transcription est en cours */}
       <div className="status-message">
         {isRecording && <p>Enregistrement en cours...</p>}
         {isTranscribing && <p>Transcription en cours...</p>}
       </div>
 
-      {/* Section de la transcription */}
       <div className="transcription-section">
         <div className="transcription-text">
           <h3>Transcription complète :</h3>
@@ -170,21 +161,26 @@ function NewTranscription() {
           />
         </div>
 
-        {/* Lecteur audio */}
         <div className="audio-player">
-          <h3>Écouter l'enregistrement :</h3>
-          {audioUrl && <audio controls src={audioUrl}></audio>}
+          <h3>Écouter enregistrement :</h3>
+          <audio controls src={audioUrl}>
+            <track kind="captions" />
+          </audio>
         </div>
       </div>
 
-      {/* Boutons pour copier, télécharger et enregistrer la transcription */}
       <div className="action-buttons">
-        <button onClick={handleCopyText}>Copier le texte</button>
-        <button onClick={handleDownloadPDF}>Télécharger PDF</button>
-        <button onClick={handleOpenModal}>Enregistrer</button>
+        <button type="button" onClick={handleCopyText}>
+          Copier le texte
+        </button>
+        <button type="button" onClick={handleDownloadPDF}>
+          Télécharger PDF
+        </button>
+        <button type="button" onClick={handleOpenModal}>
+          Enregistrer
+        </button>
       </div>
 
-      {/* Modal pour enregistrer */}
       {isModalOpen && (
         <SaveModal
           onSave={handleSaveTranscription}

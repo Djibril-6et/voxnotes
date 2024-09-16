@@ -7,11 +7,12 @@ function Souscriptions() {
     e.preventDefault();
 
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
+    // eslint-disable-next-line no-underscore-dangle
     const userId = userConnected?.user?._id;
 
     const requestBody = {
       price: price * 100, // Convertir en centimes
-      userId: userId, // Inclure userId
+      userId, // Utiliser la syntaxe abrégée
     };
 
     console.log("Request body:", requestBody); // Ajoutez le console.log ici
@@ -34,8 +35,8 @@ function Souscriptions() {
       .then(({ url }) => {
         window.location.href = url;
       })
-      .catch((e) => {
-        console.error(e.error);
+      .catch((error) => {
+        console.error(error.error);
       });
   };
 

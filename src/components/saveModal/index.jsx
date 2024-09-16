@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./index.css"; // Créer un fichier CSS pour styliser la modal
 
 function SaveModal({ onSave, onClose }) {
@@ -36,5 +37,11 @@ function SaveModal({ onSave, onClose }) {
     </div>
   );
 }
+
+// Validation des props avec PropTypes
+SaveModal.propTypes = {
+  onSave: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default SaveModal;

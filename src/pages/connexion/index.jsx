@@ -87,24 +87,27 @@ function Connexion({ setIsAuthenticated }) {
       />
 
       {/* Bouton pour soumettre le formulaire de connexion */}
-      <button className="connexion-button" onClick={handleLogin}>
+      <button type="button" className="connexion-button" onClick={handleLogin}>
         Me connecter
       </button>
 
       {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
       <button
+        type="button"
         className="connexion-button google-auth"
         onClick={handleGoogleAuth}
       >
         Connexion avec Google
       </button>
       <button
+        type="button"
         className="connexion-button github-auth"
         onClick={handleGithubAuth}
       >
         Connexion avec GitHub
       </button>
       <button
+        type="button"
         className="connexion-button discord-auth"
         onClick={handleDiscordAuth}
       >

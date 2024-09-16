@@ -21,18 +21,12 @@ function Header({ isAuthenticated }) {
         <nav className="nav-links">
           <Link to="/">{t("banner.home")}</Link>
           {!isAuthenticated && (
-            <Link to="/connexion">
-              {t("banner.connexion")}
-            </Link>
+            <Link to="/connexion">{t("banner.connexion")}</Link>
           )}
           {isAuthenticated && (
-            <Link to="/transcription">
-              {t("banner.transcription")}
-            </Link>
+            <Link to="/transcription">{t("banner.transcription")}</Link>
           )}
-          <Link to="/about">
-            {t("banner.about")}
-          </Link>
+          <Link to="/about">{t("banner.about")}</Link>
         </nav>
       </div>
 

@@ -19,7 +19,7 @@ function Profil() {
   const sessionId = queryParams.get("session_id");
 
   // Fonction pour récupérer les détails du paiement ou de l'abonnement en fonction du session_id
-  const fetchSessionDetails = async (sessionId) => {
+  const fetchSessionDetails = async (sessionId) => { // eslint-disable-line
     try {
       const sessionResponse = await fetch(
         "http://localhost:8080/get-session-details",
@@ -34,7 +34,7 @@ function Profil() {
       const sessionData = await sessionResponse.json();
 
       if (sessionResponse.ok && sessionData.session) {
-        const session = sessionData.session;
+        const session = sessionData.session; // eslint-disable-line
 
         if (session.mode === "payment") {
           const paymentResponse = await fetch(
@@ -91,11 +91,10 @@ function Profil() {
     } else {
       const storedUser = localStorage.getItem("userConnected");
       if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        setUser({
-          username: parsedUser.user.username,
-          email: parsedUser.user.email,
-        });
+        const {
+          user: { username, email }, // eslint-disable-line
+        } = JSON.parse(storedUser);
+        setUser({ username, email });
       } else {
         navigate("/connexion");
       }
@@ -104,10 +103,12 @@ function Profil() {
     // Récupération des détails de la session si sessionId est présent
     if (sessionId) {
       const fetchDetails = async () => {
-        const { paymentDetails, subscriptionDetails } =
-          await fetchSessionDetails(sessionId);
-        setPaymentDetails(paymentDetails);
-        setSubscriptionDetails(subscriptionDetails);
+        const {
+          paymentDetails: fetchedPaymentDetails,
+          subscriptionDetails: fetchedSubscriptionDetails,
+        } = await fetchSessionDetails(sessionId);
+        setPaymentDetails(fetchedPaymentDetails);
+        setSubscriptionDetails(fetchedSubscriptionDetails);
 
         // La création de la souscription dans la base de données est maintenant gérée côté serveur
       };
@@ -136,8 +137,8 @@ function Profil() {
       <p className="profil-info">
         <strong>Email:</strong> {user.email}
       </p>
-    
-      {paymentDetails ? (
+
+      {paymentDetails && (
         <div className="payment-details">
           <h3>Détails du paiement</h3>
           <p>
@@ -150,11 +151,12 @@ function Profil() {
             <strong>Statut du paiement :</strong> {paymentDetails.status}
           </p>
         </div>
-      ) : subscriptionDetails ? (
+      )}
+      {!paymentDetails && subscriptionDetails && (
         <div className="subscription-details">
-          <h3>Détails de l'abonnement</h3>
+          <h3>Détails de l&apos;abonnement</h3>
           <p>
-            <strong>ID de l'abonnement :</strong> {subscriptionDetails.id}
+            <strong>ID de l&apos;abonnement :</strong> {subscriptionDetails.id}
           </p>
           <p>
             <strong>Statut :</strong> {subscriptionDetails.status}
@@ -166,13 +168,14 @@ function Profil() {
             ).toLocaleDateString()}
           </p>
         </div>
-      ) : (
+      )}
+      {!paymentDetails && !subscriptionDetails && (
         <p className="no-payment-details">
           Aucun paiement ou abonnement récent trouvé.
         </p>
       )}
 
-      <button className="signout-button" onClick={handleSignOut}>
+      <button type="button" className="signout-button" onClick={handleSignOut}>
         Sign Out
       </button>
     </div>

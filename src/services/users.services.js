@@ -12,13 +12,12 @@ export default {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return response.json().then((data) => {
-            throw new Error(
-              data.message || "Une erreur est survenue lors de la connexion."
-            );
-          });
         }
+        return response.json().then((data) => {
+          throw new Error(
+            data.message || "Une erreur est survenue lors de la connexion."
+          );
+        });
       })
       .catch((err) => {
         console.error("Error:", err);
@@ -37,13 +36,12 @@ export default {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          return response.json().then((data) => {
-            throw new Error(
-              data.message || "Une erreur est survenue lors de l'inscription."
-            );
-          });
         }
+        return response.json().then((data) => {
+          throw new Error(
+            data.message || "Une erreur est survenue lors de l'inscription."
+          );
+        });
       })
       .catch((err) => {
         console.error("Error:", err);
