@@ -23,6 +23,7 @@ module.exports = {
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "no-console": "warn",
     "no-unused-vars": "warn",
+    "no-undef": "off",
   },
   settings: {
     react: {
