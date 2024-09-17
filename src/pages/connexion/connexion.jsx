@@ -71,6 +71,10 @@ function Connexion() {
     window.location.href = `${oauthUrl}/auth/discord`;
   };
 
+  const handleInscription = () => {
+    navigate("/inscription");
+  };
+
   return (
     <div className="connexion-container">
       <h2 className="connexion-title">Connexion</h2>
@@ -121,6 +125,15 @@ function Connexion() {
         onClick={handleDiscordAuth}
       >
         Connexion avec Discord
+      </button>
+
+      {/* Bouton pour rediriger vers la page d'inscription */}
+      <button
+        type="button"
+        className="connexion-button inscription-btn"
+        onClick={handleInscription}
+      >
+        Pas encore inscrit ? Inscription
       </button>
     </div>
   );
