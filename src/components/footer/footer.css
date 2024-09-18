@@ -1,25 +1,21 @@
+/* Footer Styling */
 .footer {
-  margin-bottom: 0px;
-  background-color: rgba(51, 51, 51, 0.8); /* Fond gris foncé avec transparence */
+  height: 5vh;
+  width: 100%; /* Occupe toute la largeur */
+  background-color: black;/* Fond gris foncé avec transparence */
   color: white;
-  padding: 20px 0;
+  padding: 5px 0; /* Réduire la hauteur du footer */
   text-align: center;
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3); /* Ombre en haut du footer */
+  position: relative;
+  bottom: 0; /* Position en bas de l'écran */
 }
-  
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .footer-logo {
-    height: 40px; /* Ajuste la taille du logo si nécessaire */
-    margin-bottom: 10px;
-  }
-  
-  .footer-text {
-    font-size: 14px;
-  }
-  
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-text {
+  font-size: 12px; /* Taille réduite du texte */
+}

@@ -1,30 +1,33 @@
-/* Container pour la page de profil avec le même fond et couleurs que la landing page */
 .profil-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(177deg, #0a9393, #000000, #000000); /* Fond dégradé */
+  min-height: 89vh; /* Hauteur minimum pour remplir l'écran */
+  background: linear-gradient(177deg, #0a9393, #000000, #000000);
   color: white;
   padding: 20px;
 }
 
-.profil-title {
-  font-size: 36px;
+.profil-info-container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
   margin-bottom: 20px;
-  color: white;
 }
 
 .profil-info {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 10px;
-  color: lightgray; /* Texte plus clair */
+  color: lightgray;
+  text-align: center;
 }
 
-.payment-details,
-.subscription-details {
-  background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent */
+.payment-details, .subscription-details {
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -33,22 +36,42 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.payment-details h3,
-.subscription-details h3 {
+.payment-details h3, .subscription-details h3 {
   font-size: 24px;
   color: white;
   margin-bottom: 10px;
 }
 
-.payment-details p,
-.subscription-details p {
+.payment-details p, .subscription-details p, .no-payment-details {
   font-size: 18px;
   color: lightgray;
 }
 
-.no-payment-details {
-  font-size: 18px;
+.audio-files-section {
+  width: 100%;
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.1);;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.audio-files-section h3 {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.audio-files-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.audio-files-section li {
+  font-size: 16px;
   color: lightgray;
+  margin-bottom: 15px;
 }
 
 .signout-button {
@@ -60,6 +83,8 @@
   background-color: #0a9393;
   color: white;
   transition: background-color 0.3s ease;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .signout-button:hover {
