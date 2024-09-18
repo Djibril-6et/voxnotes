@@ -16,6 +16,35 @@
   color: white; /* Couleur du texte blanche pour le titre */
 }
 
+/* Container pour regrouper les inputs et les boutons avec un fond et un box-shadow */
+.connexion-form-container {
+  background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement blanc et transparent */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Effet d'ombre pour faire ressortir le bloc */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Style des champs de saisie */
+.connexion-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.connexion-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}
+
 /* Style du bouton de connexion */
 .connexion-button {
   background-color: #2b2f34;
@@ -43,20 +72,31 @@
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
 }
 
-/* Style des champs de saisie */
-.connexion-input {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Boutons OAuth avec logo */
+.oauth-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.connexion-input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+.oauth-logo {
+  height: 20px;
+  margin-right: 10px;
+}
+
+/* Texte d'inscription cliquable */
+.inscription-text {
+  margin-top: 15px;
+  font-size: 16px;
+  color: white;
+}
+
+.inscription-link {
+  color: white;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.inscription-link:hover {
+  color: #484848;
 }

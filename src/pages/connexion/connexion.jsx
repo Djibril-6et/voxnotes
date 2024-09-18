@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./connexion.css"; // Assurez-vous que les styles sont bien appliqués
 import usersServices from "../../services/users.services";
+import googleLogo from "../../assets/googleLogo.png"; // Ajoutez le logo Google
+import githubLogo from "../../assets/githubLogo.png"; // Ajoutez le logo GitHub
+import discordLogo from "../../assets/discordLogo.png";
 
 function Connexion() {
   const navigate = useNavigate();
@@ -79,62 +82,81 @@ function Connexion() {
     <div className="connexion-container">
       <h2 className="connexion-title">Connexion</h2>
 
-      {/* Champ pour l'email */}
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={user.email}
-        onChange={handleChange}
-        className="connexion-input"
-      />
+      <div className="connexion-form-container">
+        {/* Champ pour l'email */}
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={user.email}
+          onChange={handleChange}
+          className="connexion-input"
+        />
 
-      {/* Champ pour le mot de passe */}
-      <input
-        type="password"
-        name="password"
-        placeholder="Mot de passe"
-        value={user.password}
-        onChange={handleChange}
-        className="connexion-input"
-      />
+        {/* Champ pour le mot de passe */}
+        <input
+          type="password"
+          name="password"
+          placeholder="Mot de passe"
+          value={user.password}
+          onChange={handleChange}
+          className="connexion-input"
+        />
 
-      {/* Bouton pour soumettre le formulaire de connexion */}
-      <button type="button" className="connexion-button" onClick={handleLogin}>
-        Me connecter
-      </button>
+        {/* Bouton pour soumettre le formulaire de connexion */}
+        <button
+          type="button"
+          className="connexion-button"
+          onClick={handleLogin}
+        >
+          Me connecter
+        </button>
 
-      {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
-      <button
-        type="button"
-        className="connexion-button google-auth"
-        onClick={handleGoogleAuth}
-      >
-        Connexion avec Google
-      </button>
-      <button
-        type="button"
-        className="connexion-button github-auth"
-        onClick={handleGithubAuth}
-      >
-        Connexion avec GitHub
-      </button>
-      <button
-        type="button"
-        className="connexion-button discord-auth"
-        onClick={handleDiscordAuth}
-      >
-        Connexion avec Discord
-      </button>
+        {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
+        <button
+          type="button"
+          className="connexion-button oauth-button"
+          onClick={handleGoogleAuth}
+        >
+          <img src={googleLogo} alt="Google" className="oauth-logo" />
+          Connexion avec Google
+        </button>
 
-      {/* Bouton pour rediriger vers la page d'inscription */}
-      <button
-        type="button"
-        className="connexion-button inscription-btn"
-        onClick={handleInscription}
-      >
-        Pas encore inscrit ? Inscription
-      </button>
+        <button
+          type="button"
+          className="connexion-button oauth-button"
+          onClick={handleGithubAuth}
+        >
+          <img src={githubLogo} alt="GitHub" className="oauth-logo" />
+          Connexion avec GitHub
+        </button>
+
+        <button
+          type="button"
+          className="connexion-button oauth-button"
+          onClick={handleDiscordAuth}
+        >
+          <img src={discordLogo} alt="Discord" className="oauth-logo" />
+          Connexion avec Discord
+        </button>
+
+        <p className="inscription-text">
+          Pas encore inscrit ?{" "}
+          <span
+            className="inscription-link"
+            role="button" // Ajout du rôle button
+            tabIndex={0} // Rendre l'élément focusable avec le clavier
+            onClick={handleInscription}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                handleInscription();
+              }
+            }} // Ajout de la gestion du clavier
+          >
+            Inscription
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
