@@ -1,0 +1,88 @@
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import Profil from './profile';
+import { MemoryRouter, useNavigate } from 'react-router-dom';
+import audioFilesServices from '../../services/audioFiles.services';
+
+// Mock du service audioFilesServices
+jest.mock('../../services/audioFiles.services', () => ({
+  getUserFiles: jest.fn(),
+}));
+
+// Mock de useNavigate
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
+
+describe('Profil component', () => {
+  const mockNavigate = useNavigate();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    localStorage.setItem(
+      'userConnected',
+      JSON.stringify({ user: { username: 'testuser', email: 'testuser@example.com', _id: '123' } })
+    );
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+  });
+
+  test('renders profile information correctly', () => {
+    render(
+      <MemoryRouter>
+        <Profil />
+      </MemoryRouter>
+    );
+
+    // Utilisation de getAllByText pour gérer plusieurs occurrences
+    const usernameElements = screen.getAllByText(/testuser/i);
+    expect(usernameElements.length).toBeGreaterThan(0); // Vérifie qu'il y a bien plusieurs éléments avec "testuser"
+
+    expect(screen.getByText(/Email:/i)).toBeInTheDocument();
+    expect(screen.getByText(/testuser@example.com/i)).toBeInTheDocument();
+  });
+
+  test('displays audio files correctly', async () => {
+    const mockAudioFiles = [
+      {
+        fileName: 'audio1.mp3',
+        fileType: 'mp3',
+        fileSize: 1050000,
+        status: 'completed',
+        uploadDate: '2023-09-15T00:00:00.000Z',
+      },
+    ];
+
+    audioFilesServices.getUserFiles.mockResolvedValue(mockAudioFiles);
+
+    render(
+      <MemoryRouter>
+        <Profil />
+      </MemoryRouter>
+    );
+
+    // Attends que la liste des fichiers audio soit rendue
+    await waitFor(() => {
+      expect(screen.getByText(/Vos fichiers audio/i)).toBeInTheDocument();
+      expect(screen.getByText(/audio1.mp3/i)).toBeInTheDocument();
+    });
+  });
+
+  test('shows no audio files message when no files are available', async () => {
+    audioFilesServices.getUserFiles.mockResolvedValue([]);
+
+    render(
+      <MemoryRouter>
+        <Profil />
+      </MemoryRouter>
+    );
+
+    // Attends que le message soit affiché
+    await waitFor(() => {
+      expect(screen.getByText(/Aucun fichier audio disponible/i)).toBeInTheDocument();
+    });
+  });
+});
