@@ -8,7 +8,6 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <img src={VoxNotesLogo} alt="Logo" className="footer-logo" />
         <p className="footer-text">
           &copy; {currentYear} VoxNotes. Tous droits réservés.
         </p>

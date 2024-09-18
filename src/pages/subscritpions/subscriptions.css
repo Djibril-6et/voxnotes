@@ -1,79 +1,129 @@
+/* Style général pour la page d'abonnement */
 .subscription-page {
-    padding: 40px;
-    background-color: #f9f9f9;
-  }
-  
-  .subscription-page h1 {
-    font-size: 32px;
-    text-align: center;
-    margin-bottom: 40px;
-    color: #333;
-  }
-  
-  .subscription-section {
-    margin-bottom: 40px;
-  }
-  
-  .subscription-section h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .subscription-cards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .card {
-    width: 250px;
-    height: 250px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-top {
-    background-color: white;
-    flex: 2;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .card-date {
-    font-size: 16px;
-    font-weight: bold;
-    color: #32373c;
-    margin-bottom: 5px;
-  }
-  
-  .card-excerpt {
-    font-size: 14px;
-    color: #444;
-    white-space: pre-wrap; /* Permet de conserver les sauts de ligne */
-    overflow: hidden;
-  }
-  
-  .card-bottom {
-    background-color: #f0f0f0;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .card-summary {
-    font-size: 16px;
-    color: black;
-    text-align: center;
-  }
-  
+  padding: 40px;
+  background: linear-gradient(177deg, #0a9393, #000000, #000000);;
+  min-height: calc(100vh - 100px); /* Ajuste pour inclure le footer et header */
+}
+
+/* Titre principal de la page */
+.subscription-page h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour chaque section d'abonnement */
+.subscription-section {
+  margin-bottom: 40px;
+  background-color: rgba(255, 255, 255, 0.1);;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Titres des différentes sections d'abonnement */
+.subscription-section h2 {
+  font-size: 28px;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Conteneur pour les cartes d'abonnement */
+.subscription-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Style des cartes d'abonnement */
+.card {
+  width: 250px;
+  height: 300px;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenu supérieur des cartes */
+.card-top {
+  background-color: white;
+  flex: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-date {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0a9393;
+  margin-bottom: 10px;
+}
+
+.card-excerpt {
+  font-size: 14px;
+  color: #444;
+  white-space: pre-wrap; /* Conserve les sauts de ligne */
+}
+
+/* Contenu inférieur des cartes */
+.card-bottom {
+  background-color: #0a9393;
+  color: white;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.card-summary {
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Boutons CTA */
+.cta-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cta-button {
+  background-color: #2b3035;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+  background-color: #4f4f4f;
+}

@@ -178,24 +178,29 @@ function Profil() {
   return (
     <div className="profil-container">
       <h2 className="profil-title">Profil</h2>
-      <p className="profil-info">
-        <strong>Username:</strong> {user.username}
-      </p>
-      <p className="profil-info">
-        <strong>Email:</strong> {user.email}
-      </p>
+      <div className="profil-info-container">
+        <p className="profil-info">
+          <strong>Username:</strong> {user.username}
+        </p>
+        <p className="profil-info">
+          <strong>Email:</strong> {user.email}
+        </p>
+      </div>
 
       {paymentDetails && (
         <div className="payment-details">
           <h3>Détails du paiement</h3>
           <p>
-            <strong>ID du paiement :</strong> {paymentDetails.id}
+            <strong>ID du paiement :</strong>
+            {paymentDetails.id}
           </p>
           <p>
-            <strong>Montant payé :</strong> {paymentDetails.amount / 100} €
+            <strong>Montant payé :</strong>
+            {paymentDetails.amount / 100} €
           </p>
           <p>
-            <strong>Statut du paiement :</strong> {paymentDetails.status}
+            <strong>Statut du paiement :</strong>
+            {paymentDetails.status}
           </p>
         </div>
       )}
@@ -204,13 +209,15 @@ function Profil() {
         <div className="subscription-details">
           <h3>Détails de l&apos;abonnement</h3>
           <p>
-            <strong>ID de l&apos;abonnement :</strong> {subscriptionDetails.id}
+            <strong>ID de l&apos;abonnement :</strong>
+            {subscriptionDetails.id}
           </p>
           <p>
-            <strong>Statut :</strong> {subscriptionDetails.status}
+            <strong>Statut :</strong>
+            {subscriptionDetails.status}
           </p>
           <p>
-            <strong>Prochain renouvellement :</strong>{" "}
+            <strong>Prochain renouvellement :</strong>
             {new Date(
               subscriptionDetails.current_period_end * 1000
             ).toLocaleDateString()}
@@ -223,21 +230,22 @@ function Profil() {
           Aucun paiement ou abonnement récent trouvé.
         </p>
       )}
+      <button type="button" className="signout-button" onClick={handleSignOut}>
+        Déconnexion
+      </button>
 
-      {/* Affichage des fichiers audio */}
       <div className="audio-files-section">
         <h3>Vos fichiers audio</h3>
-        {/* {console.log("State audioFilesList:", audioFilesList)} */}
         {audioFilesList.length > 0 ? (
           <ul>
             {audioFilesList.map((audioFile) => (
               <li key={audioFile.fileName}>
                 <strong>Nom du fichier :</strong> {audioFile.fileName} <br />
                 <strong>Type :</strong> {audioFile.fileType} <br />
-                <strong>Taille :</strong>{" "}
+                <strong>Taille :</strong>
                 {(audioFile.fileSize / 1000000).toFixed(2)} MB <br />
                 <strong>Statut :</strong> {audioFile.status} <br />
-                <strong>Date d&apos;upload :</strong>{" "}
+                <strong>Date de l&apos;upload :</strong>
                 {new Date(audioFile.uploadDate).toLocaleDateString()}
               </li>
             ))}
@@ -246,10 +254,6 @@ function Profil() {
           <p>Aucun fichier audio disponible.</p>
         )}
       </div>
-
-      <button type="button" className="signout-button" onClick={handleSignOut}>
-        Sign Out
-      </button>
     </div>
   );
 }
