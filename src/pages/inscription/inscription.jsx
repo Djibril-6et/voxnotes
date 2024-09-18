@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import usersServices from "../../services/users.services"; // Adjust the import path if necessary
+import googleLogo from "../../assets/googleLogo.png"; // Importer les logos
+import githubLogo from "../../assets/githubLogo.png";
+import discordLogo from "../../assets/discordLogo.png";
 
 function Inscription() {
   const navigate = useNavigate();
@@ -57,58 +60,70 @@ function Inscription() {
     <div className="connexion-container">
       <h2 className="connexion-title">Inscription</h2>
 
-      <form onSubmit={handleRegister} className="connexion-form">
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={user.username}
-          onChange={handleChange}
-          className="connexion-input"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={user.email}
-          onChange={handleChange}
-          className="connexion-input"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={user.password}
-          onChange={handleChange}
-          className="connexion-input"
-        />
+      <div className="connexion-form-container">
+        <div onSubmit={handleRegister} className="connexion-form">
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={user.username}
+            onChange={handleChange}
+            className="connexion-input"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={user.email}
+            onChange={handleChange}
+            className="connexion-input"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleChange}
+            className="connexion-input"
+          />
+        </div>
+
         <button type="submit" className="connexion-button">
           Register
         </button>
-      </form>
 
-      {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
-      <button
-        type="button"
-        className="connexion-button google-auth"
-        onClick={handleGoogleAuth}
-      >
-        S&apos;inscrire avec Google
-      </button>
-      <button
-        type="button"
-        className="connexion-button github-auth"
-        onClick={handleGithubAuth}
-      >
-        S&apos;inscrire avec GitHub
-      </button>
-      <button
-        type="button"
-        className="connexion-button discord-auth"
-        onClick={handleDiscordAuth}
-      >
-        S&apos;inscrire avec Discord
-      </button>
+        {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
+        <button
+          type="button"
+          className="connexion-button oauth-button"
+          onClick={handleGoogleAuth}
+        >
+          <img src={googleLogo} alt="Google logo" className="oauth-logo" />
+          S&apos;inscrire avec Google
+        </button>
+        <button
+          type="button"
+          className="connexion-button oauth-button"
+          onClick={handleGithubAuth}
+        >
+          <img src={githubLogo} alt="GitHub logo" className="oauth-logo" />
+          S&apos;inscrire avec GitHub
+        </button>
+        <button
+          type="button"
+          className="connexion-button oauth-button"
+          onClick={handleDiscordAuth}
+        >
+          <img src={discordLogo} alt="Discord logo" className="oauth-logo" />
+          S&apos;inscrire avec Discord
+        </button>
+        <p className="inscription-text">
+          Vous avez un compte ?{" "}
+          <Link to="/connexion" className="inscription-link">
+            Connexion
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
