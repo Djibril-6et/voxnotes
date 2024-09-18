@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./subscriptions.css";
 import SouscriptionCard from "../../components/souscriptionCard/souscriptionCard";
 
 function Souscriptions() {
+  const [errorMessage, setErrorMessage] = useState("");
+
   const goToPaiement = (e, subject, type, price) => {
     e.preventDefault();
 
@@ -11,11 +13,9 @@ function Souscriptions() {
     const userId = userConnected?.user?._id;
 
     const requestBody = {
-      price: price * 100, // Convertir en centimes
-      userId, // Utiliser la syntaxe abrégée
+      price: price * 100,
+      userId,
     };
-    // eslint-disable-next-line
-    console.log("Request body:", requestBody); // Ajoutez le console.log ici
 
     let endpoint = "";
     if (type === "PAI") endpoint = `/create-checkout-session/${subject}`;
@@ -36,14 +36,15 @@ function Souscriptions() {
         window.location.href = url;
       })
       .catch((error) => {
-        // eslint-disable-next-line
-        console.error(error.error);
+        setErrorMessage(error.error || "An error occurred");
       });
   };
 
   return (
     <div className="subscription-page">
       <h1>Abonnements :</h1>
+
+      {errorMessage && <p>{errorMessage}</p>}
 
       <div className="subscription-section">
         <h2>Personnel</h2>
