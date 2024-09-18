@@ -1,6 +1,5 @@
 import React from "react";
 import "./footer.css";
-import VoxNotesLogo from "../../assets/voxNotes.png";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
