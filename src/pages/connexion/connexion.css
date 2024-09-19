@@ -100,3 +100,9 @@
 .inscription-link:hover {
   color: #484848;
 }
+
+hr {
+  border: 1px solid #0a9393; /* Set the color and thickness of the line */
+  width: 100%;            /* Full width of the container */
+  margin: 20px 0;         /* Add some space around the line */
+}

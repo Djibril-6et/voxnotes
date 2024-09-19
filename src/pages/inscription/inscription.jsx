@@ -4,6 +4,7 @@ import usersServices from "../../services/users.services"; // Adjust the import 
 import googleLogo from "../../assets/googleLogo.png"; // Importer les logos
 import githubLogo from "../../assets/githubLogo.png";
 import discordLogo from "../../assets/discordLogo.png";
+import './inscription.css';
 
 function Inscription() {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ function Inscription() {
       <h2 className="connexion-title">Inscription</h2>
 
       <div className="connexion-form-container">
-        <div onSubmit={handleRegister} className="connexion-form">
+        <form onSubmit={handleRegister} className="connexion-form">
           <input
             type="text"
             name="username"
@@ -86,12 +87,14 @@ function Inscription() {
             onChange={handleChange}
             className="connexion-input"
           />
-        </div>
 
-        <button type="submit" className="connexion-button">
-          Register
-        </button>
+          <button type="submit" className="connexion-button">
+            Register
+          </button>
+        </form>
 
+        <hr/>
+        
         {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
         <button
           type="button"

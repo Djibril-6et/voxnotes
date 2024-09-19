@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./connexion.css"; // Assurez-vous que les styles sont bien appliqués
 import usersServices from "../../services/users.services";
 import googleLogo from "../../assets/googleLogo.png"; // Ajoutez le logo Google
 import githubLogo from "../../assets/githubLogo.png"; // Ajoutez le logo GitHub
 import discordLogo from "../../assets/discordLogo.png";
+import "./connexion.css"; // Assurez-vous que les styles sont bien appliqués
 
 function Connexion() {
   const navigate = useNavigate();
@@ -83,34 +83,38 @@ function Connexion() {
       <h2 className="connexion-title">Connexion</h2>
 
       <div className="connexion-form-container">
-        {/* Champ pour l'email */}
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={user.email}
-          onChange={handleChange}
-          className="connexion-input"
-        />
+        <form className="connexion-form">
+          {/* Champ pour l'email */}
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={user.email}
+            onChange={handleChange}
+            className="connexion-input"
+          />
 
-        {/* Champ pour le mot de passe */}
-        <input
-          type="password"
-          name="password"
-          placeholder="Mot de passe"
-          value={user.password}
-          onChange={handleChange}
-          className="connexion-input"
-        />
+          {/* Champ pour le mot de passe */}
+          <input
+            type="password"
+            name="password"
+            placeholder="Mot de passe"
+            value={user.password}
+            onChange={handleChange}
+            className="connexion-input"
+          />
 
-        {/* Bouton pour soumettre le formulaire de connexion */}
-        <button
-          type="button"
-          className="connexion-button"
-          onClick={handleLogin}
-        >
-          Me connecter
-        </button>
+          {/* Bouton pour soumettre le formulaire de connexion */}
+          <button
+            type="button"
+            className="connexion-button"
+            onClick={handleLogin}
+          >
+            Me connecter
+          </button>
+        </form>
+
+        <hr/>
 
         {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
         <button

@@ -2,7 +2,7 @@ const API_URL_BASE = process.env.REACT_APP_BDD_API_URL;
 
 export default {
   loginUser(payload) {
-    return fetch(`${API_URL_BASE}/bdd-api/api/users/login`, {
+    return fetch(`${API_URL_BASE}/api/users/login`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
