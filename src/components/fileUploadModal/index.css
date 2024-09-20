@@ -1,0 +1,43 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background: #0a9393;
+    padding: 10vh;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+  }
+  
+  .modal-buttons button {
+    padding: 15px 30px;
+    margin: 2vh;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .file-input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #aaa;
+  }

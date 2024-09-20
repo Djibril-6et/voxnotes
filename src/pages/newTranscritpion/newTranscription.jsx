@@ -2,15 +2,46 @@ import React, { useState, useRef } from "react";
 import { jsPDF } from "jspdf";
 import "./newTranscription.css";
 import SaveModal from "../../components/saveModal/saveModal";
+import FileUploadModal from "../../components/fileUploadModal";
 
 function NewTranscription() {
   const [transcription, setTranscription] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [audioUrl, setAudioUrl] = useState("");
+
   const mediaRecorderRef = useRef(null);
   const audioBlobRef = useRef(null);
-  const [audioUrl, setAudioUrl] = useState("");
+
+  const handleUploadFile = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch(
+        "http://localhost:9090/bdd-api/api/audioFiles/uploadfile",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `Error during file upload: ${response.status} - ${errorMessage}`
+        );
+      }
+
+      const data = await response.json();
+      alert("File uploaded successfully!");
+      console.log("Uploaded file ID:", data.fileId);
+    } catch (error) {
+      console.error("Error during file upload:", error);
+    }
+  };
 
   const sendAudioToAPI = async (audioBlob) => {
     const audioFile = new File([audioBlob], "audio.webm", {
@@ -148,6 +179,14 @@ function NewTranscription() {
         >
           Stoppez enregistrement
         </button>
+
+        <button
+          type="button"
+          onClick={() => setIsUploadModalOpen(true)}
+          className="upload-btn"
+        >
+          Importer un fichier audio
+        </button>
       </div>
 
       <div className="status-message">
@@ -189,6 +228,14 @@ function NewTranscription() {
         <SaveModal
           onSave={handleSaveTranscription}
           onClose={handleCloseModal}
+        />
+      )}
+
+      {isUploadModalOpen && (
+        <FileUploadModal
+          isOpen={isUploadModalOpen}
+          onClose={() => setIsUploadModalOpen(false)}
+          onUpload={handleUploadFile}
         />
       )}
     </div>
