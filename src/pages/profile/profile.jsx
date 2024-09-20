@@ -23,7 +23,9 @@ function Profil() {
 
   // On récupère _id des query params ou du localStorage si les query params sont vides
   /* eslint-disable-next-line no-underscore-dangle */
-  const _id = queryParams.get("_id") || JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
+  const _id =
+    queryParams.get("_id") ||
+    JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
   // eslint-disable-next-line
   console.log("Query Params _id:", _id); // Ajout pour vérifier la valeur de _id
 
@@ -52,7 +54,8 @@ function Profil() {
     }
   };
 
-  const fetchSessionDetails = async (sessionId) => { // eslint-disable-line
+  const fetchSessionDetails = async (fetchSessionId) => {
+    // eslint-disable-line
     try {
       const sessionResponse = await fetch(
         "http://localhost:8080/get-session-details",
@@ -61,7 +64,7 @@ function Profil() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ sessionId }),
+          body: JSON.stringify({ fetchSessionId }),
         }
       );
       const sessionData = await sessionResponse.json();
@@ -77,7 +80,7 @@ function Profil() {
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ sessionId }),
+              body: JSON.stringify({ fetchSessionId }),
             }
           );
           const paymentData = await paymentResponse.json();
@@ -97,7 +100,7 @@ function Profil() {
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ sessionId }),
+              body: JSON.stringify({ fetchSessionId }),
             }
           );
           const subscriptionData = await subscriptionResponse.json();
@@ -134,8 +137,16 @@ function Profil() {
           _id: storedId,
         } = JSON.parse(storedUser).user;
         // eslint-disable-next-line
-        console.log("Stored user data:", { storedUsername, storedEmail, storedId }); // eslint-disable-line
-        setUser({ username: storedUsername, email: storedEmail, _id: storedId }); // eslint-disable-line
+        console.log("Stored user data:", {
+          storedUsername,
+          storedEmail,
+          storedId,
+        }); // eslint-disable-line
+        setUser({
+          username: storedUsername,
+          email: storedEmail,
+          _id: storedId,
+        }); // eslint-disable-line
       } else {
         navigate("/connexion");
       }

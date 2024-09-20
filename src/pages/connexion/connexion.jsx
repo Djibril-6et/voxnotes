@@ -59,7 +59,7 @@ function Connexion() {
         alert(err.message);
       });
   };
-
+  // eslint-disable-next-line no-undef
   const oauthUrl = process.env.REACT_APP_OAUTH_SERVICE_URL;
 
   const handleGoogleAuth = () => {

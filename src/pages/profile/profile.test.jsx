@@ -1,28 +1,33 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import Profil from './profile';
-import { MemoryRouter, useNavigate } from 'react-router-dom';
-import audioFilesServices from '../../services/audioFiles.services';
+/* eslint-disable no-undef */
+
+import React from "react";
+import { render, screen, waitFor } from "@testing-library/react";
+import Profil from "./profile";
+import { MemoryRouter } from "react-router-dom";
+import audioFilesServices from "../../services/audioFiles.services";
 
 // Mock du service audioFilesServices
-jest.mock('../../services/audioFiles.services', () => ({
+jest.mock("../../services/audioFiles.services", () => ({
   getUserFiles: jest.fn(),
 }));
 
 // Mock de useNavigate
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn(),
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
 }));
 
-describe('Profil component', () => {
-  const mockNavigate = useNavigate();
-
+describe("Profil component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     localStorage.setItem(
-      'userConnected',
-      JSON.stringify({ user: { username: 'testuser', email: 'testuser@example.com', _id: '123' } })
+      "userConnected",
+      JSON.stringify({
+        user: {
+          username: "testuser",
+          email: "testuser@example.com",
+          _id: "123",
+        },
+      })
     );
   });
 
@@ -30,7 +35,7 @@ describe('Profil component', () => {
     localStorage.clear();
   });
 
-  test('renders profile information correctly', () => {
+  test("renders profile information correctly", () => {
     render(
       <MemoryRouter>
         <Profil />
@@ -45,14 +50,14 @@ describe('Profil component', () => {
     expect(screen.getByText(/testuser@example.com/i)).toBeInTheDocument();
   });
 
-  test('displays audio files correctly', async () => {
+  test("displays audio files correctly", async () => {
     const mockAudioFiles = [
       {
-        fileName: 'audio1.mp3',
-        fileType: 'mp3',
+        fileName: "audio1.mp3",
+        fileType: "mp3",
         fileSize: 1050000,
-        status: 'completed',
-        uploadDate: '2023-09-15T00:00:00.000Z',
+        status: "completed",
+        uploadDate: "2023-09-15T00:00:00.000Z",
       },
     ];
 
@@ -71,7 +76,7 @@ describe('Profil component', () => {
     });
   });
 
-  test('shows no audio files message when no files are available', async () => {
+  test("shows no audio files message when no files are available", async () => {
     audioFilesServices.getUserFiles.mockResolvedValue([]);
 
     render(
@@ -82,7 +87,9 @@ describe('Profil component', () => {
 
     // Attends que le message soit affiché
     await waitFor(() => {
-      expect(screen.getByText(/Aucun fichier audio disponible/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Aucun fichier audio disponible/i)
+      ).toBeInTheDocument();
     });
   });
 });
