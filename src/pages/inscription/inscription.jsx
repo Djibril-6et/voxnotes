@@ -44,6 +44,7 @@ function Inscription() {
     }
   };
 
+  // eslint-disable-next-line no-undef
   const oauthUrl = process.env.REACT_APP_OAUTH_SERVICE_URL;
 
   const handleGoogleAuth = () => {
@@ -61,7 +62,7 @@ function Inscription() {
       <h2 className="connexion-title">Inscription</h2>
 
       <div className="connexion-form-container">
-        <div onSubmit={handleRegister} className="connexion-form">
+        <form onSubmit={handleRegister} className="connexion-form">
           <input
             type="text"
             name="username"
@@ -86,11 +87,11 @@ function Inscription() {
             onChange={handleChange}
             className="connexion-input"
           />
-        </div>
 
-        <button type="submit" className="connexion-button">
-          Register
-        </button>
+          <button type="submit" className="connexion-button">
+            Register
+          </button>
+        </form>
 
         {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
         <button

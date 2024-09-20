@@ -1,10 +1,11 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import Transcription from './transcriptionList';
+/* eslint-disable no-undef */
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import Transcription from "./transcriptionList";
 
-describe('Transcription component', () => {
-  test('renders the link to create a new transcription', () => {
+describe("Transcription component", () => {
+  test("renders the link to create a new transcription", () => {
     render(
       <MemoryRouter>
         <Transcription />
@@ -14,10 +15,13 @@ describe('Transcription component', () => {
     // Vérifie que le lien vers "New transcription" est affiché
     const newTranscriptionLink = screen.getByText(/New transcription/i);
     expect(newTranscriptionLink).toBeInTheDocument();
-    expect(newTranscriptionLink.closest('a')).toHaveAttribute('href', '/newtranscription');
+    expect(newTranscriptionLink.closest("a")).toHaveAttribute(
+      "href",
+      "/newtranscription"
+    );
   });
 
-  test('renders the list of transcriptions', () => {
+  test("renders the list of transcriptions", () => {
     render(
       <MemoryRouter>
         <Transcription />
@@ -36,7 +40,15 @@ describe('Transcription component', () => {
     expect(transcriptionTitle2[0]).toBeInTheDocument();
 
     // Vérifie les contenus des transcriptions
-    expect(screen.getByText(/Ce texte est un résumé de notre dernière réunion de projet/i)).toBeInTheDocument();
-    expect(screen.getByText(/Résumé du cours de chimie sur les réactions oxydoréduction/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Ce texte est un résumé de notre dernière réunion de projet/i
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Résumé du cours de chimie sur les réactions oxydoréduction/i
+      )
+    ).toBeInTheDocument();
   });
 });
