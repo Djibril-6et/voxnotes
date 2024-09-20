@@ -1,20 +1,38 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import NewTranscription from './newTranscription';
-import '@testing-library/jest-dom';
-import SaveModal from '../../components/saveModal/saveModal';
+/* eslint-disable no-undef */
+
+//import PropTypes from "prop-types";
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import NewTranscription from "./newTranscription";
+import "@testing-library/jest-dom";
 
 // Mock du composant SaveModal
-jest.mock('../../components/saveModal/saveModal', () => ({ onSave, onClose }) => (
-  <div>
-    <button onClick={() => onSave('Test Transcription')}>Save</button>
-    <button onClick={onClose}>Close</button>
-  </div>
-));
+jest.mock("../../components/saveModal/saveModal", () => {
+  const React = require("react");
+  const PropTypes = require("prop-types");
+
+  const MockSaveModal = ({ onSave, onClose }) => (
+    <div>
+      <button onClick={() => onSave("Test Transcription")}>Save</button>
+      <button onClick={onClose}>Close</button>
+    </div>
+  );
+
+  // Add a display name
+  MockSaveModal.displayName = "SaveModal";
+
+  // Add prop-types validation inside the mock function
+  MockSaveModal.propTypes = {
+    onSave: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+  };
+
+  return MockSaveModal;
+});
 
 beforeEach(() => {
   // Mock de navigator.mediaDevices.getUserMedia
-  Object.defineProperty(navigator, 'mediaDevices', {
+  Object.defineProperty(navigator, "mediaDevices", {
     value: {
       getUserMedia: jest.fn().mockResolvedValue({
         getTracks: () => [{ stop: jest.fn() }],
@@ -31,13 +49,17 @@ beforeEach(() => {
   });
 });
 
-describe('NewTranscription component', () => {
+describe("NewTranscription component", () => {
   // Test 1: Vérifie que les boutons d'enregistrement et d'arrêt sont rendus correctement
-  test('renders start and stop recording buttons', () => {
+  test("renders start and stop recording buttons", () => {
     render(<NewTranscription />);
 
-    const startButton = screen.getByRole('button', { name: /Démarrer l'enregistrement/i });
-    const stopButton = screen.getByRole('button', { name: /Stoppez enregistrement/i });
+    const startButton = screen.getByRole("button", {
+      name: /Démarrer l'enregistrement/i,
+    });
+    const stopButton = screen.getByRole("button", {
+      name: /Stoppez enregistrement/i,
+    });
 
     // Vérifie que le bouton de démarrage est activé et celui d'arrêt est désactivé
     expect(startButton).toBeEnabled();
@@ -45,10 +67,10 @@ describe('NewTranscription component', () => {
   });
 
   // Test 4: Vérifie que la modal d'enregistrement s'affiche et fonctionne
-  test('opens save modal and saves transcription', async () => {
+  test("opens save modal and saves transcription", async () => {
     render(<NewTranscription />);
 
-    const saveButton = screen.getByRole('button', { name: /Enregistrer/i });
+    const saveButton = screen.getByRole("button", { name: /Enregistrer/i });
 
     // Simule l'ouverture de la modal
     fireEvent.click(saveButton);

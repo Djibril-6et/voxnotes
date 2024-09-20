@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const API_URL_BASE = process.env.REACT_APP_BDD_API_URL;
 
 export default {
