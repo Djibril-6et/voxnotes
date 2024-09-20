@@ -11,25 +11,28 @@ function NewTranscription() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [audioUrl, setAudioUrl] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const mediaRecorderRef = useRef(null);
   const audioBlobRef = useRef(null);
 
   const handleUploadFile = async (file) => {
-    setSelectedFile(file);
     const formData = new FormData();
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:9090/bdd-api/api/audioFiles/uploadfile", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "http://localhost:9090/bdd-api/api/audioFiles/uploadfile",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(`Error during file upload: ${response.status} - ${errorMessage}`);
+        throw new Error(
+          `Error during file upload: ${response.status} - ${errorMessage}`
+        );
       }
 
       const data = await response.json();
@@ -177,8 +180,8 @@ function NewTranscription() {
           Stoppez enregistrement
         </button>
 
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={() => setIsUploadModalOpen(true)}
           className="upload-btn"
         >
@@ -186,7 +189,6 @@ function NewTranscription() {
         </button>
       </div>
 
-      
       <div className="status-message">
         {isRecording && <p>Enregistrement en cours...</p>}
         {isTranscribing && <p>Transcription en cours...</p>}
@@ -228,7 +230,7 @@ function NewTranscription() {
           onClose={handleCloseModal}
         />
       )}
-      
+
       {isUploadModalOpen && (
         <FileUploadModal
           isOpen={isUploadModalOpen}

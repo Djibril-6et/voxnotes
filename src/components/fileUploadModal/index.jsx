@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./index.css"; // Add styling as needed
+import PropTypes from "prop-types";
+import "./index.css";
 
 function FileUploadModal({ isOpen, onClose, onUpload }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -23,19 +24,29 @@ function FileUploadModal({ isOpen, onClose, onUpload }) {
     <div className="modal-overlay">
       <div className="modal-content">
         <h3>Select a file to upload:</h3>
-        <input 
-            type="file" 
-            accept="audio/*" 
-            onChange={handleFileChange} 
-            className="file-input"
+        <input
+          type="file"
+          accept="audio/*"
+          onChange={handleFileChange}
+          className="file-input"
         />
         <div className="modal-buttons">
-          <button onClick={handleConfirm}>Upload</button>
-          <button onClick={onClose}>Cancel</button>
+          <button type="button" onClick={handleConfirm}>
+            Upload
+          </button>
+          <button type="button" onClick={onClose}>
+            Cancel
+          </button>
         </div>
       </div>
     </div>
   );
 }
+
+FileUploadModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onUpload: PropTypes.func.isRequired,
+};
 
 export default FileUploadModal;

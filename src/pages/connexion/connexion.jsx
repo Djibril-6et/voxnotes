@@ -114,7 +114,7 @@ function Connexion() {
           </button>
         </form>
 
-        <hr/>
+        <hr />
 
         {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
         <button

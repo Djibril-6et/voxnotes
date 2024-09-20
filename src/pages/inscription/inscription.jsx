@@ -4,7 +4,7 @@ import usersServices from "../../services/users.services"; // Adjust the import 
 import googleLogo from "../../assets/googleLogo.png"; // Importer les logos
 import githubLogo from "../../assets/githubLogo.png";
 import discordLogo from "../../assets/discordLogo.png";
-import './inscription.css';
+import "./inscription.css";
 
 function Inscription() {
   const navigate = useNavigate();
@@ -94,8 +94,8 @@ function Inscription() {
           </button>
         </form>
 
-        <hr/>
-        
+        <hr />
+
         {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
         <button
           type="button"
