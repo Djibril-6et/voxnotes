@@ -51,4 +51,28 @@ export default {
         throw err;
       });
   },
+
+  resetPassword(payload) {
+    return fetch(`${API_URL_BASE}/api/users/reset-password`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        return response.json().then((data) => {
+          throw new Error(
+            data.message || "Erreur lors de la réinitialisation du mot de passe." // eslint-disable-line
+          );
+        });
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        throw err;
+      });
+  },
 };
