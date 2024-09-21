@@ -59,6 +59,7 @@ function Connexion() {
         alert(err.message);
       });
   };
+
   // eslint-disable-next-line no-undef
   const oauthUrl = process.env.REACT_APP_OAUTH_SERVICE_URL;
 
@@ -76,6 +77,11 @@ function Connexion() {
 
   const handleInscription = () => {
     navigate("/inscription");
+  };
+
+  // Redirection vers la page de réinitialisation du mot de passe
+  const handleForgotPassword = () => {
+    navigate("/forgotpassword");
   };
 
   return (
@@ -114,6 +120,15 @@ function Connexion() {
           </button>
         </form>
 
+        {/* Bouton pour "Mot de passe oublié ?" */}
+        <button
+          type="button"
+          className="forgot-password-link"
+          onClick={handleForgotPassword}
+        >
+          Mot de passe oublié ?
+        </button>
+
         <hr />
 
         {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
@@ -148,14 +163,14 @@ function Connexion() {
           Pas encore inscrit ?{" "}
           <span
             className="inscription-link"
-            role="button" // Ajout du rôle button
-            tabIndex={0} // Rendre l'élément focusable avec le clavier
+            role="button"
+            tabIndex={0}
             onClick={handleInscription}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 handleInscription();
               }
-            }} // Ajout de la gestion du clavier
+            }}
           >
             Inscription
           </span>
