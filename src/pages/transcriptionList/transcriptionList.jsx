@@ -36,6 +36,7 @@ function Transcription() {
           {fakeData.map((transcription) => (
             <TranscriptionCard
               key={transcription.id}
+              id={transcription.id}
               title={transcription.title}
               date={transcription.date}
               content={transcription.content}

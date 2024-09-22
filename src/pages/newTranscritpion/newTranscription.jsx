@@ -15,41 +15,10 @@ function NewTranscription() {
   const mediaRecorderRef = useRef(null);
   const audioBlobRef = useRef(null);
 
-  const handleUploadFile = async (file) => {
+  // Fonction pour envoyer le fichier audio à l'API pour transcription
+  const sendAudioToAPI = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-
-    try {
-      const response = await fetch(
-        "http://localhost:9090/bdd-api/api/audioFiles/uploadfile",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      if (!response.ok) {
-        const errorMessage = await response.text();
-        throw new Error(
-          `Error during file upload: ${response.status} - ${errorMessage}`
-        );
-      }
-
-      const data = await response.json();
-      alert("File uploaded successfully!");
-      console.log("Uploaded file ID:", data.fileId);
-    } catch (error) {
-      console.error("Error during file upload:", error);
-    }
-  };
-
-  const sendAudioToAPI = async (audioBlob) => {
-    const audioFile = new File([audioBlob], "audio.webm", {
-      type: "audio/webm",
-    });
-
-    const formData = new FormData();
-    formData.append("file", audioFile);
 
     try {
       setIsTranscribing(true);
@@ -69,8 +38,8 @@ function NewTranscription() {
       setTranscription(data.text);
       setAudioUrl(data.audioUrl);
     } catch (error) {
-      // eslint-disable-next-line
       console.error("Erreur lors de la transcription :", error);
+      alert("Erreur lors de la transcription");
     } finally {
       setIsTranscribing(false);
     }
@@ -91,7 +60,6 @@ function NewTranscription() {
 
       mediaRecorder.start();
     } catch (error) {
-      // eslint-disable-next-line
       console.error("Erreur lors de l'initialisation du MediaRecorder:", error);
     }
   };
@@ -100,11 +68,17 @@ function NewTranscription() {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
-
+  
       mediaRecorderRef.current.onstop = async () => {
         const audioBlob = audioBlobRef.current;
         if (audioBlob) {
-          await sendAudioToAPI(audioBlob);
+          // Crée un fichier à partir du blob avec l'extension .webm
+          const audioFile = new File([audioBlob], "recorded-audio.webm", {
+            type: "audio/webm",
+          });
+  
+          // Ensuite, envoie-le à l'API pour transcription
+          await sendAudioToAPI(audioFile); 
         }
       };
     }
@@ -112,12 +86,10 @@ function NewTranscription() {
 
   const handleCopyText = () => {
     navigator.clipboard.writeText(transcription);
-    // eslint-disable-next-line
     alert("Texte copié dans le presse-papier !");
   };
 
   const handleDownloadPDF = () => {
-    // eslint-disable-next-line new-cap
     const doc = new jsPDF();
     doc.text(transcription, 10, 10);
     doc.save("transcription.pdf");
@@ -148,10 +120,8 @@ function NewTranscription() {
       if (!response.ok) {
         throw new Error("Erreur lors de l'enregistrement de la transcription");
       }
-      // eslint-disable-next-line
       alert("Transcription enregistrée avec succès !");
     } catch (error) {
-      // eslint-disable-next-line
       console.error("Erreur lors de l'enregistrement :", error);
     } finally {
       handleCloseModal();
@@ -169,7 +139,7 @@ function NewTranscription() {
           disabled={isRecording}
           className="record-btn"
         >
-          D&eacute;marrer l&apos;enregistrement
+          Démarrer l'enregistrement
         </button>
         <button
           type="button"
@@ -235,7 +205,8 @@ function NewTranscription() {
         <FileUploadModal
           isOpen={isUploadModalOpen}
           onClose={() => setIsUploadModalOpen(false)}
-          onUpload={handleUploadFile}
+          sendAudioToAPI={sendAudioToAPI} // Passer la fonction pour transcrire l'audio
+          onUpload={() => {}} // Vous pouvez gérer la sauvegarde du fichier après transcription ici si nécessaire
         />
       )}
     </div>

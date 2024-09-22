@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "./saveModal.css"; // Créer un fichier CSS pour styliser la modal
+import "./saveModal.css";
 
 function SaveModal({ onSave, onClose }) {
   const [transcriptionName, setTranscriptionName] = useState("");
@@ -8,7 +8,7 @@ function SaveModal({ onSave, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (transcriptionName) {
-      onSave(transcriptionName); // Appeler la fonction d'enregistrement avec le nom
+      onSave(transcriptionName); // Envoie le nom de la transcription au parent
     }
   };
 
@@ -38,7 +38,6 @@ function SaveModal({ onSave, onClose }) {
   );
 }
 
-// Validation des props avec PropTypes
 SaveModal.propTypes = {
   onSave: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
