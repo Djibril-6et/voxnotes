@@ -25,7 +25,7 @@ function Transcription() {
         .getSubscriptionByUserId(userId)
         .then((subscription) => {
           if (subscription) {
-            setHasSubscription(true);
+            setHasSubscription(!!subscription);
           }
         })
         .catch((error) => {
