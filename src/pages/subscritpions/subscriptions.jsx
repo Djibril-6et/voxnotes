@@ -3,6 +3,7 @@ import "./subscriptions.css";
 import SouscriptionCard from "../../components/souscriptionCard/souscriptionCard";
 
 function Souscriptions() {
+  // eslint-disable-next-line no-undef
   const PAYMENT_URL_BASE = process.env.REACT_APP_PAYMENT_URL;
   const [errorMessage, setErrorMessage] = useState("");
 

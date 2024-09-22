@@ -74,7 +74,7 @@ function Transcription() {
         {/* Message affichant le nombre de transcriptions restantes */}
         <p className="transcriptions-left-message">
           Il vous reste {transcriptionsLeft} transcription(s) gratuite(s) avant
-          qu'un abonnement soit requis.
+          qu&apos;un abonnement soit requis.
         </p>
 
         <div className="card-section">

@@ -171,7 +171,7 @@ function NewTranscription() {
           disabled={isRecording}
           className="record-btn"
         >
-          Démarrer l'enregistrement
+          Démarrer l&apos;enregistrement
         </button>
         <button
           type="button"

@@ -31,7 +31,6 @@ function OneTranscription() {
         const audioBlob = await audioFilesService.downloadAudioFile(id);
         const audioUrl = URL.createObjectURL(audioBlob); // Convertir le Blob en URL utilisable dans un lecteur audio
         setAudioFileUrl(audioUrl); // Stocker l'URL du fichier audio
-
       } catch (err) {
         console.error("Error fetching metadata or audio file:", err); // Log l'erreur si elle survient
         setError("Error fetching file metadata or audio file");
@@ -59,7 +58,8 @@ function OneTranscription() {
     <div className="transcription-detail-container">
       <h2>{fileMetadata.metadata?.title}</h2>
       <p>
-        <strong>Date:</strong> {new Date(fileMetadata.uploadDate).toLocaleDateString()}
+        <strong>Date:</strong>{" "}
+        {new Date(fileMetadata.uploadDate).toLocaleDateString()}
       </p>
       <div className="transcription-content">
         <p>{fileMetadata.metadata?.transcription}</p>

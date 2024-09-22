@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import audioFilesServices from "../../services/audioFiles.services";
 
 function Profil() {
+  // eslint-disable-next-line no-undef
   const PAYMENT_URL_BASE = process.env.REACT_APP_PAYMENT_URL;
   const [user, setUser] = useState({
     username: "",

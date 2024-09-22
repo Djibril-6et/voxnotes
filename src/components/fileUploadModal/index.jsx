@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./index.css";
 
-function FileUploadModal({ isOpen, onClose, onUpload, sendAudioToAPI }) {
+function FileUploadModal({ isOpen, onClose, sendAudioToAPI }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {

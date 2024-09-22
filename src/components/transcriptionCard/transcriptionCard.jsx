@@ -9,7 +9,7 @@ function TranscriptionCard({ title, date, content, id }) {
   const navigate = useNavigate();
 
   const handleViewTranscription = () => {
-    localStorage.setItem("transcriptionId", id)
+    localStorage.setItem("transcriptionId", id);
     navigate(`/transcriptiondetail`);
   };
 
