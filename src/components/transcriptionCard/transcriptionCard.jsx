@@ -9,7 +9,8 @@ function TranscriptionCard({ title, date, content, id }) {
   const navigate = useNavigate();
 
   const handleViewTranscription = () => {
-    navigate(`/transcriptiondetail/${id}`);
+    localStorage.setItem("transcriptionId", id);
+    navigate(`/transcriptiondetail`);
   };
 
   const formattedDate = format(new Date(date), "dd MMMM yyyy", { locale: fr });

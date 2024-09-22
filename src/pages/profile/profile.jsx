@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import audioFilesServices from "../../services/audioFiles.services";
 
 function Profil() {
+  // eslint-disable-next-line no-undef
+  const PAYMENT_URL_BASE = process.env.REACT_APP_PAYMENT_URL;
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -28,13 +30,13 @@ function Profil() {
     // eslint-disable-line
     try {
       const sessionResponse = await fetch(
-        "http://localhost:8080/get-session-details",
+        `${PAYMENT_URL_BASE}/get-session-details`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ fetchSessionId }),
+          body: JSON.stringify({ sessionId: fetchSessionId }),
         }
       );
       const sessionData = await sessionResponse.json();
@@ -44,13 +46,13 @@ function Profil() {
 
         if (session.mode === "payment") {
           const paymentResponse = await fetch(
-            "http://localhost:8080/get-payment-details",
+            `${PAYMENT_URL_BASE}/get-payment-details`,
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ fetchSessionId }),
+              body: JSON.stringify({ sessionId: fetchSessionId }),
             }
           );
           const paymentData = await paymentResponse.json();
@@ -64,13 +66,13 @@ function Profil() {
 
         if (session.mode === "subscription") {
           const subscriptionResponse = await fetch(
-            "http://localhost:8080/get-subscription-details",
+            `${PAYMENT_URL_BASE}/get-subscription-details`,
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ fetchSessionId }),
+              body: JSON.stringify({ sessionId: fetchSessionId }),
             }
           );
           const subscriptionData = await subscriptionResponse.json();

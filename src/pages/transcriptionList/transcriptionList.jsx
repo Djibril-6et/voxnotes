@@ -16,7 +16,7 @@ function Transcription() {
 
   useEffect(() => {
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
-    const userId = userConnected?.user?._id;
+    const userId = userConnected?.user?._id; // eslint-disable-line no-underscore-dangle
 
     if (userId) {
       audioFilesService
@@ -53,6 +53,7 @@ function Transcription() {
           <button
             onClick={handleNewTranscriptionClick}
             className="new-transcription-link"
+            type="button"
           >
             New transcription
           </button>
@@ -60,10 +61,9 @@ function Transcription() {
       </section>
       <section className="my-transcriptions-section">
         <h1>My Transcriptions</h1>
-
         <p className="transcriptions-left-message">
           Il vous reste {transcriptionsLeft} transcription(s) gratuite(s) avant
-          qu'un abonnement soit requis.
+          qu&apos;un abonnement soit requis.
         </p>
 
         <div className="card-section">
@@ -71,7 +71,7 @@ function Transcription() {
             transcriptions.map((transcription) => (
               <TranscriptionCard
                 key={transcription.id}
-                id={transcription.id}
+                id={transcription._id} // eslint-disable-line no-underscore-dangle
                 title={transcription.metadata.title}
                 date={transcription.uploadDate}
                 content={transcription.metadata.transcription}

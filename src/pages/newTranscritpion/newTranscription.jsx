@@ -15,6 +15,9 @@ function NewTranscription() {
   const audioBlobRef = useRef(null);
   const [audioFile, setAudioFile] = useState(null);
 
+
+  // eslint-disable-next-line no-undef
+  const API_URL_BASE = process.env.REACT_APP_BDD_API_URL;
   const sendAudioToAPI = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -44,6 +47,7 @@ function NewTranscription() {
     } finally {
       setIsTranscribing(false);
     }
+    return { transcription: "", audioUrl: "" }; // Ensure a return  value
   };
 
   const handleUploadFile = async (file) => {
@@ -90,6 +94,7 @@ function NewTranscription() {
   };
 
   const handleDownloadPDF = () => {
+    // eslint-disable-next-line new-cap
     const doc = new jsPDF();
     doc.text(transcription, 10, 10);
     doc.save("transcription.pdf");
@@ -121,7 +126,7 @@ function NewTranscription() {
 
     try {
       const response = await fetch(
-        "http://localhost:9090/api/audioFiles/uploadfile",
+        `${API_URL_BASE}/api/audioFiles/uploadfile`,
         {
           method: "POST",
           body: formData,
@@ -152,7 +157,7 @@ function NewTranscription() {
           disabled={isRecording}
           className="record-btn"
         >
-          Démarrer l'enregistrement
+          Démarrer l&apos;enregistrement
         </button>
         <button
           type="button"
