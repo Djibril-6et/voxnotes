@@ -29,8 +29,8 @@ function Transcription() {
           }
         })
         .catch((error) => {
-            setHasSubscription(false); // No subscription found
-            console.log(error);
+          setHasSubscription(false); // No subscription found
+          console.log(error);
         });
 
       audioFilesService
