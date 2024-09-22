@@ -73,16 +73,6 @@ function Header() {
           )}
         </nav>
       </div>
-
-      <select
-        className="language-selector"
-        onChange={(e) => changeLanguage(e.target.value)}
-      >
-        <option value="en">En</option>
-        <option value="fr">Fr</option>
-        <option value="pt">Pt</option>
-        <option value="es">Es</option>
-      </select>
     </header>
   );
 }
