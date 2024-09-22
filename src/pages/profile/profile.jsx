@@ -4,7 +4,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import subscriptionService from "../../services/subscriptions.services";
 
 function Profil() {
-    // eslint-disable-next-line no-undef
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // eslint-disable-next-line no-undef
   const PAYMENT_URL_BASE = process.env.REACT_APP_PAYMENT_URL;
   const queryParams = new URLSearchParams(location.search);
   const [user, setUser] = useState({
@@ -16,9 +19,6 @@ function Profil() {
   const [subscriptionDetails, setSubscriptionDetails] = useState(null);
   const [sessionId, setSessionId] = useState(queryParams.get("session_id"));
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const username = queryParams.get("username");
   const email = queryParams.get("email");
   /* const sessionId = queryParams.get("session_id"); */
@@ -26,7 +26,6 @@ function Profil() {
   const _id =
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
-
 
   const fetchSessionDetails = async (fetchSessionId) => {
     // eslint-disable-line
@@ -94,7 +93,8 @@ function Profil() {
 
   const fetchUserSubscription = async (userId) => {
     try {
-      const subscriptionData = await subscriptionService.getSubscriptionByUserId(userId);
+      const subscriptionData =
+        await subscriptionService.getSubscriptionByUserId(userId);
       if (subscriptionData) {
         setSubscriptionDetails(subscriptionData);
       }
