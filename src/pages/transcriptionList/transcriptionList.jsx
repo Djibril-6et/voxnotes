@@ -21,33 +21,32 @@ function Transcription() {
     const userId = userConnected?.user?._id; // eslint-disable-line no-underscore-dangle
 
     if (userId) {
-      subscriptionService
-        .getSubscriptionByUserId(userId)
-        .then((subscription) => {
-          if (subscription) {
-            setHasSubscription(true);
-          }
-        })
-        .catch((error) => {
+      const fetchSubscription = async () => {
+        try {
+          const subscription = await subscriptionService.getSubscriptionByUserId(userId);
+          console.log("Fetched Subscription:", subscription);
+          setHasSubscription(!!subscription); 
+                } catch (error) {
+          console.log("Error fetching subscription:", error);
           setHasSubscription(false);
-          console.log(error);
-        });
-
-      audioFilesService
-        .getUserFiles(userId)
-        .then((data) => {
+        }
+      };
+  
+      const fetchUserFiles = async () => {
+        try {
+          const data = await audioFilesService.getUserFiles(userId);
           setTranscriptions(data);
-        })
-        // eslint-disable-next-line
-        .catch((error) => {
+        } catch (error) {
           if (error.response && error.response.status === 404) {
-            // eslint-disable-next-line
             console.log("No transcriptions found");
           }
-        })
-        .finally(() => {
+        } finally {
           setLoading(false);
-        });
+        }
+      };
+  
+      fetchSubscription();
+      fetchUserFiles();
     }
   }, []);
 
