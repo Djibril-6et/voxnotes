@@ -96,14 +96,9 @@ function Profil() {
       const subscriptionData =
         await subscriptionService.getSubscriptionByUserId(userId);
       if (subscriptionData) {
-        const startDate = subscriptionData.startDate; // eslint-disable-line prefer-destructuring
-        const nextMonthDate = new Date(startDate);
-        nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
-
         setSubscriptionDetails({
           id: subscriptionData.stripeSessionId,
-          status: subscriptionData.status,
-          endDate: nextMonthDate,
+          status: subscriptionData.status
         });
       }
     } catch (error) {
@@ -196,10 +191,6 @@ function Profil() {
           <p>
             <strong>Statut :</strong>
             {subscriptionDetails.status}
-          </p>
-          <p>
-            <strong>Prochain renouvellement :</strong>
-            {subscriptionDetails.endDate}
           </p>
         </div>
       )}
