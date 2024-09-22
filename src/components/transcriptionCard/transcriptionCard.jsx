@@ -17,11 +17,11 @@ function TranscriptionCard({ title, date, content, id }) {
   return (
     <div className="card">
       <div className="card-top">
-      <p className="card-summary">{title}</p>
+        <p className="card-summary">{title}</p>
         <p className="card-excerpt">{content}</p>
       </div>
       <div className="card-bottom">
-      <p className="card-date">{formattedDate}</p>
+        <p className="card-date">{formattedDate}</p>
         <button
           type="button"
           className="view-transcription-btn"

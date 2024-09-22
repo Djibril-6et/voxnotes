@@ -62,7 +62,8 @@ function Transcription() {
         <h1>My Transcriptions</h1>
 
         <p className="transcriptions-left-message">
-          Il vous reste {transcriptionsLeft} transcription(s) gratuite(s) avant qu'un abonnement soit requis.
+          Il vous reste {transcriptionsLeft} transcription(s) gratuite(s) avant
+          qu'un abonnement soit requis.
         </p>
 
         <div className="card-section">

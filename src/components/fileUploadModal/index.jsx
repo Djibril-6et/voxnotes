@@ -30,7 +30,7 @@ function FileUploadModal({ isOpen, onClose, onUpload, sendAudioToAPI }) {
         <h3>Sélectionnez un fichier à uploader :</h3>
         <input
           type="file"
-          accept="audio/*" 
+          accept="audio/*"
           onChange={handleFileChange}
           className="file-input"
         />
@@ -51,7 +51,7 @@ FileUploadModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onUpload: PropTypes.func.isRequired,
-  sendAudioToAPI: PropTypes.func.isRequired
+  sendAudioToAPI: PropTypes.func.isRequired,
 };
 
 export default FileUploadModal;

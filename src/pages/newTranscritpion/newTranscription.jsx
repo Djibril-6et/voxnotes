@@ -64,8 +64,7 @@ function NewTranscription() {
       };
 
       mediaRecorder.start();
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleStopRecording = async () => {
@@ -76,7 +75,9 @@ function NewTranscription() {
       mediaRecorderRef.current.onstop = async () => {
         const audioBlob = audioBlobRef.current;
         if (audioBlob) {
-          const file = new File([audioBlob], "audio.webm", { type: "audio/webm" });
+          const file = new File([audioBlob], "audio.webm", {
+            type: "audio/webm",
+          });
           await sendAudioToAPI(file);
         }
       };
@@ -109,15 +110,15 @@ function NewTranscription() {
 
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
     const userId = userConnected?.user?._id;
-  
+
     if (userId) {
       formData.append("userId", userId);
     }
-  
+
     if (audioFile) {
       formData.append("file", audioFile);
     }
-  
+
     try {
       const response = await fetch(
         "http://localhost:9090/api/audioFiles/uploadfile",
@@ -126,7 +127,7 @@ function NewTranscription() {
           body: formData,
         }
       );
-  
+
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(

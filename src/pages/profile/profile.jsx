@@ -31,7 +31,8 @@ function Profil() {
         const audioFiles = await audioFilesServices.getUserFiles(_id);
         setAudioFilesList(audioFiles);
       } catch (error) {}
-    }};
+    }
+  };
 
   const fetchSessionDetails = async (fetchSessionId) => {
     // eslint-disable-line
