@@ -17,13 +17,17 @@ function NewTranscription() {
 
   // eslint-disable-next-line no-undef
   const API_URL_BASE = process.env.REACT_APP_BDD_API_URL;
+
+  // eslint-disable-next-line no-undef
+  const IA_URL_BASE = process.env.REACT_APP_IA_SERVICE_URL;
+
   const sendAudioToAPI = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
 
     try {
       setIsTranscribing(true);
-      const response = await fetch("http://localhost:5015/transcribe", {
+      const response = await fetch(`${IA_URL_BASE}/transcribe`, {
         method: "POST",
         body: formData,
       });
@@ -48,10 +52,6 @@ function NewTranscription() {
       setIsTranscribing(false);
     }
     return { transcription: "", audioUrl: "" };
-  };
-
-  const handleUploadFile = async (file) => {
-    await sendAudioToAPI(file);
   };
 
   const handleStartRecording = async () => {
@@ -228,7 +228,6 @@ function NewTranscription() {
         <FileUploadModal
           isOpen={isUploadModalOpen}
           onClose={() => setIsUploadModalOpen(false)}
-          onUpload={handleUploadFile}
           sendAudioToAPI={sendAudioToAPI}
         />
       )}
