@@ -42,6 +42,7 @@ function Transcription() {
         // eslint-disable-next-line
         .catch((error) => {
           if (error.response && error.response.status === 404) {
+            // eslint-disable-next-line
             console.log("No transcriptions found");
           }
         })
@@ -65,7 +66,7 @@ function Transcription() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Chargement...</div>;
   }
 
   return (
@@ -77,12 +78,12 @@ function Transcription() {
             className="new-transcription-link"
             type="button"
           >
-            New transcription
+            Nouvelle transcription
           </button>
         </div>
       </section>
       <section className="my-transcriptions-section">
-        <h1>My Transcriptions</h1>
+        <h1>Mes Transcriptions</h1>
         {!hasSubscription && (
           <p className="transcriptions-left-message">
             Il vous reste {transcriptionsLeft} transcription(s) gratuite(s)
@@ -102,7 +103,7 @@ function Transcription() {
               />
             ))
           ) : (
-            <p>No transcriptions found</p>
+            <p>Aucune transcription trouvée</p>
           )}
         </div>
       </section>

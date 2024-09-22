@@ -1,102 +1,112 @@
 .connexion-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 89vh;
-    background: linear-gradient(177deg, #0a9393, #000000, #000000);
-    padding: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(177deg, #0a9393, #000000, #000000);
+  padding: 20px;
+}
 
-  .connexion-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: white;
-  }
+.connexion-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+}
 
-  .connexion-form-container {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .connexion-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .connexion-input {
-    width: 100%;
-    max-width: 350px;
-    padding: 10px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .connexion-input:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
-  }
-  
-  .connexion-button {
-    background-color: #2b2f34;
-    color: white;
-    font-size: 18px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
-    width: 100%;
-    max-width: 350px;
-  }
-  
-  .connexion-button:hover {
-    background-color: #6d6d6d;
-  }
-  
-  .connexion-button:active {
-    background-color: #040404;
-  }
-  
-  .connexion-button:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
-  }
+.connexion-form-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
 
-  .oauth-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 350px;
-    margin-top: 10px;
-  }
-  
-  .oauth-logo {
-    height: 20px;
-    margin-right: 10px;
-  }
-  
-  hr {
-    border: 1px solid #0a9393;
-    width: 100%;
-    margin: 20px 0;
-  }
+.connexion-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.connexion-input {
+  width: 100%;
+  max-width: 350px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.connexion-input:focus {
+  outline: none;
+  border-color: #0a9393;
+  box-shadow: 0 0 5px #0a9393;
+}
+.password-field {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+}
+.password-field input {
+  flex: 1;
+}
+.toggle-password-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0a9393;
+  font-size: 14px;
+}
+.connexion-button {
+  background-color: #2b2f34;
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  width: 100%;
+  max-width: 350px;
+}
+.connexion-button:hover {
+  background-color: #6d6d6d;
+}
+.connexion-button:active {
+  background-color: #040404;
+}
+.connexion-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #0a9393;
+}
+.oauth-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 350px;
+  margin-top: 10px;
+}
+.oauth-logo {
+  height: 20px;
+  margin-right: 10px;
+}
+hr {
+  border: 1px solid #0a9393;
+  width: 100%;
+  margin: 20px 0;
+}
