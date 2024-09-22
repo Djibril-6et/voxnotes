@@ -42,6 +42,8 @@ function Transcription() {
         }
       };
 
+      fetchSubscription();
+      
       audioFilesService
         .getUserFiles(userId)
         .then((data) => {
@@ -58,8 +60,7 @@ function Transcription() {
           setLoading(false);
         });
 
-      fetchSubscription();
-      
+
     }
   }, []);
 
