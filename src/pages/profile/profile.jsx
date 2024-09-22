@@ -21,7 +21,7 @@ function Profil() {
   const username = queryParams.get("username");
   const email = queryParams.get("email");
   const sessionId = queryParams.get("session_id");
-
+  // eslint-disable-next-line
   const _id =
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
@@ -84,6 +84,7 @@ function Profil() {
           }
         }
       }
+      // eslint-disable-next-line
     } catch (error) {}
 
     return { paymentDetails: null, subscriptionDetails: null };
@@ -133,6 +134,7 @@ function Profil() {
       window.dispatchEvent(event);
 
       navigate("/connexion");
+      // eslint-disable-next-line
     } catch (error) {}
   };
 

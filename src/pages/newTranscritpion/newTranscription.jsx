@@ -15,7 +15,6 @@ function NewTranscription() {
   const audioBlobRef = useRef(null);
   const [audioFile, setAudioFile] = useState(null);
 
-
   // eslint-disable-next-line no-undef
   const API_URL_BASE = process.env.REACT_APP_BDD_API_URL;
   const sendAudioToAPI = async (file) => {
@@ -47,7 +46,7 @@ function NewTranscription() {
     } finally {
       setIsTranscribing(false);
     }
-    return { transcription: "", audioUrl: "" }; // Ensure a return  value
+    return { transcription: "", audioUrl: "" };
   };
 
   const handleUploadFile = async (file) => {
@@ -68,6 +67,7 @@ function NewTranscription() {
       };
 
       mediaRecorder.start();
+      // eslint-disable-next-line
     } catch (error) {}
   };
 
@@ -114,6 +114,7 @@ function NewTranscription() {
     formData.append("title", transcriptionName);
 
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
+    // eslint-disable-next-line
     const userId = userConnected?.user?._id;
 
     if (userId) {
@@ -140,6 +141,7 @@ function NewTranscription() {
         );
       }
       alert("Transcription et fichier audio enregistrés avec succès !");
+      // eslint-disable-next-line
     } catch (error) {
     } finally {
       setIsModalOpen(false);
