@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./profile.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import audioFilesServices from "../../services/audioFiles.services";
 
 function Profil() {
   // eslint-disable-next-line no-undef
