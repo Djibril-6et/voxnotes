@@ -22,7 +22,6 @@ export default {
         });
       })
       .catch((err) => {
-        console.error("Error:", err);
         throw err;
       });
   },
@@ -47,7 +46,6 @@ export default {
         });
       })
       .catch((err) => {
-        console.error("Error:", err);
         throw err;
       });
   },

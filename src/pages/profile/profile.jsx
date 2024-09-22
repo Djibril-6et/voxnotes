@@ -9,12 +9,11 @@ function Profil() {
   const [user, setUser] = useState({
     username: "",
     email: "",
-    _id: "", // Suppression de l'espace en trop ici
+    _id: "",
   });
 
-  const [paymentDetails, setPaymentDetails] = useState(null); // Détails du paiement
-  const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Détails de l'abonnement
-  const [audioFilesList, setAudioFilesList] = useState([]); // Liste des fichiers audio
+  const [paymentDetails, setPaymentDetails] = useState(null);
+  const [subscriptionDetails, setSubscriptionDetails] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,38 +22,9 @@ function Profil() {
   const email = queryParams.get("email");
   const sessionId = queryParams.get("session_id");
 
-  // On récupère _id des query params ou du localStorage si les query params sont vides
-  /* eslint-disable-next-line no-underscore-dangle */
   const _id =
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
-  // eslint-disable-next-line
-  console.log("Query Params _id:", _id); // Ajout pour vérifier la valeur de _id
-
-  // Fonction pour récupérer les fichiers audio de l'utilisateur connecté
-  const fetchUserAudioFiles = async () => {
-    if (_id) {
-      // eslint-disable-next-line
-      console.log("User ID:", _id); // Vérifiez que l'ID est correct
-      try {
-        const audioFiles = await audioFilesServices.getUserFiles(_id);
-        // eslint-disable-next-line
-        console.log("Audio Files Data: ", audioFiles); // Afficher la réponse complète de l'API
-        setAudioFilesList(audioFiles); // Assigner la liste directement
-        // eslint-disable-next-line
-        console.log("State after setting audio files: ", audioFilesList); // Vérifier l'état après mise à jour
-      } catch (error) {
-        // eslint-disable-next-line
-        console.error(
-          "Erreur lors de la récupération des fichiers audio :",
-          error
-        );
-      }
-    } else {
-      // eslint-disable-next-line
-      console.warn("No user ID found!"); // Log si l'ID est manquant
-    }
-  };
 
   const fetchSessionDetails = async (fetchSessionId) => {
     // eslint-disable-line
@@ -114,13 +84,7 @@ function Profil() {
           }
         }
       }
-    } catch (error) {
-      // eslint-disable-next-line
-      console.error(
-        "Erreur lors de la récupération des fichiers audio :",
-        error
-      ); // eslint-disable-line no-console
-    }
+    } catch (error) {}
 
     return { paymentDetails: null, subscriptionDetails: null };
   };
@@ -138,12 +102,6 @@ function Profil() {
           email: storedEmail,
           _id: storedId,
         } = JSON.parse(storedUser).user;
-        // eslint-disable-next-line
-        console.log("Stored user data:", {
-          storedUsername,
-          storedEmail,
-          storedId,
-        }); // eslint-disable-line
         setUser({
           username: storedUsername,
           email: storedEmail,
@@ -154,7 +112,6 @@ function Profil() {
       }
     }
 
-    // Récupération des détails de la session si sessionId est présent
     if (sessionId) {
       const fetchDetails = async () => {
         const {
@@ -166,26 +123,17 @@ function Profil() {
       };
       fetchDetails();
     }
-    // eslint-disable-next-line
-    console.log("useEffect - _id:", _id); // Vérification de _id dans useEffect
-
-    fetchUserAudioFiles();
   }, [location, navigate, username, email, sessionId, _id]);
 
   const handleSignOut = async () => {
     try {
-      // Remove user data from localStorage
       localStorage.removeItem("userConnected");
 
-      // Émettre un événement pour mettre à jour le header
       const event = new Event("userDisconnected");
       window.dispatchEvent(event);
 
-      // Redirect to login page
       navigate("/connexion");
-    } catch (error) {
-      console.error("Error signing out:", error); // eslint-disable-line no-console
-    }
+    } catch (error) {}
   };
 
   return (
@@ -246,27 +194,6 @@ function Profil() {
       <button type="button" className="signout-button" onClick={handleSignOut}>
         Déconnexion
       </button>
-
-      <div className="audio-files-section">
-        <h3>Vos fichiers audio</h3>
-        {audioFilesList.length > 0 ? (
-          <ul>
-            {audioFilesList.map((audioFile) => (
-              <li key={audioFile.fileName}>
-                <strong>Nom du fichier :</strong> {audioFile.fileName} <br />
-                <strong>Type :</strong> {audioFile.fileType} <br />
-                <strong>Taille :</strong>
-                {(audioFile.fileSize / 1000000).toFixed(2)} MB <br />
-                <strong>Statut :</strong> {audioFile.status} <br />
-                <strong>Date de l&apos;upload :</strong>
-                {new Date(audioFile.uploadDate).toLocaleDateString()}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Aucun fichier audio disponible.</p>
-        )}
-      </div>
     </div>
   );
 }

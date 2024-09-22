@@ -3,7 +3,7 @@
   align-items: center;
   padding: 40px 20px;
   background-color: #f4f4f4;
-  flex-wrap: wrap; /* Permet de gérer la disposition sur les petits écrans */
+  flex-wrap: wrap;
 }
 
 .presentation-text {
@@ -33,7 +33,6 @@
   border-radius: 10px;
 }
 
-/* Style pour le bouton */
 .cta-button-container {
   text-align: center;
   width: 100%;
@@ -54,8 +53,6 @@
   background-color: #4f4f4f;
 }
 
-  
-  /* Style pour la section À propos de nous */
   .about-section {
     padding: 40px 20px;
     background-color: #fff;

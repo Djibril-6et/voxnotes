@@ -23,12 +23,11 @@ function SouscriptionCard({ title, price, content, onClickFunction }) {
   );
 }
 
-// Validation des props avec PropTypes
 SouscriptionCard.propTypes = {
-  title: PropTypes.string.isRequired, // Validation que title est une chaîne de caractères obligatoire
-  price: PropTypes.string.isRequired, // Validation que price est une chaîne de caractères obligatoire
-  content: PropTypes.string.isRequired, // Validation que content est une chaîne de caractères obligatoire
-  onClickFunction: PropTypes.func.isRequired, // Validation que onClickFunction est une fonction obligatoire
+  title: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  onClickFunction: PropTypes.func.isRequired,
 };
 
 export default SouscriptionCard;

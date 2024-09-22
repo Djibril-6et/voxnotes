@@ -1,49 +1,44 @@
-/* Container pour la page d'inscription */
 .connexion-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 89vh; /* Occupe toute la hauteur de l'écran */
-    background: linear-gradient(177deg, #0a9393, #000000, #000000); /* Fond dégradé similaire à la landing page */
+    height: 89vh;
+    background: linear-gradient(177deg, #0a9393, #000000, #000000);
     padding: 20px;
   }
-  
-  /* Titre de la page d'inscription */
+
   .connexion-title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: white; /* Couleur du texte blanche pour le titre */
+    color: white;
   }
-  
-  /* Container pour regrouper les inputs et les boutons avec un fond et un box-shadow */
+
   .connexion-form-container {
-    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement blanc et transparent */
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Effet d'ombre pour faire ressortir le bloc */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 400px; /* Limiter la largeur pour les écrans larges */
-    margin: 0 auto; /* Centrer le conteneur horizontalement */
+    max-width: 400px;
+    margin: 0 auto;
   }
   
-  /* Formulaire en colonne */
   .connexion-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%; /* Le formulaire prend toute la largeur du conteneur */
+    width: 100%;
   }
   
-  /* Style des champs de saisie */
   .connexion-input {
     width: 100%;
-    max-width: 350px; /* Limiter la largeur maximale des inputs */
+    max-width: 350px;
     padding: 10px;
     margin-bottom: 15px;
     font-size: 16px;
@@ -58,7 +53,6 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
   }
   
-  /* Style du bouton d'inscription */
   .connexion-button {
     background-color: #2b2f34;
     color: white;
@@ -69,32 +63,31 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 10px; /* Espacement entre les boutons */
+    margin-top: 10px;
     width: 100%;
     max-width: 350px;
   }
   
   .connexion-button:hover {
-    background-color: #6d6d6d; /* Changement de couleur au survol */
+    background-color: #6d6d6d;
   }
   
   .connexion-button:active {
-    background-color: #040404; /* Couleur lors du clic */
+    background-color: #040404;
   }
   
   .connexion-button:focus {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
   }
-  
-  /* Boutons OAuth avec logo */
+
   .oauth-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%; /* Prendre toute la largeur */
-    max-width: 350px; /* Limiter la largeur des boutons OAuth */
-    margin-top: 10px; /* Espacement entre les boutons OAuth */
+    width: 100%;
+    max-width: 350px;
+    margin-top: 10px;
   }
   
   .oauth-logo {
@@ -103,7 +96,7 @@
   }
   
   hr {
-    border: 1px solid #0a9393; /* Set the color and thickness of the line */
-    width: 100%;            /* Full width of the container */
-    margin: 20px 0;         /* Add some space around the line */
+    border: 1px solid #0a9393;
+    width: 100%;
+    margin: 20px 0;
   }

@@ -11,10 +11,9 @@ function FileUploadModal({ isOpen, onClose, sendAudioToAPI }) {
 
   const handleConfirm = async () => {
     if (selectedFile) {
-      // Envoyer le fichier à l'API de transcription
       try {
         await sendAudioToAPI(selectedFile);
-        onClose(); // Fermer la modal après le succès
+        onClose();
       } catch (error) {
         alert("Erreur lors de l'envoi de la transcription");
       }
@@ -31,7 +30,7 @@ function FileUploadModal({ isOpen, onClose, sendAudioToAPI }) {
         <h3>Sélectionnez un fichier à uploader :</h3>
         <input
           type="file"
-          accept="audio/*" // Accepter tous les formats audio
+          accept="audio/*"
           onChange={handleFileChange}
           className="file-input"
         />
@@ -51,7 +50,8 @@ function FileUploadModal({ isOpen, onClose, sendAudioToAPI }) {
 FileUploadModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  sendAudioToAPI: PropTypes.func.isRequired, // Cette fonction doit être utilisée pour la transcription
+  onUpload: PropTypes.func.isRequired,
+  sendAudioToAPI: PropTypes.func.isRequired,
 };
 
 export default FileUploadModal;

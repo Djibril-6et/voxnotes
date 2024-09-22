@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { fr } from "date-fns/locale"; // Import du locale français pour le formatage
+import { fr } from "date-fns/locale";
 import "./transcriptionCard.css";
 
 function TranscriptionCard({ title, date, content, id }) {
@@ -13,7 +13,6 @@ function TranscriptionCard({ title, date, content, id }) {
     navigate(`/transcriptiondetail`);
   };
 
-  // Formatage de la date au format "dd MMMM yyyy"
   const formattedDate = format(new Date(date), "dd MMMM yyyy", { locale: fr });
 
   return (
@@ -36,12 +35,11 @@ function TranscriptionCard({ title, date, content, id }) {
   );
 }
 
-// Validation des props avec PropTypes
 TranscriptionCard.propTypes = {
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired, // Ajoutez un identifiant pour la navigation
+  id: PropTypes.number.isRequired,
 };
 
 export default TranscriptionCard;

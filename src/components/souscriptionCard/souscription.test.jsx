@@ -5,13 +5,12 @@ import SouscriptionCard from "./souscriptionCard";
 import "@testing-library/jest-dom";
 
 describe("SouscriptionCard component", () => {
-  const mockOnClickFunction = jest.fn(); // Simule la fonction onClick
+  const mockOnClickFunction = jest.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks(); // Réinitialiser les mocks avant chaque test
+    jest.clearAllMocks();
   });
 
-  // Test 1: Vérifie que les informations du composant s'affichent correctement
   test("renders title, price, and content correctly", () => {
     render(
       <SouscriptionCard
@@ -22,7 +21,6 @@ describe("SouscriptionCard component", () => {
       />
     );
 
-    // Vérifie que le titre, le prix et le contenu sont affichés
     expect(screen.getByText(/Souscription Premium/i)).toBeInTheDocument();
     expect(screen.getByText(/49,99 €/i)).toBeInTheDocument();
     expect(
@@ -30,7 +28,6 @@ describe("SouscriptionCard component", () => {
     ).toBeInTheDocument();
   });
 
-  // Test 2: Vérifie que la fonction onClickFunction est appelée lorsque le bouton est cliqué
   test("calls onClickFunction when payment button is clicked", () => {
     render(
       <SouscriptionCard
@@ -41,13 +38,11 @@ describe("SouscriptionCard component", () => {
       />
     );
 
-    // Simule un clic sur le bouton "Allez au paiement"
     const paymentButton = screen.getByRole("button", {
       name: /Allez au paiement/i,
     });
     fireEvent.click(paymentButton);
 
-    // Vérifie que la fonction onClickFunction a été appelée une fois
     expect(mockOnClickFunction).toHaveBeenCalledTimes(1);
   });
 });
