@@ -87,6 +87,10 @@
   .action-buttons button:hover {
     background-color: #62cece;
   }
+
+  .action-buttons .deleteBtn{
+    background-color: rgb(242, 72, 72);
+  }
   
   @media (max-width: 768px) {
     .transcription-text textarea {
