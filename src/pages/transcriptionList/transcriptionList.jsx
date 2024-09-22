@@ -29,7 +29,7 @@ function Transcription() {
           }
         })
         .catch((error) => {
-          setHasSubscription(false); // No subscription found
+          setHasSubscription(false);
           console.log(error);
         });
 
