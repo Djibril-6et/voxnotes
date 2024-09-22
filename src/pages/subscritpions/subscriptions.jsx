@@ -3,6 +3,7 @@ import "./subscriptions.css";
 import SouscriptionCard from "../../components/souscriptionCard/souscriptionCard";
 
 function Souscriptions() {
+  const PAYMENT_URL_BASE = process.env.REACT_APP_PAYMENT_URL;
   const [errorMessage, setErrorMessage] = useState("");
 
   const goToPaiement = (e, subject, type, price) => {
@@ -21,7 +22,7 @@ function Souscriptions() {
     if (type === "PAI") endpoint = `/create-checkout-session/${subject}`;
     else if (type === "SUB") endpoint = `/create-subscription/${subject}`;
 
-    fetch(`http://localhost:8080${endpoint}`, {
+    fetch(`${PAYMENT_URL_BASE}${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

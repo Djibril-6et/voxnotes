@@ -15,6 +15,9 @@ function NewTranscription() {
   const audioBlobRef = useRef(null);
   const [audioFile, setAudioFile] = useState(null);
 
+  // eslint-disable-next-line no-undef
+  const API_URL_BASE = process.env.REACT_APP_BDD_API_URL;
+
   // Fonction pour envoyer l'audio à l'API OpenAI
   const sendAudioToAPI = async (file) => {
     const formData = new FormData();
@@ -132,7 +135,7 @@ function NewTranscription() {
   
     try {
       const response = await fetch(
-        "http://localhost:9090/api/audioFiles/uploadfile",
+        `${API_URL_BASE}/api/audioFiles/uploadfile`,
         {
           method: "POST",
           body: formData,
