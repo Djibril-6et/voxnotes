@@ -42,21 +42,24 @@ function Transcription() {
         }
       };
 
-      const fetchUserFiles = async () => {
-        try {
-          const data = await audioFilesService.getUserFiles(userId);
+      audioFilesService
+        .getUserFiles(userId)
+        .then((data) => {
           setTranscriptions(data);
-        } catch (error) {
+        })
+        // eslint-disable-next-line
+        .catch((error) => {
           if (error.response && error.response.status === 404) {
+            // eslint-disable-next-line
             console.log("No transcriptions found");
           }
-        } finally {
+        })
+        .finally(() => {
           setLoading(false);
-        }
-      };
+        });
 
       fetchSubscription();
-      fetchUserFiles();
+      
     }
   }, []);
 
