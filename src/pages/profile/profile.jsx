@@ -98,7 +98,7 @@ function Profil() {
       if (subscriptionData) {
         setSubscriptionDetails({
           id: subscriptionData.stripeSessionId,
-          status: subscriptionData.status
+          status: subscriptionData.status,
         });
       }
     } catch (error) {
@@ -189,7 +189,7 @@ function Profil() {
         <div className="subscription-details">
           <h3>Détails de l&apos;abonnement</h3>
           <p>
-            <strong>Statut :</strong>
+            <strong>Statut : </strong>
             {subscriptionDetails.status}
           </p>
         </div>
