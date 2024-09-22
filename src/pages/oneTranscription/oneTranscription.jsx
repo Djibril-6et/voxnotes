@@ -53,6 +53,26 @@ function OneTranscription() {
     }
   };
 
+  const handleDeleteTranscription = async () => {
+    const confirmation = window.confirm(
+      "Êtes-vous sûr de vouloir supprimer cette transcription ? Cette action est irréversible."
+    );
+    if (confirmation) {
+      try {
+        const id = localStorage.getItem("transcriptionId");
+        if (!id) {
+          alert("Transcription ID not found.");
+          return;
+        }
+        await audioFilesService.deleteFileById(id);
+        alert("La transcription a été supprimée avec succès.");
+        window.location.href = "/transcription";
+      } catch (err) {
+        alert("Erreur lors de la suppression de la transcription.");
+      }
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -104,6 +124,13 @@ function OneTranscription() {
         </button>
         <button type="button" onClick={handleDownloadPDF}>
           Télécharger PDF
+        </button>
+        <button
+          className="deleteBtn"
+          type="button"
+          onClick={handleDeleteTranscription}
+        >
+          Supprimer la transcription
         </button>
       </div>
     </div>

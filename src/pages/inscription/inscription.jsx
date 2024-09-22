@@ -14,12 +14,18 @@ function Inscription() {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({
       ...user,
       [name]: value,
     });
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword); // Inverser la visibilité du mot de passe
   };
 
   const handleRegister = async (e) => {
@@ -33,7 +39,7 @@ function Inscription() {
     }
 
     try {
-      await usersServices.registerUser(user);
+      await usersServices.registerUser({ username, email, password });
       // eslint-disable-next-line
       alert("User registered successfully");
       navigate("/connexion");
@@ -43,7 +49,6 @@ function Inscription() {
     }
   };
 
-  // eslint-disable-next-line no-undef
   const oauthUrl = process.env.REACT_APP_OAUTH_SERVICE_URL;
 
   const handleGoogleAuth = () => {
@@ -78,17 +83,25 @@ function Inscription() {
             onChange={handleChange}
             className="connexion-input"
           />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={user.password}
-            onChange={handleChange}
-            className="connexion-input"
-          />
-
+          <div className="password-field">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Mot de passe"
+              value={user.password}
+              onChange={handleChange}
+              className="connexion-input"
+            />
+            <button
+              type="button"
+              onClick={toggleShowPassword}
+              className="toggle-password-btn"
+            >
+              {showPassword ? "Cacher" : "Voir"}
+            </button>
+          </div>
           <button type="submit" className="connexion-button">
-            Register
+            S&apos;inscrire
           </button>
         </form>
 

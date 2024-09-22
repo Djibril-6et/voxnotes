@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { jsPDF } from "jspdf";
+// import { jsPDF } from "jspdf";
 import "./newTranscription.css";
 import SaveModal from "../../components/saveModal/saveModal";
 import FileUploadModal from "../../components/fileUploadModal";
@@ -95,12 +95,12 @@ function NewTranscription() {
     alert("Texte copié dans le presse-papier !");
   };
 
-  const handleDownloadPDF = () => {
-    // eslint-disable-next-line new-cap
-    const doc = new jsPDF();
-    doc.text(transcription, 10, 10);
-    doc.save("transcription.pdf");
-  };
+  // const handleDownloadPDF = () => {
+  //   // eslint-disable-next-line new-cap
+  //   const doc = new jsPDF();
+  //   doc.text(transcription, 10, 10);
+  //   doc.save("transcription.pdf");
+  // };
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -208,9 +208,6 @@ function NewTranscription() {
       <div className="action-buttons">
         <button type="button" onClick={handleCopyText}>
           Copier le texte
-        </button>
-        <button type="button" onClick={handleDownloadPDF}>
-          Télécharger PDF
         </button>
         <button type="button" onClick={handleOpenModal}>
           Enregistrer

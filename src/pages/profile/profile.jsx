@@ -102,6 +102,7 @@ function Profil() {
         });
       }
     } catch (error) {
+      // eslint-disable-next-line
       console.error("Failed to fetch user subscription:", error);
     }
   };
@@ -164,7 +165,7 @@ function Profil() {
       <h2 className="profil-title">Profil</h2>
       <div className="profil-info-container">
         <p className="profil-info">
-          <strong>Username:</strong> {user.username}
+          <strong>Utilisateur:</strong> {user.username}
         </p>
         <p className="profil-info">
           <strong>Email:</strong> {user.email}

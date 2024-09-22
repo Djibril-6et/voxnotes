@@ -1,4 +1,3 @@
-/* eslint-disable no-undef, no-unused-vars */
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Home from "./landingPage";
