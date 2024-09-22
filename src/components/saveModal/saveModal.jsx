@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import "./saveModal.css";
 
 function SaveModal({ onSave, onClose }) {
   const [transcriptionName, setTranscriptionName] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (transcriptionName) {
       onSave(transcriptionName);
+      navigate("/transcription");
     }
   };
 

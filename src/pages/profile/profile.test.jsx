@@ -1,3 +1,4 @@
+/* eslint-disable no-undef, no-unused-vars */
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import Profil from "./profile";

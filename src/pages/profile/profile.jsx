@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./profile.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import subscriptionService from "../../services/subscriptions.services";
 
 function Profil() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   // eslint-disable-next-line no-undef
   const PAYMENT_URL_BASE = process.env.REACT_APP_PAYMENT_URL;
+  const queryParams = new URLSearchParams(location.search);
   const [user, setUser] = useState({
     username: "",
     email: "",
     _id: "",
   });
-
   const [paymentDetails, setPaymentDetails] = useState(null);
   const [subscriptionDetails, setSubscriptionDetails] = useState(null);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [sessionId, setSessionId] = useState(queryParams.get("session_id"));
 
-  const queryParams = new URLSearchParams(location.search);
   const username = queryParams.get("username");
   const email = queryParams.get("email");
-  const sessionId = queryParams.get("session_id");
+  /* const sessionId = queryParams.get("session_id"); */
   // eslint-disable-next-line
   const _id =
     queryParams.get("_id") ||
@@ -89,6 +91,23 @@ function Profil() {
     return { paymentDetails: null, subscriptionDetails: null };
   };
 
+  const fetchUserSubscription = async (userId) => {
+    try {
+      const subscriptionData =
+        await subscriptionService.getSubscriptionByUserId(userId);
+      if (subscriptionData) {
+        setSubscriptionDetails({
+          id: subscriptionData.stripeSessionId,
+          status: subscriptionData.status,
+          current_period_end: subscriptionData.current_period_end,
+        });
+      }
+    } catch (error) {
+      // eslint-disable-next-line
+      console.error("Failed to fetch user subscription:", error);
+    }
+  };
+
   useEffect(() => {
     if (username && email && _id) {
       const userData = { username, email, _id };
@@ -110,6 +129,11 @@ function Profil() {
       } else {
         navigate("/connexion");
       }
+    }
+
+    if (_id) {
+      const sub = fetchUserSubscription(_id); // Fetch subscription by user ID
+      setSessionId(sub?.sessionId);
     }
 
     if (sessionId) {
@@ -142,7 +166,7 @@ function Profil() {
       <h2 className="profil-title">Profil</h2>
       <div className="profil-info-container">
         <p className="profil-info">
-          <strong>Username:</strong> {user.username}
+          <strong>Utilisateur:</strong> {user.username}
         </p>
         <p className="profil-info">
           <strong>Email:</strong> {user.email}
