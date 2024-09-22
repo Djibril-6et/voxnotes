@@ -96,10 +96,14 @@ function Profil() {
       const subscriptionData =
         await subscriptionService.getSubscriptionByUserId(userId);
       if (subscriptionData) {
+        const startDate = subscriptionData.startDate;
+        const nextMonthDate = new Date(startDate);
+        nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
+
         setSubscriptionDetails({
           id: subscriptionData.stripeSessionId,
           status: subscriptionData.status,
-          current_period_end: subscriptionData.current_period_end,
+          endDate: nextMonthDate,
         });
       }
     } catch (error) {
@@ -176,10 +180,6 @@ function Profil() {
         <div className="payment-details">
           <h3>Détails du paiement</h3>
           <p>
-            <strong>ID du paiement :</strong>
-            {paymentDetails.id}
-          </p>
-          <p>
             <strong>Montant payé :</strong>
             {paymentDetails.amount / 100} €
           </p>
@@ -194,18 +194,12 @@ function Profil() {
         <div className="subscription-details">
           <h3>Détails de l&apos;abonnement</h3>
           <p>
-            <strong>ID de l&apos;abonnement :</strong>
-            {subscriptionDetails.id}
-          </p>
-          <p>
             <strong>Statut :</strong>
             {subscriptionDetails.status}
           </p>
           <p>
             <strong>Prochain renouvellement :</strong>
-            {new Date(
-              subscriptionDetails.current_period_end * 1000
-            ).toLocaleDateString()}
+            {subscriptionDetails.endDate}
           </p>
         </div>
       )}
