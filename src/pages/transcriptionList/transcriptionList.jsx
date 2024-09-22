@@ -25,8 +25,14 @@ function Transcription() {
         try {
           const subscription = await subscriptionService.getSubscriptionByUserId(userId);
           console.log("Fetched Subscription:", subscription);
-          setHasSubscription(!!subscription); 
-                } catch (error) {
+          
+          // Check if subscription has valid data
+          if (subscription && subscription.message !== "Subscription not found") {
+            setHasSubscription(true);
+          } else {
+            setHasSubscription(false);
+          }
+        } catch (error) {
           console.log("Error fetching subscription:", error);
           setHasSubscription(false);
         }
