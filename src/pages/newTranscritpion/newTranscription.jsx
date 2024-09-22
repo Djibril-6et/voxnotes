@@ -11,11 +11,11 @@ function NewTranscription() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [audioUrl, setAudioUrl] = useState("");
-
   const mediaRecorderRef = useRef(null);
   const audioBlobRef = useRef(null);
+  const [audioFile, setAudioFile] = useState(null);
 
-  // Fonction pour envoyer le fichier audio à l'API pour transcription
+  // Fonction pour envoyer l'audio à l'API OpenAI
   const sendAudioToAPI = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -37,6 +37,9 @@ function NewTranscription() {
       const data = await response.json();
       setTranscription(data.text);
       setAudioUrl(data.audioUrl);
+      setAudioFile(file); // Stockez le fichier pour l'envoyer plus tard à la BDD
+
+      return { transcription: data.text, audioUrl: data.audioUrl };
     } catch (error) {
       console.error("Erreur lors de la transcription :", error);
       alert("Erreur lors de la transcription");
@@ -45,6 +48,12 @@ function NewTranscription() {
     }
   };
 
+  // Fonction pour gérer le téléchargement de fichier et transcription
+  const handleUploadFile = async (file) => {
+    await sendAudioToAPI(file); // Envoyer l'audio à OpenAI
+  };
+
+  // Fonction pour démarrer l'enregistrement
   const handleStartRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -64,67 +73,76 @@ function NewTranscription() {
     }
   };
 
+  // Fonction pour stopper l'enregistrement et envoyer pour transcription
   const handleStopRecording = async () => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
-  
+
       mediaRecorderRef.current.onstop = async () => {
         const audioBlob = audioBlobRef.current;
         if (audioBlob) {
-          // Crée un fichier à partir du blob avec l'extension .webm
-          const audioFile = new File([audioBlob], "recorded-audio.webm", {
-            type: "audio/webm",
-          });
-  
-          // Ensuite, envoie-le à l'API pour transcription
-          await sendAudioToAPI(audioFile); 
+          const file = new File([audioBlob], "audio.webm", { type: "audio/webm" });
+          await sendAudioToAPI(file); // Envoyer l'audio à l'API OpenAI
         }
       };
     }
   };
 
+  // Fonction pour copier le texte de la transcription dans le presse-papier
   const handleCopyText = () => {
     navigator.clipboard.writeText(transcription);
     alert("Texte copié dans le presse-papier !");
   };
 
+  // Fonction pour télécharger la transcription en PDF
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
     doc.text(transcription, 10, 10);
     doc.save("transcription.pdf");
   };
 
+  // Fonction pour ouvrir la modal d'enregistrement
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
+  // Fonction pour fermer la modal d'enregistrement
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+  // Fonction pour sauvegarder la transcription et l'audio dans la BDD
   const handleSaveTranscription = async (transcriptionName) => {
+    const formData = new FormData();
+    formData.append("transcription", transcription); // Ajoute le texte de transcription
+    formData.append("name", transcriptionName); // Nom de la transcription
+
+    if (audioFile) {
+      formData.append("file", audioFile); // Ajoute le fichier audio
+    }
+
     try {
-      const response = await fetch("http://localhost:5015/save-transcription", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: transcriptionName,
-          transcription,
-          audioUrl,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:9090/api/audioFiles/uploadfile",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Erreur lors de l'enregistrement de la transcription");
+        const errorMessage = await response.text();
+        throw new Error(
+          `Error during file upload: ${response.status} - ${errorMessage}`
+        );
       }
-      alert("Transcription enregistrée avec succès !");
+
+      alert("Transcription et fichier audio enregistrés avec succès !");
     } catch (error) {
       console.error("Erreur lors de l'enregistrement :", error);
     } finally {
-      handleCloseModal();
+      setIsModalOpen(false);
     }
   };
 
@@ -196,7 +214,7 @@ function NewTranscription() {
 
       {isModalOpen && (
         <SaveModal
-          onSave={handleSaveTranscription}
+          onSave={handleSaveTranscription} // Sauvegarde dans la BDD
           onClose={handleCloseModal}
         />
       )}
@@ -205,8 +223,8 @@ function NewTranscription() {
         <FileUploadModal
           isOpen={isUploadModalOpen}
           onClose={() => setIsUploadModalOpen(false)}
-          sendAudioToAPI={sendAudioToAPI} // Passer la fonction pour transcrire l'audio
-          onUpload={() => {}} // Vous pouvez gérer la sauvegarde du fichier après transcription ici si nécessaire
+          onUpload={handleUploadFile} // Assurez-vous que cette fonction est bien passée
+          sendAudioToAPI={sendAudioToAPI} // Envoyer le fichier pour transcription
         />
       )}
     </div>
