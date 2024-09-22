@@ -85,7 +85,9 @@ function NewTranscription() {
       mediaRecorderRef.current.onstop = async () => {
         const audioBlob = audioBlobRef.current;
         if (audioBlob) {
-          const file = new File([audioBlob], "audio.webm", { type: "audio/webm" });
+          const file = new File([audioBlob], "audio.webm", {
+            type: "audio/webm",
+          });
           await sendAudioToAPI(file); // Envoyer l'audio à l'API OpenAI
         }
       };
@@ -120,19 +122,19 @@ function NewTranscription() {
     const formData = new FormData();
     formData.append("transcription", transcription); // Ajoute la transcription
     formData.append("title", transcriptionName); // Nom de la transcription
-  
+
     // Récupérer les informations de l'utilisateur depuis le localStorage
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
     const userId = userConnected?.user?._id; // ID de l'utilisateur connecté
-  
+
     if (userId) {
       formData.append("userId", userId); // Ajouter l'ID de l'utilisateur au FormData
     }
-  
+
     if (audioFile) {
       formData.append("file", audioFile); // Ajoute le fichier audio
     }
-  
+
     try {
       const response = await fetch(
         `${API_URL_BASE}/api/audioFiles/uploadfile`,
@@ -141,14 +143,14 @@ function NewTranscription() {
           body: formData,
         }
       );
-  
+
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(
           `Error during file upload: ${response.status} - ${errorMessage}`
         );
       }
-      
+
       console.log(response);
       alert("Transcription et fichier audio enregistrés avec succès !");
     } catch (error) {

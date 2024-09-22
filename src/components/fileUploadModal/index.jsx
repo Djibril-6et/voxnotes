@@ -31,7 +31,7 @@ function FileUploadModal({ isOpen, onClose, onUpload, sendAudioToAPI }) {
         <h3>Sélectionnez un fichier à uploader :</h3>
         <input
           type="file"
-          accept="audio/*"  // Accepter tous les formats audio
+          accept="audio/*" // Accepter tous les formats audio
           onChange={handleFileChange}
           className="file-input"
         />
@@ -51,8 +51,8 @@ function FileUploadModal({ isOpen, onClose, onUpload, sendAudioToAPI }) {
 FileUploadModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onUpload: PropTypes.func.isRequired,  // Cette fonction pourrait être utilisée pour enregistrer après transcription
-  sendAudioToAPI: PropTypes.func.isRequired  // Cette fonction doit être utilisée pour la transcription
+  onUpload: PropTypes.func.isRequired, // Cette fonction pourrait être utilisée pour enregistrer après transcription
+  sendAudioToAPI: PropTypes.func.isRequired, // Cette fonction doit être utilisée pour la transcription
 };
 
 export default FileUploadModal;
