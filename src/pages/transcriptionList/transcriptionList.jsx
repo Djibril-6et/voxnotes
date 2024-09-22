@@ -29,6 +29,7 @@ function Transcription() {
           }
         })
         .catch((error) => {
+          setHasSubscription(false);
           console.log(error);
         });
 
@@ -48,7 +49,7 @@ function Transcription() {
           setLoading(false);
         });
     }
-  }, [hasSubscription]);
+  }, []);
 
   /* ADD SESSION ID */
   const handleNewTranscriptionClick = () => {
@@ -104,6 +105,9 @@ function Transcription() {
             <p>Aucune transcription trouvée</p>
           )}
         </div>
+        <p className="transcriptions-left-message">
+          Debug: Has Subscription: {hasSubscription.toString()}
+        </p>
       </section>
     </div>
   );
