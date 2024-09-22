@@ -96,7 +96,14 @@ function Profil() {
       const subscriptionData =
         await subscriptionService.getSubscriptionByUserId(userId);
       if (subscriptionData) {
-        setSubscriptionDetails(subscriptionData);
+        const periodEnd = new Date(
+          subscriptionData.current_period_end * 1000
+        ).toLocaleDateString();
+        setSubscriptionDetails({
+          id: subscriptionData.stripeSessionId,
+          status: subscriptionData.status,
+          current_period_end: periodEnd ,
+        });
       }
     } catch (error) {
       console.error("Failed to fetch user subscription:", error);
