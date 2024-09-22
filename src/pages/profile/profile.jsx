@@ -12,7 +12,6 @@ function Profil() {
 
   const [paymentDetails, setPaymentDetails] = useState(null);
   const [subscriptionDetails, setSubscriptionDetails] = useState(null);
-  const [audioFilesList, setAudioFilesList] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,15 +23,6 @@ function Profil() {
   const _id =
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
-
-  const fetchUserAudioFiles = async () => {
-    if (_id) {
-      try {
-        const audioFiles = await audioFilesServices.getUserFiles(_id);
-        setAudioFilesList(audioFiles);
-      } catch (error) {}
-    }
-  };
 
   const fetchSessionDetails = async (fetchSessionId) => {
     // eslint-disable-line
@@ -131,7 +121,6 @@ function Profil() {
       };
       fetchDetails();
     }
-    fetchUserAudioFiles();
   }, [location, navigate, username, email, sessionId, _id]);
 
   const handleSignOut = async () => {
@@ -203,27 +192,6 @@ function Profil() {
       <button type="button" className="signout-button" onClick={handleSignOut}>
         Déconnexion
       </button>
-
-      <div className="audio-files-section">
-        <h3>Vos fichiers audio</h3>
-        {audioFilesList.length > 0 ? (
-          <ul>
-            {audioFilesList.map((audioFile) => (
-              <li key={audioFile.fileName}>
-                <strong>Nom du fichier :</strong> {audioFile.fileName} <br />
-                <strong>Type :</strong> {audioFile.fileType} <br />
-                <strong>Taille :</strong>
-                {(audioFile.fileSize / 1000000).toFixed(2)} MB <br />
-                <strong>Statut :</strong> {audioFile.status} <br />
-                <strong>Date de l&apos;upload :</strong>
-                {new Date(audioFile.uploadDate).toLocaleDateString()}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Aucun fichier audio disponible.</p>
-        )}
-      </div>
     </div>
   );
 }
