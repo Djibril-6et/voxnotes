@@ -11,4 +11,13 @@ export default {
       body: JSON.stringify(payload),
     }).then((res) => res.json());
   },
+
+  getSubscriptionByUserId(userId) {
+    return fetch(`${API_URL_BASE}/api/subscriptions/user/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }).then((res) => res.json());
+  },
 };

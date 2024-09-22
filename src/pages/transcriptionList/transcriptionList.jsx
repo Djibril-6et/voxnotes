@@ -32,6 +32,7 @@ function Transcription() {
     }
   }, []);
 
+  //ADD SESSION ID
   const handleNewTranscriptionClick = () => {
     if (transcriptions.length >= MAX_FREE_TRANSCRIPTIONS) {
       // eslint-disable-next-line

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./profile.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import subscriptionService from "../../services/subscriptions.services";
 
 function Profil() {
   // eslint-disable-next-line no-undef
@@ -13,17 +14,20 @@ function Profil() {
 
   const [paymentDetails, setPaymentDetails] = useState(null);
   const [subscriptionDetails, setSubscriptionDetails] = useState(null);
+  const [sessionId, setSessionId] = useState(queryParams.get("session_id"));
+
   const navigate = useNavigate();
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
   const username = queryParams.get("username");
   const email = queryParams.get("email");
-  const sessionId = queryParams.get("session_id");
+  //const sessionId = queryParams.get("session_id");
   // eslint-disable-next-line
   const _id =
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
+
 
   const fetchSessionDetails = async (fetchSessionId) => {
     // eslint-disable-line
@@ -89,6 +93,17 @@ function Profil() {
     return { paymentDetails: null, subscriptionDetails: null };
   };
 
+  const fetchUserSubscription = async (userId) => {
+    try {
+      const subscriptionData = await subscriptionService.getSubscriptionByUserId(userId);
+      if (subscriptionData) {
+        setSubscriptionDetails(subscriptionData);
+      }
+    } catch (error) {
+      console.error("Failed to fetch user subscription:", error);
+    }
+  };
+
   useEffect(() => {
     if (username && email && _id) {
       const userData = { username, email, _id };
@@ -110,6 +125,11 @@ function Profil() {
       } else {
         navigate("/connexion");
       }
+    }
+
+    if (_id) {
+      const sub = fetchUserSubscription(_id); // Fetch subscription by user ID
+      setSessionId(sub?.sessionId);
     }
 
     if (sessionId) {
