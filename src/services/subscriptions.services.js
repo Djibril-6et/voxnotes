@@ -26,13 +26,14 @@ export default {
     });
   },
 
-  cancelSubscription(sessionId) {  // Ici on envoie bien le sessionId
+  cancelSubscription(sessionId) {
+    // Ici on envoie bien le sessionId
     return fetch(`${API_PAYMENT_URL_BASE}/cancel-subscription`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ stripeSessionId: sessionId }), 
+      body: JSON.stringify({ stripeSessionId: sessionId }),
     }).then((res) => res.json());
   },
 };

@@ -41,7 +41,7 @@ function Profil() {
       const sessionData = await sessionResponse.json();
 
       if (sessionResponse.ok && sessionData.session) {
-        const session = sessionData.session;
+        const session = sessionData.session; // eslint-disable-line prefer-destructuring
 
         if (session.mode === "payment") {
           const paymentResponse = await fetch(
