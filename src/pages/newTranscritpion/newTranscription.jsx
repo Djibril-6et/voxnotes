@@ -40,7 +40,6 @@ function NewTranscription() {
 
       return { transcription: data.text, audioUrl: data.audioUrl };
     } catch (error) {
-      console.error("Erreur lors de la transcription :", error);
       alert("Erreur lors de la transcription");
     } finally {
       setIsTranscribing(false);
@@ -66,7 +65,6 @@ function NewTranscription() {
 
       mediaRecorder.start();
     } catch (error) {
-      console.error("Erreur lors de l'initialisation du MediaRecorder:", error);
     }
   };
 
@@ -135,11 +133,8 @@ function NewTranscription() {
           `Error during file upload: ${response.status} - ${errorMessage}`
         );
       }
-      
-      console.log(response);
       alert("Transcription et fichier audio enregistrés avec succès !");
     } catch (error) {
-      console.error("Erreur lors de l'enregistrement :", error);
     } finally {
       setIsModalOpen(false);
     }

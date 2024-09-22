@@ -24,31 +24,14 @@ function Profil() {
   const _id =
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
-  // eslint-disable-next-line
-  console.log("Query Params _id:", _id);
 
   const fetchUserAudioFiles = async () => {
     if (_id) {
-      // eslint-disable-next-line
-      console.log("User ID:", _id);
       try {
         const audioFiles = await audioFilesServices.getUserFiles(_id);
-        // eslint-disable-next-line
-        console.log("Audio Files Data: ", audioFiles);
         setAudioFilesList(audioFiles);
-        // eslint-disable-next-line
-        console.log("State after setting audio files: ", audioFilesList);
-      } catch (error) {
-        // eslint-disable-next-line
-        console.error(
-          "Erreur lors de la récupération des fichiers audio :",
-          error
-        );
-      }
-    } else {
-      console.warn("No user ID found!");
-    }
-  };
+      } catch (error) {}
+    }};
 
   const fetchSessionDetails = async (fetchSessionId) => {
     // eslint-disable-line
@@ -108,13 +91,7 @@ function Profil() {
           }
         }
       }
-    } catch (error) {
-      // eslint-disable-next-line
-      console.error(
-        "Erreur lors de la récupération des fichiers audio :",
-        error
-      ); // eslint-disable-line no-console
-    }
+    } catch (error) {}
 
     return { paymentDetails: null, subscriptionDetails: null };
   };
@@ -132,12 +109,6 @@ function Profil() {
           email: storedEmail,
           _id: storedId,
         } = JSON.parse(storedUser).user;
-        // eslint-disable-next-line
-        console.log("Stored user data:", {
-          storedUsername,
-          storedEmail,
-          storedId,
-        }); // eslint-disable-line
         setUser({
           username: storedUsername,
           email: storedEmail,
@@ -159,9 +130,6 @@ function Profil() {
       };
       fetchDetails();
     }
-    // eslint-disable-next-line
-    console.log("useEffect - _id:", _id);
-
     fetchUserAudioFiles();
   }, [location, navigate, username, email, sessionId, _id]);
 
@@ -173,9 +141,7 @@ function Profil() {
       window.dispatchEvent(event);
 
       navigate("/connexion");
-    } catch (error) {
-      console.error("Error signing out:", error); // eslint-disable-line no-console
-    }
+    } catch (error) {}
   };
 
   return (

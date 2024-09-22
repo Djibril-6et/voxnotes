@@ -16,12 +16,12 @@ export default {
         }
         return response.json().then((data) => {
           throw new Error(
-            data.message || "Une erreur est survenue lors de l'envoi de l'email de réinitialisation." // eslint-disable-line
+            data.message ||
+              "Une erreur est survenue lors de l'envoi de l'email de réinitialisation." // eslint-disable-line
           );
         });
       })
       .catch((err) => {
-        console.error("Error:", err);
         throw err;
       });
   },
@@ -40,12 +40,12 @@ export default {
         }
         return response.json().then((data) => {
           throw new Error(
-            data.message || "Une erreur est survenue lors de l'envoi de l'email." // eslint-disable-line
+            data.message ||
+              "Une erreur est survenue lors de l'envoi de l'email." // eslint-disable-line
           );
         });
       })
       .catch((err) => {
-        console.error("Error:", err);
         throw err;
       });
   },

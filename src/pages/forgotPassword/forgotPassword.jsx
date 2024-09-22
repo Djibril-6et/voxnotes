@@ -8,7 +8,6 @@ function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Email saisi par l'utilisateur:", email);
     if (!email) {
       alert("Veuillez entrer votre adresse e-mail.");
       return;
@@ -16,13 +15,11 @@ function ForgotPassword() {
     emailsServices
       .sendResetPasswordEmail({ email })
       .then((res) => {
-        console.log("Réponse du serveur après soumission du formulaire:", res);
         setMessage(
           "Un email de réinitialisation a été envoyé si cet email est associé à un compte."
         );
       })
       .catch((err) => {
-        console.error("Erreur lors de l'envoi de l'email de réinitialisation:", err); // eslint-disable-line
         setMessage("Erreur lors de l'envoi de l'email de réinitialisation.");
       });
   };

@@ -39,8 +39,6 @@ function Inscription() {
       navigate("/connexion");
     } catch (err) {
       // eslint-disable-next-line
-      console.error("Error:", err);
-      // eslint-disable-next-line
       alert(err.message);
     }
   };

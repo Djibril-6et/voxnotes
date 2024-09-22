@@ -23,14 +23,8 @@ function Transcription() {
         .getUserFiles(userId)
         .then((data) => {
           setTranscriptions(data);
-          console.log(data);
         })
-        .catch((error) => {
-          console.error(
-            "Erreur lors de la récupération des transcriptions:",
-            error
-          );
-        })
+        .catch((error) => {})
         .finally(() => {
           setLoading(false);
         });

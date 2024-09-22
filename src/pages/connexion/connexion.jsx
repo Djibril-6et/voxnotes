@@ -43,7 +43,6 @@ function Connexion() {
       .loginUser(user)
       .then((userData) => {
         // eslint-disable-next-line
-        console.log("LOGGED IN", userData);
         localStorage.setItem("userConnected", JSON.stringify(userData));
 
         const event = new Event("userConnected");
@@ -52,8 +51,6 @@ function Connexion() {
         navigate("/transcription");
       })
       .catch((err) => {
-        // eslint-disable-next-line
-        console.error("Error:", err);
         // eslint-disable-next-line
         alert(err.message);
       });

@@ -62,7 +62,6 @@ function ResetPassword() {
         navigate("/connexion");
       })
       .catch((err) => {
-        console.error("Erreur lors de la mise à jour du mot de passe:", err);
         alert(err.message);
       });
   };
