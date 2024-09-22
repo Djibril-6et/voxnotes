@@ -50,7 +50,7 @@ function Connexion() {
         const event = new Event("userConnected");
         window.dispatchEvent(event);
 
-        navigate("/profile");
+        navigate("/transcription");
       })
       .catch((err) => {
         // eslint-disable-next-line
