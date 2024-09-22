@@ -51,7 +51,6 @@ function FileUploadModal({ isOpen, onClose, sendAudioToAPI }) {
 FileUploadModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onUpload: PropTypes.func.isRequired, // Cette fonction pourrait être utilisée pour enregistrer après transcription
   sendAudioToAPI: PropTypes.func.isRequired, // Cette fonction doit être utilisée pour la transcription
 };
 

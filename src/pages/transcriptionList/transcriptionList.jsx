@@ -18,7 +18,7 @@ function Transcription() {
   useEffect(() => {
     // Récupération du userId depuis le localStorage
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
-    const userId = userConnected?.user?._id;
+    const userId = userConnected?.user?._id; // eslint-disable-line no-underscore-dangle
 
     if (userId) {
       // Appel à l'API pour récupérer les fichiers audio de l'utilisateur
@@ -63,6 +63,7 @@ function Transcription() {
           <button
             onClick={handleNewTranscriptionClick}
             className="new-transcription-link"
+            type="button"
           >
             New transcription
           </button>
@@ -82,7 +83,7 @@ function Transcription() {
             transcriptions.map((transcription) => (
               <TranscriptionCard
                 key={transcription.id}
-                id={transcription._id}
+                id={transcription._id} // eslint-disable-line no-underscore-dangle
                 title={transcription.metadata.title}
                 date={transcription.uploadDate}
                 content={transcription.metadata.transcription}

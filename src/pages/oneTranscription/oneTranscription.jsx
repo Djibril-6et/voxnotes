@@ -69,6 +69,7 @@ function OneTranscription() {
         <div className="audio-player">
           <audio controls>
             <source src={audioFileUrl} type={fileMetadata.metadata?.mimetype} />
+            <track kind="captions" srcLang="en" label="English captions" />
             Your browser does not support the audio element.
           </audio>
         </div>

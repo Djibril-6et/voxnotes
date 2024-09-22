@@ -49,6 +49,7 @@ function NewTranscription() {
     } finally {
       setIsTranscribing(false);
     }
+    return { transcription: "", audioUrl: "" }; // Ensure a return  value
   };
 
   // Fonction pour gérer le téléchargement de fichier et transcription
@@ -102,6 +103,7 @@ function NewTranscription() {
 
   // Fonction pour télécharger la transcription en PDF
   const handleDownloadPDF = () => {
+    // eslint-disable-next-line new-cap
     const doc = new jsPDF();
     doc.text(transcription, 10, 10);
     doc.save("transcription.pdf");
@@ -125,7 +127,7 @@ function NewTranscription() {
 
     // Récupérer les informations de l'utilisateur depuis le localStorage
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
-    const userId = userConnected?.user?._id; // ID de l'utilisateur connecté
+    const userId = userConnected?.user?._id; // eslint-disable-line no-underscore-dangle
 
     if (userId) {
       formData.append("userId", userId); // Ajouter l'ID de l'utilisateur au FormData
