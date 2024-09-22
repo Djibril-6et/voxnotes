@@ -1,4 +1,3 @@
-/* eslint-disable no-undef, no-unused-vars */
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -19,8 +18,8 @@ describe("Inscription Component", () => {
   it("renders the form fields and buttons", () => {
     expect(screen.getByPlaceholderText("Username")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Email")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
-    expect(screen.getByText("Register")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Mot de passe")).toBeInTheDocument();
+    expect(screen.getByText("S'inscrire")).toBeInTheDocument();
     expect(screen.getByText("S'inscrire avec Google")).toBeInTheDocument();
     expect(screen.getByText("S'inscrire avec GitHub")).toBeInTheDocument();
     expect(screen.getByText("S'inscrire avec Discord")).toBeInTheDocument();
@@ -35,7 +34,7 @@ describe("Inscription Component", () => {
     fireEvent.change(emailInput, { target: { value: "test@example.com" } });
     expect(emailInput.value).toBe("test@example.com");
 
-    const passwordInput = screen.getByPlaceholderText("Password");
+    const passwordInput = screen.getByPlaceholderText("Mot de passe");
     fireEvent.change(passwordInput, { target: { value: "password123" } });
     expect(passwordInput.value).toBe("password123");
   });
@@ -43,7 +42,7 @@ describe("Inscription Component", () => {
   it("shows an alert when fields are missing", () => {
     window.alert = jest.fn();
 
-    const registerButton = screen.getByText("Register");
+    const registerButton = screen.getByText("S'inscrire");
     fireEvent.click(registerButton);
 
     expect(window.alert).toHaveBeenCalledWith("Please fill in all fields");
@@ -62,11 +61,11 @@ describe("Inscription Component", () => {
     fireEvent.change(screen.getByPlaceholderText("Email"), {
       target: { value: "test@example.com" },
     });
-    fireEvent.change(screen.getByPlaceholderText("Password"), {
+    fireEvent.change(screen.getByPlaceholderText("Mot de passe"), {
       target: { value: "password123" },
     });
 
-    const registerButton = screen.getByText("Register");
+    const registerButton = screen.getByText("S'inscrire");
     fireEvent.click(registerButton);
 
     expect(usersServices.registerUser).toHaveBeenCalledWith({

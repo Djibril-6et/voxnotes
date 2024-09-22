@@ -1,4 +1,3 @@
-/* eslint-disable no-undef, no-unused-vars */
 import React from "react";
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import Souscriptions from "./subscriptions";

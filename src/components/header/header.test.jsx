@@ -1,4 +1,3 @@
-/* eslint-disable no-undef, no-unused-vars */
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
@@ -29,8 +28,8 @@ describe("Header component", () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText(/banner.connexion/i)).toBeInTheDocument();
-    expect(screen.getByText(/banner.about/i)).toBeInTheDocument();
+    expect(screen.getByText("Connexion")).toBeInTheDocument();
+    expect(screen.getByText("À propos")).toBeInTheDocument();
   });
 
   test("renders authenticated links when user is authenticated", () => {
