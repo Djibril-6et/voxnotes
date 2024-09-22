@@ -21,14 +21,12 @@ function Profil() {
 
   const username = queryParams.get("username");
   const email = queryParams.get("email");
-  /* const sessionId = queryParams.get("session_id"); */
   // eslint-disable-next-line
   const _id =
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
 
   const fetchSessionDetails = async (fetchSessionId) => {
-    // eslint-disable-line
     try {
       const sessionResponse = await fetch(
         `${PAYMENT_URL_BASE}/get-session-details`,
@@ -43,7 +41,7 @@ function Profil() {
       const sessionData = await sessionResponse.json();
 
       if (sessionResponse.ok && sessionData.session) {
-        const session = sessionData.session; // eslint-disable-line
+        const session = sessionData.session;
 
         if (session.mode === "payment") {
           const paymentResponse = await fetch(
@@ -85,8 +83,9 @@ function Profil() {
           }
         }
       }
-      // eslint-disable-next-line
-    } catch (error) {}
+    } catch (error) {
+      console.error("Failed to fetch session details", error); // eslint-disable-line no-console
+    }
 
     return { paymentDetails: null, subscriptionDetails: null };
   };
@@ -100,10 +99,10 @@ function Profil() {
           id: subscriptionData.stripeSessionId,
           status: subscriptionData.status,
         });
+        setSessionId(subscriptionData.stripeSessionId); // set sessionId from subscription data
       }
     } catch (error) {
-      // eslint-disable-next-line
-      console.error("Failed to fetch user subscription:", error);
+      console.error("Failed to fetch user subscription:", error); // eslint-disable-line no-console
     }
   };
 
@@ -124,15 +123,14 @@ function Profil() {
           username: storedUsername,
           email: storedEmail,
           _id: storedId,
-        }); // eslint-disable-line
+        });
       } else {
         navigate("/connexion");
       }
     }
 
     if (_id) {
-      const sub = fetchUserSubscription(_id); // Fetch subscription by user ID
-      setSessionId(sub?.sessionId);
+      fetchUserSubscription(_id);
     }
 
     if (sessionId) {
@@ -156,8 +154,40 @@ function Profil() {
       window.dispatchEvent(event);
 
       navigate("/connexion");
-      // eslint-disable-next-line
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error signing out:", error); // eslint-disable-line no-console
+    }
+  };
+
+  const handleCancelSubscription = async () => {
+    if (!sessionId) {
+      console.error("Session ID is missing"); // eslint-disable-line no-console
+      return;
+    }
+
+    const confirmed = window.confirm(
+      "Êtes-vous sûr de vouloir annuler votre abonnement ?"
+    );
+
+    if (confirmed) {
+      try {
+        const response = await subscriptionService.cancelSubscription(
+          sessionId // Use sessionId
+        );
+        if (response.message) {
+          alert("Abonnement annulé avec succès.");
+          setSubscriptionDetails((prevDetails) => ({
+            ...prevDetails,
+            status: "cancelled",
+          }));
+        } else {
+          alert("Échec de l'annulation de l'abonnement.");
+        }
+      } catch (error) {
+        alert("Erreur lors de l'annulation de l'abonnement.");
+        console.error("Erreur lors de l'annulation de l'abonnement:", error); // eslint-disable-line no-console
+      }
+    }
   };
 
   return (
@@ -180,8 +210,7 @@ function Profil() {
             {paymentDetails.amount / 100} €
           </p>
           <p>
-            <strong>Statut du paiement :</strong>
-            {paymentDetails.status}
+            <strong>Statut du paiement :</strong> {paymentDetails.status}
           </p>
         </div>
       )}
@@ -190,9 +219,24 @@ function Profil() {
         <div className="subscription-details">
           <h3>Détails de l&apos;abonnement</h3>
           <p>
-            <strong>Statut : </strong>
-            {subscriptionDetails.status}
+            <strong>Statut :</strong> {subscriptionDetails.status}
           </p>
+          <p>
+            <strong>Prochain renouvellement :</strong>{" "}
+            {new Date(
+              subscriptionDetails.current_period_end * 1000
+            ).toLocaleDateString()}
+          </p>
+
+          {subscriptionDetails.status !== "cancelled" && (
+            <button
+              type="button"
+              className="cancel-subscription-button"
+              onClick={handleCancelSubscription}
+            >
+              Annuler l&apos;abonnement
+            </button>
+          )}
         </div>
       )}
 
