@@ -25,11 +25,11 @@ function Transcription() {
         .getSubscriptionByUserId(userId)
         .then((subscription) => {
           if (subscription) {
-            setHasSubscription(true);
+            setHasSubscription(!!subscription);
           }
         })
         .catch((error) => {
-          setHasSubscription(false); // No subscription found
+          setHasSubscription(false);
           console.log(error);
         });
 
