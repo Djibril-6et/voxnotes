@@ -96,13 +96,10 @@ function Profil() {
       const subscriptionData =
         await subscriptionService.getSubscriptionByUserId(userId);
       if (subscriptionData) {
-        const periodEnd = new Date(
-          subscriptionData.current_period_end * 1000
-        ).toLocaleDateString();
         setSubscriptionDetails({
           id: subscriptionData.stripeSessionId,
           status: subscriptionData.status,
-          current_period_end: periodEnd ,
+          current_period_end: subscriptionData.current_period_end ,
         });
       }
     } catch (error) {
