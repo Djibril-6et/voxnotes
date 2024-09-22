@@ -61,8 +61,8 @@ function Header() {
             </>
           ) : (
             <>
-              <Link to="/connexion">{t("banner.connexion")}</Link>
-              <Link to="/about">{t("banner.about")}</Link>
+              <Link to="/connexion">Connexion</Link>
+              <Link to="/about">À propos</Link>
             </>
           )}
         </nav>
