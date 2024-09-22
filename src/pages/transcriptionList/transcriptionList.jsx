@@ -23,11 +23,15 @@ function Transcription() {
     if (userId) {
       const fetchSubscription = async () => {
         try {
-          const subscription = await subscriptionService.getSubscriptionByUserId(userId);
+          const subscription =
+            await subscriptionService.getSubscriptionByUserId(userId);
           console.log("Fetched Subscription:", subscription);
-          
+
           // Check if subscription has valid data
-          if (subscription && subscription.message !== "Subscription not found") {
+          if (
+            subscription &&
+            subscription.message !== "Subscription not found"
+          ) {
             setHasSubscription(true);
           } else {
             setHasSubscription(false);
@@ -37,7 +41,7 @@ function Transcription() {
           setHasSubscription(false);
         }
       };
-  
+
       const fetchUserFiles = async () => {
         try {
           const data = await audioFilesService.getUserFiles(userId);
@@ -54,11 +58,11 @@ function Transcription() {
           setLoading(false);
         }
       };
-  
-      fetchSubscription();
+
       fetchUserFiles();
+      fetchSubscription();
     }
-  }, []);
+  }, [transcriptions]);
 
   /* ADD SESSION ID */
   const handleNewTranscriptionClick = () => {
