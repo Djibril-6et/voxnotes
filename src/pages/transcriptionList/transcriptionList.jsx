@@ -45,6 +45,10 @@ function Transcription() {
         } catch (error) {
           if (error.response && error.response.status === 404) {
             console.log("No transcriptions found");
+            setTranscriptions([]); // Explicitly set to empty if none found
+          } else {
+            console.log("Error fetching user files:", error);
+            setTranscriptions([]); // Handle other errors as well
           }
         } finally {
           setLoading(false);
@@ -110,9 +114,6 @@ function Transcription() {
             <p>Aucune transcription trouvée</p>
           )}
         </div>
-        <p className="transcriptions-left-message">
-          Debug: Has Subscription: {hasSubscription.toString()}
-        </p>
       </section>
     </div>
   );
