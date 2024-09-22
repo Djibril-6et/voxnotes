@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import "./transcriptionList.css";
 import TranscriptionCard from "../../components/transcriptionCard/transcriptionCard";
 import audioFilesService from "../../services/audioFiles.services";
+import subscriptionService from "../../services/subscriptions.services";
 
 function Transcription() {
   const [transcriptions, setTranscriptions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hasSubscription, setHasSubscription] = useState(false);
   const navigate = useNavigate();
 
   const MAX_FREE_TRANSCRIPTIONS = 3;
@@ -19,6 +21,19 @@ function Transcription() {
     const userId = userConnected?.user?._id; // eslint-disable-line no-underscore-dangle
 
     if (userId) {
+      subscriptionService
+        .getSubscriptionByUserId(userId)
+        .then((subscription) => {
+          if (subscription) {
+            setHasSubscription(true);
+          }
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 404) {
+            setHasSubscription(false); // No subscription found
+          }
+        });
+
       audioFilesService
         .getUserFiles(userId)
         .then((data) => {
@@ -34,7 +49,7 @@ function Transcription() {
 
   /* ADD SESSION ID */
   const handleNewTranscriptionClick = () => {
-    if (transcriptions.length >= MAX_FREE_TRANSCRIPTIONS) {
+    if (!hasSubscription && transcriptions.length >= MAX_FREE_TRANSCRIPTIONS) {
       // eslint-disable-next-line
       alert(
         "Vous avez atteint la limite de transcriptions gratuites. Souscrivez à un abonnement pour continuer."
@@ -64,10 +79,12 @@ function Transcription() {
       </section>
       <section className="my-transcriptions-section">
         <h1>My Transcriptions</h1>
-        <p className="transcriptions-left-message">
-          Il vous reste {transcriptionsLeft} transcription(s) gratuite(s) avant
-          qu&apos;un abonnement soit requis.
-        </p>
+        {!hasSubscription && (
+          <p className="transcriptions-left-message">
+            Il vous reste {transcriptionsLeft} transcription(s) gratuite(s) avant
+            qu&apos;un abonnement soit requis.
+          </p>
+        )}
 
         <div className="card-section">
           {transcriptions.length > 0 ? (
