@@ -12,6 +12,7 @@ import Souscriptions from "./pages/subscritpions/subscriptions";
 import Inscription from "./pages/inscription/inscription";
 import ResetPassword from "./pages/resetPassword/resetPassword";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
+import TranscriptionDetail from "./pages/transcriptionDetail/transcriptionDetail";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
             <Route path="/souscription" element={<Souscriptions />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route
+              path="/transcriptiondetail"
+              element={<TranscriptionDetail />}
+            />
           </Routes>
         </div>
       </main>

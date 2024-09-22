@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./index.css";
 
-function FileUploadModal({ isOpen, onClose, onUpload }) {
+function FileUploadModal({ isOpen, onClose, onUpload, sendAudioToAPI }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (selectedFile) {
-      onUpload(selectedFile);
-      onClose();
+      // Envoyer le fichier à l'API de transcription
+      try {
+        await sendAudioToAPI(selectedFile);
+        onClose(); // Fermer la modal après le succès
+      } catch (error) {
+        alert("Erreur lors de l'envoi de la transcription");
+      }
     } else {
-      alert("Please select a file first!");
+      alert("Veuillez sélectionner un fichier audio.");
     }
   };
 
@@ -23,10 +28,10 @@ function FileUploadModal({ isOpen, onClose, onUpload }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h3>Select a file to upload:</h3>
+        <h3>Sélectionnez un fichier à uploader :</h3>
         <input
           type="file"
-          accept="audio/*"
+          accept="audio/*"  // Accepter tous les formats audio
           onChange={handleFileChange}
           className="file-input"
         />
@@ -35,7 +40,7 @@ function FileUploadModal({ isOpen, onClose, onUpload }) {
             Upload
           </button>
           <button type="button" onClick={onClose}>
-            Cancel
+            Annuler
           </button>
         </div>
       </div>
@@ -46,7 +51,8 @@ function FileUploadModal({ isOpen, onClose, onUpload }) {
 FileUploadModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onUpload: PropTypes.func.isRequired,
+  onUpload: PropTypes.func.isRequired,  // Cette fonction pourrait être utilisée pour enregistrer après transcription
+  sendAudioToAPI: PropTypes.func.isRequired  // Cette fonction doit être utilisée pour la transcription
 };
 
 export default FileUploadModal;

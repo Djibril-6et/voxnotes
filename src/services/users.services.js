@@ -66,7 +66,8 @@ export default {
         }
         return response.json().then((data) => {
           throw new Error(
-            data.message || "Erreur lors de la réinitialisation du mot de passe." // eslint-disable-line
+            data.message ||
+              "Erreur lors de la réinitialisation du mot de passe." // eslint-disable-line
           );
         });
       })

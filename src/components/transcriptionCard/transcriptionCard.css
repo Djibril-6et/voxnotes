@@ -1,51 +1,67 @@
 .card {
-    width: 150px;
-    height: 180px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-top {
-    background-color: white;
-    flex: 2; /* Partie supérieure plus grande */
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .card-date {
-    font-size: 12px;
-    color: #999;
-    margin-bottom: 5px;
-  }
-  
-  .card-excerpt {
-    font-size: 14px;
-    color: #444;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  
-  .card-bottom {
-    background-color: #0a9393; /* Couleur grise pour la partie inférieure */
-    flex: 1; /* Partie inférieure plus petite */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .card-summary {
-    font-size: 14px;
-    color: black;
-    text-align: center;
-  }
-  
+  width: 150px;
+  height: 200px; /* Augmentation de la hauteur pour inclure le bouton */
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-top {
+  background-color: white;
+  flex: 2;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-date {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 5px;
+}
+
+.card-excerpt {
+  font-size: 14px;
+  color: #444;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card-bottom {
+  background-color: #0a9393;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+}
+
+.card-summary {
+  font-size: 14px;
+  color: black;
+  text-align: center;
+}
+
+.view-transcription-btn {
+  margin-top: 5px;
+  background-color: #2b2f34;
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-transcription-btn:hover {
+  background-color: #484f56;
+}
