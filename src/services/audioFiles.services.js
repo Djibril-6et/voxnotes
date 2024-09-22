@@ -25,4 +25,16 @@ export default {
       return response.blob(); // Convertir la réponse en Blob (pour les fichiers binaires)
     });
   },
+
+  // Méthode pour supprimer un fichier audio par son ID
+  deleteFileById(fileId) {
+    return fetch(`${API_URL_BASE}/api/audioFiles/file/${fileId}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to delete the file");
+      }
+      return response.json();
+    });
+  },
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
+import { format } from "date-fns"; // eslint-disable-line
+import { fr } from "date-fns/locale"; // eslint-disable-line
 import "./transcriptionCard.css";
 
 function TranscriptionCard({ title, date, content, id }) {
