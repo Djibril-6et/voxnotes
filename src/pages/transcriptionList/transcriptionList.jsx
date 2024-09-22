@@ -62,7 +62,7 @@ function Transcription() {
       fetchUserFiles();
       fetchSubscription();
     }
-  }, [transcriptions]);
+  }, []);
 
   /* ADD SESSION ID */
   const handleNewTranscriptionClick = () => {
