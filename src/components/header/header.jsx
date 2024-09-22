@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import "./header.css";
 import voxNotesLogo from "../../assets/voxNotes.png";
 
 function Header() {
-  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -33,10 +31,6 @@ function Header() {
       window.removeEventListener("userDisconnected", handleUserDisconnected);
     };
   }, []);
-
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
 
   const handleLogout = () => {
     localStorage.removeItem("userConnected");
