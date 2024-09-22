@@ -3,6 +3,8 @@ import { jsPDF } from "jspdf";
 import "./newTranscription.css";
 import SaveModal from "../../components/saveModal/saveModal";
 import FileUploadModal from "../../components/fileUploadModal";
+// eslint-disable-next-line no-undef
+const API_URL_BASE = process.env.REACT_APP_BDD_API_URL;
 
 function NewTranscription() {
   const [transcription, setTranscription] = useState("");
@@ -21,7 +23,7 @@ function NewTranscription() {
 
     try {
       const response = await fetch(
-        "http://localhost:9090/bdd-api/api/audioFiles/uploadfile",
+        `${API_URL_BASE}/api/audioFiles/uploadfile`,
         {
           method: "POST",
           body: formData,

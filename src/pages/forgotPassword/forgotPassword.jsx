@@ -22,7 +22,10 @@ function ForgotPassword() {
         );
       })
       .catch((err) => {
-        console.error("Erreur lors de l'envoi de l'email de réinitialisation:", err); // eslint-disable-line
+        console.error(
+          "Erreur lors de l'envoi de l'email de réinitialisation:",
+          err
+        ); // eslint-disable-line
         setMessage("Erreur lors de l'envoi de l'email de réinitialisation.");
       });
   };
