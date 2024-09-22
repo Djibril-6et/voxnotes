@@ -99,7 +99,7 @@ function Profil() {
         setSubscriptionDetails({
           id: subscriptionData.stripeSessionId,
           status: subscriptionData.status,
-          current_period_end: subscriptionData.current_period_end ,
+          current_period_end: subscriptionData.current_period_end,
         });
       }
     } catch (error) {
