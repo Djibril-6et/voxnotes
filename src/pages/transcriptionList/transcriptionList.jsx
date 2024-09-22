@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./transcriptionList.css";
 import TranscriptionCard from "../../components/transcriptionCard/transcriptionCard";
-import audioFilesService from "../../services/audioFiles.services"; // import du service
+import audioFilesService from "../../services/audioFiles.services";
 
 function Transcription() {
   const [transcriptions, setTranscriptions] = useState([]);

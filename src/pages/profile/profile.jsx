@@ -4,14 +4,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import subscriptionService from "../../services/subscriptions.services";
 
 function Profil() {
-  // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-undef
   const PAYMENT_URL_BASE = process.env.REACT_APP_PAYMENT_URL;
+  const queryParams = new URLSearchParams(location.search);
   const [user, setUser] = useState({
     username: "",
     email: "",
     _id: "",
   });
-
   const [paymentDetails, setPaymentDetails] = useState(null);
   const [subscriptionDetails, setSubscriptionDetails] = useState(null);
   const [sessionId, setSessionId] = useState(queryParams.get("session_id"));
@@ -19,10 +19,9 @@ function Profil() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const queryParams = new URLSearchParams(location.search);
   const username = queryParams.get("username");
   const email = queryParams.get("email");
-  //const sessionId = queryParams.get("session_id");
+  /* const sessionId = queryParams.get("session_id"); */
   // eslint-disable-next-line
   const _id =
     queryParams.get("_id") ||
