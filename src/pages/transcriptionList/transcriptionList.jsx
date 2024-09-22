@@ -25,11 +25,10 @@ function Transcription() {
         .getSubscriptionByUserId(userId)
         .then((subscription) => {
           if (subscription) {
-            setHasSubscription(!!subscription);
+            setHasSubscription(true);
           }
         })
         .catch((error) => {
-          setHasSubscription(false);
           console.log(error);
         });
 
@@ -49,7 +48,7 @@ function Transcription() {
           setLoading(false);
         });
     }
-  }, []);
+  }, [hasSubscription]);
 
   /* ADD SESSION ID */
   const handleNewTranscriptionClick = () => {
