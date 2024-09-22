@@ -96,13 +96,14 @@ function Profil() {
       const subscriptionData =
         await subscriptionService.getSubscriptionByUserId(userId);
       if (subscriptionData) {
-        const startDate = subscriptionData.startDate;
+        const { stripeSessionId, status, startDate } = subscriptionData;
+
         const nextMonthDate = new Date(startDate);
         nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
 
         setSubscriptionDetails({
-          id: subscriptionData.stripeSessionId,
-          status: subscriptionData.status,
+          id: stripeSessionId,
+          status,
           endDate: nextMonthDate,
         });
       }
