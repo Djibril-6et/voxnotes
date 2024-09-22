@@ -96,7 +96,7 @@ function Profil() {
       const subscriptionData =
         await subscriptionService.getSubscriptionByUserId(userId);
       if (subscriptionData) {
-        const startDate = subscriptionData.startDate; //eslint-disable-line prefer-destructuring
+        const startDate = subscriptionData.startDate; // eslint-disable-line prefer-destructuring
         const nextMonthDate = new Date(startDate);
         nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
 
