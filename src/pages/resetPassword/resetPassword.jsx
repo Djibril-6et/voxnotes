@@ -5,23 +5,22 @@ import "./resetPassword.css";
 
 function ResetPassword() {
   const navigate = useNavigate();
-  const location = useLocation(); // Utiliser useLocation pour obtenir les paramètres de l'URL
+  const location = useLocation();
   const [passwords, setPasswords] = useState({
     newPassword: "",
     confirmPassword: "",
   });
-  const [token, setToken] = useState(null); // Stocker le token extrait de l'URL
+  const [token, setToken] = useState(null);
 
-  // Récupérer le token depuis l'URL lors du montage du composant
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search); // Récupérer les paramètres de l'URL
+    const queryParams = new URLSearchParams(location.search);
     const tokenFromUrl = queryParams.get("token");
 
     if (tokenFromUrl) {
-      setToken(tokenFromUrl); // Stocker le token dans l'état
+      setToken(tokenFromUrl);
     } else {
       alert("Token de réinitialisation non trouvé.");
-      navigate("/login"); // Rediriger vers la page de connexion si aucun token trouvé
+      navigate("/login");
     }
   }, [location, navigate]);
 
@@ -38,33 +37,29 @@ function ResetPassword() {
 
     const { newPassword, confirmPassword } = passwords;
 
-    // Vérifier si les champs sont remplis
     if (!newPassword || !confirmPassword) {
       alert("Veuillez remplir tous les champs.");
       return;
     }
 
-    // Vérifier si les deux mots de passe correspondent
     if (newPassword !== confirmPassword) {
       alert("Les mots de passe ne correspondent pas.");
       return;
     }
 
-    // Vérifier la force du mot de passe
     if (newPassword.length < 8) {
       alert("Le mot de passe doit contenir au moins 8 caractères.");
       return;
     }
 
-    // Envoyer la requête de réinitialisation avec le token
     usersServices
       .resetPassword({
-        token, // Envoyer le token
-        newPassword, // Envoyer le nouveau mot de passe
+        token,
+        newPassword,
       })
       .then(() => {
         alert("Mot de passe mis à jour avec succès.");
-        navigate("/connexion"); // Rediriger vers la page de connexion
+        navigate("/connexion");
       })
       .catch((err) => {
         console.error("Erreur lors de la mise à jour du mot de passe:", err);

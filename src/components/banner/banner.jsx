@@ -1,19 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Importez useNavigate pour la redirection
+import { useNavigate } from "react-router-dom";
 import "./banner.css";
 
 function Banner() {
   const navigate = useNavigate();
 
-  // Fonction qui gère le clic sur le bouton
   const handleTryClick = () => {
     const userSession = localStorage.getItem("userConnected");
 
     if (userSession) {
-      // Si l'utilisateur est connecté, redirigez-le vers la page de transcription
       navigate("/transcription");
     } else {
-      // Sinon, redirigez-le vers la page de connexion
       navigate("/connexion");
     }
   };

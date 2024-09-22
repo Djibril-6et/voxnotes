@@ -1,11 +1,9 @@
-/* Style général pour la page d'abonnement */
 .subscription-page {
   padding: 40px;
   background: linear-gradient(177deg, #0a9393, #000000, #000000);;
-  min-height: calc(100vh - 100px); /* Ajuste pour inclure le footer et header */
+  min-height: calc(100vh - 100px);
 }
 
-/* Titre principal de la page */
 .subscription-page h1 {
   font-size: 36px;
   text-align: center;
@@ -18,7 +16,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Style pour chaque section d'abonnement */
 .subscription-section {
   margin-bottom: 40px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -27,7 +24,6 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Titres des différentes sections d'abonnement */
 .subscription-section h2 {
   font-size: 28px;
   color: white;
@@ -36,14 +32,12 @@
   text-align: center;
 }
 
-/* Conteneur pour les cartes d'abonnement */
 .subscription-cards {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
-/* Style des cartes d'abonnement */
 .card {
   width: 250px;
   height: 300px;
@@ -62,7 +56,6 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenu supérieur des cartes */
 .card-top {
   background-color: white;
   flex: 2;
@@ -84,10 +77,9 @@
 .card-excerpt {
   font-size: 14px;
   color: #444;
-  white-space: pre-wrap; /* Conserve les sauts de ligne */
+  white-space: pre-wrap;
 }
 
-/* Contenu inférieur des cartes */
 .card-bottom {
   background-color: #0a9393;
   color: white;
@@ -106,7 +98,6 @@
   font-weight: bold;
 }
 
-/* Boutons CTA */
 .cta-button-container {
   text-align: center;
   margin-top: 20px;

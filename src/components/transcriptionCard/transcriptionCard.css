@@ -1,6 +1,6 @@
 .card {
   width: 150px;
-  height: 200px; /* Augmentation de la hauteur pour inclure le bouton */
+  height: 200px;
   border: 1px solid #ddd;
   border-radius: 20px;
   overflow: hidden;

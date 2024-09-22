@@ -1,13 +1,12 @@
-/* Footer Styling */
 .footer {
   height: 5vh;
-  width: 100%; /* Occupe toute la largeur */
-  background-color: black;/* Fond gris foncé avec transparence */
+  width: 100%;
+  background-color: black;
   color: white;
-  padding: 5px 0; /* Réduire la hauteur du footer */
+  padding: 5px 0;
   text-align: center;
   position: relative;
-  bottom: 0; /* Position en bas de l'écran */
+  bottom: 0;
 }
 
 .footer-content {
@@ -17,5 +16,5 @@
 }
 
 .footer-text {
-  font-size: 12px; /* Taille réduite du texte */
+  font-size: 12px;
 }

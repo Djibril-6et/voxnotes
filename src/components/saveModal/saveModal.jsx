@@ -8,7 +8,7 @@ function SaveModal({ onSave, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (transcriptionName) {
-      onSave(transcriptionName); // Envoie le nom de la transcription au parent
+      onSave(transcriptionName);
     }
   };
 

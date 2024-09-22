@@ -1,22 +1,21 @@
-/* Header Styling */
 .floating-header {
   position: fixed;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%; /* Ajuste la largeur du header */
+  width: 80%;
   height: 20px;
-  background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Ombre sous le header */
-  border-radius: 20px; /* Bordures arrondies */
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
   padding: 20px 0;
   display: flex;
-  align-items: center; /* Centre verticalement */
-  justify-content: space-between; /* Espace entre logo, liens et sélection de langue */
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
-  margin-left: 20px; /* Logo collé à gauche */
+  margin-left: 20px;
 }
 
 .logo img {
@@ -26,7 +25,7 @@
 .nav-links-container {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%); /* Centre les liens horizontalement */
+  transform: translateX(-50%);
 }
 
 .nav-links {
@@ -52,7 +51,7 @@
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
-  margin-right: 20px; /* Sélecteur de langue collé à droite */
+  margin-right: 20px;
 }
 
 .language-selector:focus {

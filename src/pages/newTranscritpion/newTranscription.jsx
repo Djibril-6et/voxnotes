@@ -15,7 +15,6 @@ function NewTranscription() {
   const audioBlobRef = useRef(null);
   const [audioFile, setAudioFile] = useState(null);
 
-  // Fonction pour envoyer l'audio à l'API OpenAI
   const sendAudioToAPI = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -37,7 +36,7 @@ function NewTranscription() {
       const data = await response.json();
       setTranscription(data.text);
       setAudioUrl(data.audioUrl);
-      setAudioFile(file); // Stockez le fichier pour l'envoyer plus tard à la BDD
+      setAudioFile(file);
 
       return { transcription: data.text, audioUrl: data.audioUrl };
     } catch (error) {
@@ -48,12 +47,10 @@ function NewTranscription() {
     }
   };
 
-  // Fonction pour gérer le téléchargement de fichier et transcription
   const handleUploadFile = async (file) => {
-    await sendAudioToAPI(file); // Envoyer l'audio à OpenAI
+    await sendAudioToAPI(file);
   };
 
-  // Fonction pour démarrer l'enregistrement
   const handleStartRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -73,7 +70,6 @@ function NewTranscription() {
     }
   };
 
-  // Fonction pour stopper l'enregistrement et envoyer pour transcription
   const handleStopRecording = async () => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
@@ -83,51 +79,45 @@ function NewTranscription() {
         const audioBlob = audioBlobRef.current;
         if (audioBlob) {
           const file = new File([audioBlob], "audio.webm", { type: "audio/webm" });
-          await sendAudioToAPI(file); // Envoyer l'audio à l'API OpenAI
+          await sendAudioToAPI(file);
         }
       };
     }
   };
 
-  // Fonction pour copier le texte de la transcription dans le presse-papier
   const handleCopyText = () => {
     navigator.clipboard.writeText(transcription);
     alert("Texte copié dans le presse-papier !");
   };
 
-  // Fonction pour télécharger la transcription en PDF
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
     doc.text(transcription, 10, 10);
     doc.save("transcription.pdf");
   };
 
-  // Fonction pour ouvrir la modal d'enregistrement
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
-  // Fonction pour fermer la modal d'enregistrement
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-  // Fonction pour sauvegarder la transcription et l'audio dans la BDD
   const handleSaveTranscription = async (transcriptionName) => {
     const formData = new FormData();
-    formData.append("transcription", transcription); // Ajoute la transcription
-    formData.append("title", transcriptionName); // Nom de la transcription
-  
-    // Récupérer les informations de l'utilisateur depuis le localStorage
+    formData.append("transcription", transcription);
+    formData.append("title", transcriptionName);
+
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
-    const userId = userConnected?.user?._id; // ID de l'utilisateur connecté
+    const userId = userConnected?.user?._id;
   
     if (userId) {
-      formData.append("userId", userId); // Ajouter l'ID de l'utilisateur au FormData
+      formData.append("userId", userId);
     }
   
     if (audioFile) {
-      formData.append("file", audioFile); // Ajoute le fichier audio
+      formData.append("file", audioFile);
     }
   
     try {
@@ -223,7 +213,7 @@ function NewTranscription() {
 
       {isModalOpen && (
         <SaveModal
-          onSave={handleSaveTranscription} // Sauvegarde dans la BDD
+          onSave={handleSaveTranscription}
           onClose={handleCloseModal}
         />
       )}
@@ -232,8 +222,8 @@ function NewTranscription() {
         <FileUploadModal
           isOpen={isUploadModalOpen}
           onClose={() => setIsUploadModalOpen(false)}
-          onUpload={handleUploadFile} // Assurez-vous que cette fonction est bien passée
-          sendAudioToAPI={sendAudioToAPI} // Envoyer le fichier pour transcription
+          onUpload={handleUploadFile}
+          sendAudioToAPI={sendAudioToAPI}
         />
       )}
     </div>

@@ -1,17 +1,14 @@
 /* eslint-disable no-undef */
-
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import Profil from "./profile";
 import { MemoryRouter } from "react-router-dom";
 import audioFilesServices from "../../services/audioFiles.services";
 
-// Mock du service audioFilesServices
 jest.mock("../../services/audioFiles.services", () => ({
   getUserFiles: jest.fn(),
 }));
 
-// Mock de useNavigate
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
 }));
@@ -42,9 +39,8 @@ describe("Profil component", () => {
       </MemoryRouter>
     );
 
-    // Utilisation de getAllByText pour gérer plusieurs occurrences
     const usernameElements = screen.getAllByText(/testuser/i);
-    expect(usernameElements.length).toBeGreaterThan(0); // Vérifie qu'il y a bien plusieurs éléments avec "testuser"
+    expect(usernameElements.length).toBeGreaterThan(0);
 
     expect(screen.getByText(/Email:/i)).toBeInTheDocument();
     expect(screen.getByText(/testuser@example.com/i)).toBeInTheDocument();
@@ -69,7 +65,6 @@ describe("Profil component", () => {
       </MemoryRouter>
     );
 
-    // Attends que la liste des fichiers audio soit rendue
     await waitFor(() => {
       expect(screen.getByText(/Vos fichiers audio/i)).toBeInTheDocument();
       expect(screen.getByText(/audio1.mp3/i)).toBeInTheDocument();
@@ -85,7 +80,6 @@ describe("Profil component", () => {
       </MemoryRouter>
     );
 
-    // Attends que le message soit affiché
     await waitFor(() => {
       expect(
         screen.getByText(/Aucun fichier audio disponible/i)

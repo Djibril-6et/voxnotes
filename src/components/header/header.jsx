@@ -9,17 +9,14 @@ function Header() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Fonction pour vérifier l'authentification à partir du localStorage
   const checkAuthStatus = () => {
     const session = localStorage.getItem("userConnected");
     setIsAuthenticated(!!session);
   };
 
   useEffect(() => {
-    // Vérification initiale lors du chargement de la page
     checkAuthStatus();
 
-    // Ajout d'un écouteur pour détecter les événements de connexion et déconnexion
     const handleUserConnected = () => {
       checkAuthStatus();
     };
@@ -31,27 +28,23 @@ function Header() {
     window.addEventListener("userConnected", handleUserConnected);
     window.addEventListener("userDisconnected", handleUserDisconnected);
 
-    // Nettoyage des écouteurs lors du démontage du composant
     return () => {
       window.removeEventListener("userConnected", handleUserConnected);
       window.removeEventListener("userDisconnected", handleUserDisconnected);
     };
   }, []);
 
-  // Fonction pour changer la langue
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
 
-  // Fonction pour gérer la déconnexion
   const handleLogout = () => {
-    localStorage.removeItem("userConnected"); // Supprime la session du localStorage
+    localStorage.removeItem("userConnected");
 
-    // Émettre un événement pour mettre à jour le header
     const event = new Event("userDisconnected");
     window.dispatchEvent(event);
 
-    navigate("/"); // Redirige vers la page d'accueil après la déconnexion
+    navigate("/");
   };
 
   return (

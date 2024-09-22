@@ -1,4 +1,3 @@
-/* S'assurer que l'html et le body prennent toute la hauteur disponible */
 html, body {
   height: 100%;
   margin: 0;
@@ -7,24 +6,21 @@ html, body {
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* S'assurer que le conteneur de l'application occupe toute la hauteur de l'écran */
+  min-height: 100vh;
   text-align: center;
 }
 
-/* Logo */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
-/* Animation pour le logo */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
-/* Header de l'application */
 .App-header {
   background-color: #282c34;
   display: flex;
@@ -33,15 +29,13 @@ html, body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  flex: 1; /* Prend l'espace disponible entre la bannière et le footer */
+  flex: 1;
 }
 
-/* Liens dans l'application */
 .App-link {
   color: #61dafb;
 }
 
-/* Animation de rotation pour le logo */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -51,7 +45,6 @@ html, body {
   }
 }
 
-/* Footer collé en bas de page */
 footer {
   background-color: #333;
   color: white;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import usersServices from "../../services/users.services"; // Adjust the import path if necessary
-import googleLogo from "../../assets/googleLogo.png"; // Importer les logos
+import usersServices from "../../services/users.services";
+import googleLogo from "../../assets/googleLogo.png";
 import githubLogo from "../../assets/githubLogo.png";
 import discordLogo from "../../assets/discordLogo.png";
 import "./inscription.css";
@@ -36,7 +36,7 @@ function Inscription() {
       await usersServices.registerUser(user);
       // eslint-disable-next-line
       alert("User registered successfully");
-      navigate("/connexion"); // Redirect to login page after successful registration
+      navigate("/connexion");
     } catch (err) {
       // eslint-disable-next-line
       console.error("Error:", err);
@@ -96,7 +96,6 @@ function Inscription() {
 
         <hr />
 
-        {/* Boutons pour l'authentification avec Google, GitHub et Discord */}
         <button
           type="button"
           className="connexion-button oauth-button"

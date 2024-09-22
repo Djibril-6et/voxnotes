@@ -7,12 +7,12 @@ function Profil() {
   const [user, setUser] = useState({
     username: "",
     email: "",
-    _id: "", // Suppression de l'espace en trop ici
+    _id: "",
   });
 
-  const [paymentDetails, setPaymentDetails] = useState(null); // Détails du paiement
-  const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Détails de l'abonnement
-  const [audioFilesList, setAudioFilesList] = useState([]); // Liste des fichiers audio
+  const [paymentDetails, setPaymentDetails] = useState(null);
+  const [subscriptionDetails, setSubscriptionDetails] = useState(null);
+  const [audioFilesList, setAudioFilesList] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -21,26 +21,23 @@ function Profil() {
   const email = queryParams.get("email");
   const sessionId = queryParams.get("session_id");
 
-  // On récupère _id des query params ou du localStorage si les query params sont vides
-  /* eslint-disable-next-line no-underscore-dangle */
   const _id =
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
   // eslint-disable-next-line
-  console.log("Query Params _id:", _id); // Ajout pour vérifier la valeur de _id
+  console.log("Query Params _id:", _id);
 
-  // Fonction pour récupérer les fichiers audio de l'utilisateur connecté
   const fetchUserAudioFiles = async () => {
     if (_id) {
       // eslint-disable-next-line
-      console.log("User ID:", _id); // Vérifiez que l'ID est correct
+      console.log("User ID:", _id);
       try {
         const audioFiles = await audioFilesServices.getUserFiles(_id);
         // eslint-disable-next-line
-        console.log("Audio Files Data: ", audioFiles); // Afficher la réponse complète de l'API
-        setAudioFilesList(audioFiles); // Assigner la liste directement
+        console.log("Audio Files Data: ", audioFiles);
+        setAudioFilesList(audioFiles);
         // eslint-disable-next-line
-        console.log("State after setting audio files: ", audioFilesList); // Vérifier l'état après mise à jour
+        console.log("State after setting audio files: ", audioFilesList);
       } catch (error) {
         // eslint-disable-next-line
         console.error(
@@ -49,8 +46,7 @@ function Profil() {
         );
       }
     } else {
-      // eslint-disable-next-line
-      console.warn("No user ID found!"); // Log si l'ID est manquant
+      console.warn("No user ID found!");
     }
   };
 
@@ -152,7 +148,6 @@ function Profil() {
       }
     }
 
-    // Récupération des détails de la session si sessionId est présent
     if (sessionId) {
       const fetchDetails = async () => {
         const {
@@ -165,21 +160,18 @@ function Profil() {
       fetchDetails();
     }
     // eslint-disable-next-line
-    console.log("useEffect - _id:", _id); // Vérification de _id dans useEffect
+    console.log("useEffect - _id:", _id);
 
     fetchUserAudioFiles();
   }, [location, navigate, username, email, sessionId, _id]);
 
   const handleSignOut = async () => {
     try {
-      // Remove user data from localStorage
       localStorage.removeItem("userConnected");
 
-      // Émettre un événement pour mettre à jour le header
       const event = new Event("userDisconnected");
       window.dispatchEvent(event);
 
-      // Redirect to login page
       navigate("/connexion");
     } catch (error) {
       console.error("Error signing out:", error); // eslint-disable-line no-console
