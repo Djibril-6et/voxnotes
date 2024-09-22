@@ -61,8 +61,8 @@ function Header() {
             </>
           ) : (
             <>
-              <Link to="/connexion">connexion</Link>
-              <Link to="/about">à propos</Link>
+              <Link to="/connexion">Connexion</Link>
+              <Link to="/about">À propos</Link>
             </>
           )}
         </nav>
