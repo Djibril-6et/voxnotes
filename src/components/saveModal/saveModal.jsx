@@ -7,11 +7,12 @@ function SaveModal({ onSave, onClose }) {
   const [transcriptionName, setTranscriptionName] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (transcriptionName) {
-      onSave(transcriptionName);
+      await onSave(transcriptionName);
       navigate("/transcription");
+      window.location.reload();
     }
   };
 

@@ -18,7 +18,12 @@ export default {
       headers: {
         "Content-type": "application/json",
       },
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error(`Error fetching subscription: ${res.statusText}`);
+      }
+      return res.json();
+    });
   },
 
   cancelSubscription(sessionId) {  // Ici on envoie bien le sessionId

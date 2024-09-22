@@ -16,38 +16,39 @@ function Transcription() {
   const transcriptionsLeft =
     MAX_FREE_TRANSCRIPTIONS - (transcriptions.length || 0);
 
+  const fetchTranscriptions = async (userId) => {
+    try {
+      const data = await audioFilesService.getUserFiles(userId);
+      setTranscriptions(data);
+    } catch (error) {
+      console.log("Error fetching transcriptions:", error);
+    }
+  };
+
+  const fetchSubscription = async (userId) => {
+    try {
+      const subscription =
+        await subscriptionService.getSubscriptionByUserId(userId);
+
+      if (subscription && subscription.message !== "Subscription not found") {
+        setHasSubscription(true);
+      } else {
+        setHasSubscription(false);
+      }
+    } catch (error) {
+      console.log("Error fetching subscription:", error);
+      setHasSubscription(false);
+    }
+  };
+
   useEffect(() => {
     const userConnected = JSON.parse(localStorage.getItem("userConnected"));
     const userId = userConnected?.user?._id; // eslint-disable-line no-underscore-dangle
 
     if (userId) {
-      subscriptionService
-        .getSubscriptionByUserId(userId)
-        .then((subscription) => {
-          if (subscription) {
-            setHasSubscription(!!subscription);
-          }
-        })
-        .catch((error) => {
-          setHasSubscription(false);
-          console.log(error);
-        });
-
-      audioFilesService
-        .getUserFiles(userId)
-        .then((data) => {
-          setTranscriptions(data);
-        })
-        // eslint-disable-next-line
-        .catch((error) => {
-          if (error.response && error.response.status === 404) {
-            // eslint-disable-next-line
-            console.log("No transcriptions found");
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      setLoading(true);
+      fetchTranscriptions(userId);
+      fetchSubscription(userId).finally(() => setLoading(false));
     }
   }, []);
 
