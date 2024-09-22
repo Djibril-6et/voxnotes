@@ -49,7 +49,7 @@ function Transcription() {
             transcriptions.map((transcription) => (
               <TranscriptionCard
                 key={transcription.id}
-                id={transcription.id}
+                id={transcription._id}
                 title={transcription.metadata.title}
                 date={transcription.uploadDate}
                 content={transcription.metadata.transcription}

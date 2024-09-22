@@ -7,7 +7,8 @@ function TranscriptionCard({ title, date, content, id }) {
   const navigate = useNavigate();
 
   const handleViewTranscription = () => {
-    navigate(`/transcriptiondetail/${id}`);
+    localStorage.setItem("transcriptionId", id)
+    navigate(`/transcriptiondetail`);
   };
 
   return (
