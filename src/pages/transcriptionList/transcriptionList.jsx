@@ -24,6 +24,7 @@ function Transcription() {
         .then((data) => {
           setTranscriptions(data);
         })
+        // eslint-disable-next-line
         .catch((error) => {})
         .finally(() => {
           setLoading(false);
@@ -33,6 +34,7 @@ function Transcription() {
 
   const handleNewTranscriptionClick = () => {
     if (transcriptions.length >= MAX_FREE_TRANSCRIPTIONS) {
+      // eslint-disable-next-line
       alert(
         "Vous avez atteint la limite de transcriptions gratuites. Souscrivez à un abonnement pour continuer."
       );

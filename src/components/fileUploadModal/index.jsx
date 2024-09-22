@@ -15,9 +15,11 @@ function FileUploadModal({ isOpen, onClose, sendAudioToAPI }) {
         await sendAudioToAPI(selectedFile);
         onClose();
       } catch (error) {
+        // eslint-disable-next-line
         alert("Erreur lors de l'envoi de la transcription");
       }
     } else {
+      // eslint-disable-next-line
       alert("Veuillez sélectionner un fichier audio.");
     }
   };

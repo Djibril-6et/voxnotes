@@ -42,6 +42,7 @@ function NewTranscription() {
 
       return { transcription: data.text, audioUrl: data.audioUrl };
     } catch (error) {
+      // eslint-disable-next-line
       alert("Erreur lors de la transcription");
     } finally {
       setIsTranscribing(false);
@@ -90,6 +91,7 @@ function NewTranscription() {
 
   const handleCopyText = () => {
     navigator.clipboard.writeText(transcription);
+    // eslint-disable-next-line
     alert("Texte copié dans le presse-papier !");
   };
 
@@ -140,6 +142,7 @@ function NewTranscription() {
           `Error during file upload: ${response.status} - ${errorMessage}`
         );
       }
+      // eslint-disable-next-line
       alert("Transcription et fichier audio enregistrés avec succès !");
       // eslint-disable-next-line
     } catch (error) {

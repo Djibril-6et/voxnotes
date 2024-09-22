@@ -19,6 +19,7 @@ function ResetPassword() {
     if (tokenFromUrl) {
       setToken(tokenFromUrl);
     } else {
+      // eslint-disable-next-line
       alert("Token de réinitialisation non trouvé.");
       navigate("/login");
     }
@@ -38,16 +39,19 @@ function ResetPassword() {
     const { newPassword, confirmPassword } = passwords;
 
     if (!newPassword || !confirmPassword) {
+      // eslint-disable-next-line
       alert("Veuillez remplir tous les champs.");
       return;
     }
 
     if (newPassword !== confirmPassword) {
+      // eslint-disable-next-line
       alert("Les mots de passe ne correspondent pas.");
       return;
     }
 
     if (newPassword.length < 8) {
+      // eslint-disable-next-line
       alert("Le mot de passe doit contenir au moins 8 caractères.");
       return;
     }
@@ -58,10 +62,12 @@ function ResetPassword() {
         newPassword,
       })
       .then(() => {
+        // eslint-disable-next-line
         alert("Mot de passe mis à jour avec succès.");
         navigate("/connexion");
       })
       .catch((err) => {
+        // eslint-disable-next-line
         alert(err.message);
       });
   };

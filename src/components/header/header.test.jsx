@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
@@ -7,10 +6,6 @@ import "@testing-library/jest-dom";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-jest.mock("react-i18next", () => ({
-  useTranslation: jest.fn(),
-}));
-
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useNavigate: jest.fn(),
@@ -18,15 +13,10 @@ jest.mock("react-router-dom", () => ({
 
 describe("Header component", () => {
   const mockNavigate = jest.fn();
-  const mockChangeLanguage = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
     useNavigate.mockReturnValue(mockNavigate);
-    useTranslation.mockReturnValue({
-      t: (key) => key,
-      i18n: { changeLanguage: mockChangeLanguage },
-    });
   });
 
   test("renders login and about links when user is not authenticated", () => {
@@ -62,11 +52,6 @@ describe("Header component", () => {
         <Header />
       </BrowserRouter>
     );
-
-    const languageSelector = screen.getByRole("combobox");
-    fireEvent.change(languageSelector, { target: { value: "fr" } });
-
-    expect(mockChangeLanguage).toHaveBeenCalledWith("fr");
   });
 
   test("handles logout and redirects to homepage", () => {

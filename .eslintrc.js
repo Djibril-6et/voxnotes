@@ -2,15 +2,12 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true,
-    node: true,
   },
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "airbnb",
     "plugin:prettier/recommended",
-    "plugin:jest/recommended"
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -19,7 +16,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "jest"],
+  plugins: ["react"],
   rules: {
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",

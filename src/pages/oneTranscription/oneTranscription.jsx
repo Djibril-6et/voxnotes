@@ -39,6 +39,7 @@ function OneTranscription() {
   const handleCopyText = () => {
     if (fileMetadata?.metadata?.transcription) {
       navigator.clipboard.writeText(fileMetadata.metadata.transcription);
+      // eslint-disable-next-line
       alert("Texte copié dans le presse-papier !");
     }
   };

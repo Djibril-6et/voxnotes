@@ -9,16 +9,19 @@ function ForgotPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email) {
+      // eslint-disable-next-line
       alert("Veuillez entrer votre adresse e-mail.");
       return;
     }
     emailsServices
       .sendResetPasswordEmail({ email })
+      // eslint-disable-next-line
       .then((res) => {
         setMessage(
           "Un email de réinitialisation a été envoyé si cet email est associé à un compte."
         );
       })
+      // eslint-disable-next-line
       .catch((err) => {
         setMessage("Erreur lors de l'envoi de l'email de réinitialisation.");
       });
