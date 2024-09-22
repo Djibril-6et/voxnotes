@@ -8,7 +8,6 @@ import subscriptionService from "../../services/subscriptions.services";
 function Transcription() {
   const [transcriptions, setTranscriptions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [hasTranscriptions, setHasTranscriptions] = useState(false);
   const [hasSubscription, setHasSubscription] = useState(false);
   const navigate = useNavigate();
 
@@ -39,12 +38,11 @@ function Transcription() {
         .getUserFiles(userId)
         .then((data) => {
           setTranscriptions(data);
-          setHasTranscriptions(true);
         })
         // eslint-disable-next-line
         .catch((error) => {
           if (error.response && error.response.status === 404) {
-            setHasTranscriptions(false);
+            console.log("No transcriptions found");
           }
         })
         .finally(() => {
@@ -93,7 +91,7 @@ function Transcription() {
         )}
 
         <div className="card-section">
-          {hasTranscriptions ? (
+          {transcriptions.length > 0 ? (
             transcriptions.map((transcription) => (
               <TranscriptionCard
                 key={transcription.id}
