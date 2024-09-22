@@ -1,9 +1,11 @@
 // eslint-disable-next-line no-undef
 const API_PAYMENT_URL_BASE = process.env.REACT_APP_PAYMENT_URL;
+// eslint-disable-next-line no-undef
+const API_URL_BASE = process.env.REACT_APP_BDD_API_URL;
 
 export default {
   createNewSubscription(payload) {
-    return fetch(`${API_PAYMENT_URL_BASE}/api/subscriptions`, {
+    return fetch(`${API_URL_BASE}/api/subscriptions`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -13,7 +15,7 @@ export default {
   },
 
   getSubscriptionByUserId(userId) {
-    return fetch(`${API_PAYMENT_URL_BASE}/api/subscriptions/user/${userId}`, {
+    return fetch(`${API_URL_BASE}/api/subscriptions/user/${userId}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
