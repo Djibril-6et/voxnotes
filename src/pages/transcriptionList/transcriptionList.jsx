@@ -25,13 +25,12 @@ function Transcription() {
         .getSubscriptionByUserId(userId)
         .then((subscription) => {
           if (subscription) {
-            setHasSubscription(true);
+            setHasSubscription(!!subscription);
           }
         })
         .catch((error) => {
-          if (error.response && error.response.status === 404) {
-            setHasSubscription(false); // No subscription found
-          }
+          setHasSubscription(false);
+          console.log(error);
         });
 
       audioFilesService

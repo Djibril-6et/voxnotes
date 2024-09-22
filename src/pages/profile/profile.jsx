@@ -98,7 +98,6 @@ function Profil() {
         setSubscriptionDetails({
           id: subscriptionData.stripeSessionId,
           status: subscriptionData.status,
-          current_period_end: subscriptionData.current_period_end,
         });
         setSessionId(subscriptionData.stripeSessionId); // set sessionId from subscription data
       }
@@ -207,10 +206,8 @@ function Profil() {
         <div className="payment-details">
           <h3>Détails du paiement</h3>
           <p>
-            <strong>ID du paiement :</strong> {paymentDetails.id}
-          </p>
-          <p>
-            <strong>Montant payé :</strong> {paymentDetails.amount / 100} €
+            <strong>Montant payé :</strong>
+            {paymentDetails.amount / 100} €
           </p>
           <p>
             <strong>Statut du paiement :</strong> {paymentDetails.status}
