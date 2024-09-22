@@ -49,8 +49,6 @@ function Transcription() {
         } catch (error) {
           if (error.response && error.response.status === 404) {
             console.log("No transcriptions found");
-          } else {
-            console.log("Error fetching user files:", error);
           }
         } finally {
           setLoading(false);
