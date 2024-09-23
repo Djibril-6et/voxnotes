@@ -164,7 +164,7 @@ function Profil() {
       console.error("Session ID is missing"); // eslint-disable-line no-console
       return;
     }
-
+    // eslint-disable-next-line
     const confirmed = window.confirm(
       "Êtes-vous sûr de vouloir annuler votre abonnement ?"
     );
@@ -175,16 +175,20 @@ function Profil() {
           sessionId // Use sessionId
         );
         if (response.message) {
+          // eslint-disable-next-line
           alert("Abonnement annulé avec succès.");
           setSubscriptionDetails((prevDetails) => ({
             ...prevDetails,
             status: "cancelled",
           }));
         } else {
+          // eslint-disable-next-line
           alert("Échec de l'annulation de l'abonnement.");
         }
       } catch (error) {
+        // eslint-disable-next-line
         alert("Erreur lors de l'annulation de l'abonnement.");
+        // eslint-disable-next-line
         console.error("Erreur lors de l'annulation de l'abonnement:", error); // eslint-disable-line no-console
       }
     }
@@ -231,7 +235,7 @@ function Profil() {
           {subscriptionDetails.status !== "cancelled" && (
             <button
               type="button"
-              className="cancel-subscription-button"
+              className="signout-button"
               onClick={handleCancelSubscription}
             >
               Annuler l&apos;abonnement
