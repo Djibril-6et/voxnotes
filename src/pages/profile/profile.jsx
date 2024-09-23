@@ -23,6 +23,7 @@ function Profil() {
   const email = queryParams.get("email");
   // eslint-disable-next-line
   const _id =
+    // eslint-disable-next-line
     queryParams.get("_id") ||
     JSON.parse(localStorage.getItem("userConnected"))?.user._id; // eslint-disable-line
 
