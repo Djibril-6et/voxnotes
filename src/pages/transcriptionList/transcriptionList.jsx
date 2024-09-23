@@ -21,6 +21,7 @@ function Transcription() {
       const data = await audioFilesService.getUserFiles(userId);
       setTranscriptions(data);
     } catch (error) {
+      // eslint-disable-next-line
       console.log("Error fetching transcriptions:", error);
     }
   };
@@ -36,6 +37,7 @@ function Transcription() {
         setHasSubscription(false);
       }
     } catch (error) {
+      // eslint-disable-next-line
       console.log("Error fetching subscription:", error);
       setHasSubscription(false);
     }

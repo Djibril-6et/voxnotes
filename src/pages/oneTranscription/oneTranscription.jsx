@@ -54,6 +54,7 @@ function OneTranscription() {
   };
 
   const handleDeleteTranscription = async () => {
+    // eslint-disable-next-line
     const confirmation = window.confirm(
       "Êtes-vous sûr de vouloir supprimer cette transcription ? Cette action est irréversible."
     );
@@ -61,13 +62,16 @@ function OneTranscription() {
       try {
         const id = localStorage.getItem("transcriptionId");
         if (!id) {
+          // eslint-disable-next-line
           alert("Transcription ID not found.");
           return;
         }
         await audioFilesService.deleteFileById(id);
+        // eslint-disable-next-line
         alert("La transcription a été supprimée avec succès.");
         window.location.href = "/transcription";
       } catch (err) {
+        // eslint-disable-next-line
         alert("Erreur lors de la suppression de la transcription.");
       }
     }
