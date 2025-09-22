@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import usersServices from "../../services/users.services";
 import googleLogo from "../../assets/googleLogo.png";
 import githubLogo from "../../assets/githubLogo.png";
@@ -8,11 +8,67 @@ import "./connexion.css";
 
 function Connexion() {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const [notification, setNotification] = useState(null);
+
+  // Fonction pour afficher une notification avec disparition automatique
+  const showNotification = useCallback((type, message, duration = 5000) => {
+    setNotification({ type, message });
+
+    // Auto-disparition après la durée spécifiée
+    setTimeout(() => {
+      setNotification(null);
+    }, duration);
+  }, []);
+
+  // Gestion des erreurs OAuth au chargement du composant
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const error = urlParams.get("error");
+    const email = urlParams.get("email");
+
+    if (error) {
+      let message = "";
+
+      switch (error) {
+        case "email_exists":
+          message = `Un compte existe déjà avec l'email ${email || "fourni"}.`;
+          break;
+        case "username_exists":
+          message = "Un compte existe déjà avec cet email.";
+          break;
+        case "auth_error":
+          message = "Erreur d'authentification. Veuillez réessayer.";
+          break;
+        case "auth_failed":
+          message = "Échec de l'authentification. Veuillez réessayer.";
+          break;
+        case "user_not_found":
+          message =
+            "Utilisateur non trouvé après l'authentification. Veuillez réessayer.";
+          break;
+        case "callback_error":
+          message =
+            "Erreur lors du processus d'authentification. Veuillez réessayer.";
+          break;
+        case "login_error":
+          message = "Erreur lors de la connexion. Veuillez réessayer.";
+          break;
+        default:
+          message =
+            "Une erreur inconnue s'est produite lors de l'authentification.";
+      }
+
+      showNotification("error", message, 8000);
+
+      // Nettoyer l'URL après avoir affiché l'erreur
+      navigate("/connexion", { replace: true });
+    }
+  }, [location, navigate, showNotification]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,36 +83,37 @@ function Connexion() {
 
     const { email, password } = user;
     if (!email || !password) {
-      // eslint-disable-next-line
-      alert("Veuillez remplir tous les champs.");
+      showNotification("error", "Veuillez remplir tous les champs.");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      // eslint-disable-next-line
-      alert("Veuillez entrer une adresse email valide.");
+      showNotification("error", "Veuillez entrer une adresse email valide.");
       return;
     }
 
     usersServices
       .loginUser(user)
       .then((userData) => {
-        // eslint-disable-next-line
         localStorage.setItem("userConnected", JSON.stringify(userData));
 
         const event = new Event("userConnected");
         window.dispatchEvent(event);
 
-        navigate("/transcription");
+        showNotification(
+          "success",
+          "Connexion réussie ! Redirection en cours...",
+          2000
+        );
+
+        setTimeout(() => navigate("/transcription"), 1000);
       })
       .catch((err) => {
-        // eslint-disable-next-line
-        alert(err.message);
+        showNotification("error", err.message);
       });
   };
 
-  // eslint-disable-next-line no-undef
   const oauthUrl = process.env.REACT_APP_OAUTH_SERVICE_URL;
 
   const handleGoogleAuth = () => {
@@ -79,8 +136,26 @@ function Connexion() {
     navigate("/forgotpassword");
   };
 
+  const closeNotification = () => {
+    setNotification(null);
+  };
+
   return (
     <div className="connexion-container">
+      {notification && (
+        <div className={`notification ${notification.type}`}>
+          <p>{notification.message}</p>
+          <button
+            type="button"
+            onClick={closeNotification}
+            className="notification-close"
+            aria-label="Fermer la notification"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
       <h2 className="connexion-title">Connexion</h2>
 
       <div className="connexion-form-container">
